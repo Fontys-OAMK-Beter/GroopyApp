@@ -4,11 +4,11 @@
 
 ## Install dependencies and tools
 
-'npx expo install' and 'npm i'
+` npx expo install ` and `npm i`
 
-Start the project with
+Start the dev server with:
 
-'npx expo start'
+` npx expo start `
 
 
 ## Contributing
