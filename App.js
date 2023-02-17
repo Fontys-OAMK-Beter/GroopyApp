@@ -19,6 +19,15 @@ function LaunchPage({ navigation }) {
   )
 }
 
+//Needed for passing the header the navigation object
+//For each screen that needs the custom header give it
+// " options={({ navigation }) => useCustomHeader(navigation, "Page title")} "
+const useCustomHeader = (navigation, title) => {
+  return { 
+    headerTitle: () => <CustomHeader navigation={navigation} title={title}/>
+  }
+}
+
 export default function App() {
   const Stack = createNativeStackNavigator()
 
@@ -35,17 +44,10 @@ export default function App() {
           component={LaunchPage} 
           options={{headerShown: false}} 
         />
-        {/* custom header component needs to be passed down in options as headerTitle in every screen that will use it
-        additionally we need to pass the navigation object to it as a prop, we accomplish this by giving options a function so that
-        navigation can be passed down. titles also are passed down into the header as another prop (can be set to any text)*/}
         <Stack.Screen 
           name="Hello" 
           component={HelloWorld}
-          options={({ navigation }) => {
-            return { 
-              headerTitle: () => <CustomHeader navigation={navigation} title={"Hello world"}/>
-            }
-          }}
+          options={({ navigation }) => useCustomHeader(navigation, "Page title")}
         />
       </Stack.Navigator>
     </NavigationContainer>
