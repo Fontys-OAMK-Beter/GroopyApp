@@ -1,12 +1,13 @@
 import React from 'react'
-import { Text, SafeAreaView } from 'react-native'
-const CustomHeader = ({title, navigation}) => {
+import { Text, View } from 'react-native'
 
-  return (
-    <SafeAreaView>
-      <Text>{title}</Text>
-    </SafeAreaView>
-  )
+const CustomHeader = ({title}) => {
+
+    return (
+      <View>
+        <Text>{title}</Text>
+      </View>
+    )
 }
 
 export default CustomHeader
