@@ -5,7 +5,7 @@ const CustomHeader = ({title}) => {
 
     return (
       <View>
-        <Text>{title}</Text>
+        <Text style={{fontStyle: 'italic', color: 'white', fontSize: 18}}>{title}</Text>
       </View>
     )
 }
