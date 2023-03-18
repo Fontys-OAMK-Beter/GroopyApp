@@ -9,6 +9,7 @@ import CustomHeader from './components/CustomHeader';
 import HelloWorld from './components/HelloWorld';
 import User from './components/User';
 
+
 //This function is just temporary, once login screen is done replace this with that
 function LaunchPage({ navigation }) {
   useEffect(() => {
@@ -81,8 +82,8 @@ export default function App() {
             component={User}
             options={({ navigation }) => useCustomHeader(navigation, "User")}
           />
-          <Tab.Screen 
-            name="Hello" 
+          <Tab.Screen
+            name="Hello"
             component={HelloWorld}
             options={({ navigation }) => useCustomHeader(navigation, "Page title")}
           />  
