@@ -15,6 +15,38 @@ const DATA = [
         id: '3',
         title: 'Group 3',
     },
+    /* {
+        id: '4',
+        title: 'Group 3',
+    },
+    {
+        id: '5',
+        title: 'Group 3',
+    },
+    {
+        id: '6',
+        title: 'Group 3',
+    },
+    {
+        id: '7',
+        title: 'Group 3',
+    },
+    {
+        id: '8',
+        title: 'Group 3',
+    },
+    {
+        id: '9',
+        title: 'Group 3',
+    },
+    {
+        id: '10',
+        title: 'Group 3',
+    },
+    {
+        id: '11',
+        title: 'Group 3',
+    } */
 ];
 
 //This is and the component rendered in the flatlist? maybe?
@@ -29,11 +61,12 @@ const Groups = () => {
   return (
     <View style={styles.container}>
         
-        <FlatList>
+        <FlatList
             data={DATA}
             renderItem={({ item }) => <Item title={item.title} />}
-            keyExtractor={item => item.id}
-        </FlatList>
+            keyExtractor={item => item.id} 
+        />
+        
 
         <Button 
             style={styles.button}
@@ -50,7 +83,8 @@ const Groups = () => {
 //This is here for testing how styles work and I have no idea what I'm doing
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'gray'
+        backgroundColor: '#f4f4f4',
+        flex: 1,
     },
     Header: {
         backgroundColor: '#f4f4f4'
@@ -61,7 +95,8 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: '#f194ff',
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        position: 'relative'
     },
     item: {
         backgroundColor: '#f9c2ff',
