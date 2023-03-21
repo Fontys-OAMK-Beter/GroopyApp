@@ -1,5 +1,8 @@
+import { createStackNavigator } from '@react-navigation/stack';
 import React from "react";
-import { View, Text, StyleSheet, FlatList, Button, Alert } from "react-native";
+import { View, Text, StyleSheet, FlatList, Button, Alert, TouchableOpacity } from "react-native";
+
+import ViewGroup from './ViewGroup';
 
 //Dummy data to show before fetching from database
 const DATA = [
@@ -49,36 +52,63 @@ const DATA = [
     } */
 ];
 
-//This is and the component rendered in the flatlist? maybe?
-const Item = ({ title }) => (
-    <View style={styles.item}>
-        <Text style={styles.title}>{title}</Text>
-    </View>
+//This is and the component rendered in the flatlist
+const Item = ({ item, onPress }) => (
+    <TouchableOpacity onPress={onPress} style={[styles.item]}>
+        <Text style={styles.title}>{item.title}</Text>
+    </TouchableOpacity>
 );
 
-//Check if header is needed here or if it comes from main
-const Groups = () => {
-  return (
-    <View style={styles.container}>
-        
-        <FlatList
-            data={DATA}
-            renderItem={({ item }) => <Item title={item.title} />}
-            keyExtractor={item => item.id} 
-        />
-        
 
-        <Button 
-            style={styles.button}
-            title="Create Group"
-            onPress={()=>{Alert.alert("You want to create a new group!")}} />
-        <Button
-            style={styles.button}
-            title="Create Event"
-            onPress={()=>{Alert.alert("You want to create a new event!")}} />
-    </View>
-  );
+const Groups = ({ navigation }) => {
+
+    const renderItem = ({ item }) => {
+        return (
+            <Item
+                item={item}
+                onPress={() => { navigation.navigate("ViewGroup", {id: item.id}) }}
+            />
+        );
+    };
+
+    return (
+        <View style={styles.container}>
+
+            <FlatList
+                data={DATA}
+                renderItem={renderItem}
+                keyExtractor={item => item.id}
+            />
+
+            <Button
+                style={styles.button}
+                title="Create Group"
+                onPress={() => { Alert.alert("You want to create a new group!") }} />
+            <Button
+                style={styles.button}
+                title="Create Event"
+                onPress={() => { Alert.alert("You want to create a new event!") }} />
+        </View>
+    );
 }
+
+//Testing navigation
+const Stack = createStackNavigator()
+
+const GroupStack = () => {
+    return (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen
+                name="Groups" component={Groups}
+            />
+            <Stack.Screen
+                name="ViewGroup" component={ViewGroup}
+            />
+        </Stack.Navigator>
+    )
+}
+
+
 
 //This is here for testing how styles work and I have no idea what I'm doing
 const styles = StyleSheet.create({
@@ -109,4 +139,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Groups;
+export default GroupStack;

@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
 import { NavigationContainer} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import { Button, Text, SafeAreaView } from 'react-native';
 import { IconComponentProvider, IconButton, Icon } from '@react-native-material/core';
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 import CustomHeader from './components/CustomHeader';
-import HelloWorld from './components/HelloWorld';
 import User from './components/User';
-import Groups from './components/Groups';
+import GroupStack from './components/Groups';
 
 //This function is just temporary, once login screen is done replace this with that
 function LaunchPage({ navigation }) {
   useEffect(() => {
-    navigation.navigate("Groups")
+    navigation.navigate("GroupStack")
   }, [])
   
 
@@ -21,8 +21,8 @@ function LaunchPage({ navigation }) {
     <SafeAreaView style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>This loads on app startup</Text>
       <Button
-        title="Go to Groups"
-        onPress={() => navigation.navigate("Groups")}
+        title="Go to GroupStack"
+        onPress={() => navigation.navigate("GroupStack")}
       />
     </SafeAreaView>
   )
@@ -47,6 +47,7 @@ export default function App() {
   }
 
   const Tab = createBottomTabNavigator()
+  const Stack = createStackNavigator()
 
   return (
     <IconComponentProvider IconComponent={MaterialCommunityIcons}>
@@ -61,7 +62,7 @@ export default function App() {
                 iconName = focused ? 'cards-playing' : 'cards-outline';
               } else if (route.name === 'User') {
                 iconName = focused ? 'account' : 'account-outline';
-              } else if (route.name === 'Groups') {
+              } else if (route.name === 'GroupStack') {
                 iconName = focused ? 'account-group' : 'account-group-outline';
               }
               return <Icon name={iconName} size={30} color={color} />;
@@ -78,9 +79,9 @@ export default function App() {
             options={{headerShown: false}} 
           />
           <Tab.Screen 
-            name="Groups" 
-            component={Groups}
-            options={({ navigation }) => useCustomHeader(navigation, "Groups")}
+            name="GroupStack" 
+            component={GroupStack}
+            options={({ navigation }) => useCustomHeader(navigation, "GroupStack")}
           />
           <Tab.Screen 
             name="User" 
@@ -88,6 +89,7 @@ export default function App() {
             options={({ navigation }) => useCustomHeader(navigation, "User")}
           />
         </Tab.Navigator>
+        
       </NavigationContainer>
     </IconComponentProvider>
   );
