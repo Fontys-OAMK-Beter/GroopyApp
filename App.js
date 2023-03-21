@@ -81,7 +81,7 @@ export default function App() {
           <Tab.Screen 
             name="GroupStack" 
             component={GroupStack}
-            options={({ navigation }) => useCustomHeader(navigation, "GroupStack")}
+            options={({ navigation }) => useCustomHeader(navigation, "Groups")}
           />
           <Tab.Screen 
             name="User" 
