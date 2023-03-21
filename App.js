@@ -8,11 +8,12 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import CustomHeader from './components/CustomHeader';
 import HelloWorld from './components/HelloWorld';
 import User from './components/User';
+import Groups from './components/Groups';
 
 //This function is just temporary, once login screen is done replace this with that
 function LaunchPage({ navigation }) {
   useEffect(() => {
-    navigation.navigate("Hello")
+    navigation.navigate("Groups")
   }, [])
   
 
@@ -20,8 +21,8 @@ function LaunchPage({ navigation }) {
     <SafeAreaView style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>This loads on app startup</Text>
       <Button
-        title="Open hello world"
-        onPress={() => navigation.navigate("Hello")}
+        title="Go to Groups"
+        onPress={() => navigation.navigate("Groups")}
       />
     </SafeAreaView>
   )
@@ -58,9 +59,9 @@ export default function App() {
               let iconName;
               if (route.name === 'Launch') { //change to swipe or something
                 iconName = focused ? 'cards-playing' : 'cards-outline';
-              } else if (route.name === 'Hello') {
-                iconName = focused ? 'account' : 'account-outline';
               } else if (route.name === 'User') {
+                iconName = focused ? 'account' : 'account-outline';
+              } else if (route.name === 'Groups') {
                 iconName = focused ? 'account-group' : 'account-group-outline';
               }
               return <Icon name={iconName} size={30} color={color} />;
@@ -77,15 +78,15 @@ export default function App() {
             options={{headerShown: false}} 
           />
           <Tab.Screen 
+            name="Groups" 
+            component={Groups}
+            options={({ navigation }) => useCustomHeader(navigation, "Groups")}
+          />
+          <Tab.Screen 
             name="User" 
             component={User}
             options={({ navigation }) => useCustomHeader(navigation, "User")}
           />
-          <Tab.Screen 
-            name="Hello" 
-            component={HelloWorld}
-            options={({ navigation }) => useCustomHeader(navigation, "Page title")}
-          />  
         </Tab.Navigator>
       </NavigationContainer>
     </IconComponentProvider>
