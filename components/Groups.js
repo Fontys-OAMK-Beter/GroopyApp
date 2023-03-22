@@ -52,16 +52,15 @@ const DATA = [
     } */
 ];
 
-//This is and the component rendered in the flatlist
+//This is and the component rendered in the flatlist. The onpress routes to the viewgroup page of the selected group
 const Item = ({ item, onPress }) => (
     <TouchableOpacity onPress={onPress} style={[styles.item]}>
         <Text style={styles.title}>{item.title}</Text>
     </TouchableOpacity>
 );
 
-
+//This is the main page of the groups tab. It renders the flatlist and the buttons to create a group or event
 const Groups = ({ navigation }) => {
-
     const renderItem = ({ item }) => {
         return (
             <Item
@@ -92,7 +91,7 @@ const Groups = ({ navigation }) => {
     );
 }
 
-//Testing navigation
+//This is the stack navigator for the groups tab so that viewgroup can be accessed by pressing on a group in the flatlist
 const Stack = createStackNavigator()
 
 const GroupStack = () => {
@@ -109,7 +108,7 @@ const GroupStack = () => {
 }
 
 
-
+//TODO: styles as own file
 //This is here for testing how styles work and I have no idea what I'm doing
 const styles = StyleSheet.create({
     container: {
