@@ -3,6 +3,7 @@ import React from "react";
 import { View, Text, StyleSheet, FlatList, Button, Alert, TouchableOpacity } from "react-native";
 
 import ViewGroup from './ViewGroup';
+import Styles from './Styles';
 
 //Dummy data to show before fetching from database
 const DATA = [
@@ -54,8 +55,8 @@ const DATA = [
 
 //This is and the component rendered in the flatlist. The onpress routes to the viewgroup page of the selected group
 const Item = ({ item, onPress }) => (
-    <TouchableOpacity onPress={onPress} style={[styles.item]}>
-        <Text style={styles.title}>{item.title}</Text>
+    <TouchableOpacity onPress={onPress} style={[Styles.item]}>
+        <Text style={Styles.title}>{item.title}</Text>
     </TouchableOpacity>
 );
 
@@ -71,7 +72,7 @@ const Groups = ({ navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
+        <View style={Styles.container}>
 
             <FlatList
                 data={DATA}
@@ -80,11 +81,11 @@ const Groups = ({ navigation }) => {
             />
 
             <Button
-                style={styles.button}
+                style={Styles.button}
                 title="Create Group"
                 onPress={() => { Alert.alert("You want to create a new group!") }} />
             <Button
-                style={styles.button}
+                style={Styles.button}
                 title="Create Event"
                 onPress={() => { Alert.alert("You want to create a new event!") }} />
         </View>
@@ -108,9 +109,9 @@ const GroupStack = () => {
 }
 
 
-//TODO: styles as own file
-//This is here for testing how styles work and I have no idea what I'm doing
-const styles = StyleSheet.create({
+//TODO: Styles as own file
+//This is here for testing how Styles work and I have no idea what I'm doing
+const Styles = StyleSheet.create({
     container: {
         backgroundColor: '#f4f4f4',
         flex: 1,

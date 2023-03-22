@@ -9,6 +9,9 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import CustomHeader from './components/CustomHeader';
 import User from './components/User';
 import GroupStack from './components/Groups';
+import Styles from './components/Styles';
+
+//TODO: implement Styles.js here also
 
 //This function is just temporary, once login screen is done replace this with that
 function LaunchPage({ navigation }) {
