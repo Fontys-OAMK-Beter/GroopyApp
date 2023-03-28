@@ -5,41 +5,30 @@ import moment from 'moment';
 
 const Calendar = () => {
     const [selectedStartDate, setSelectedStartDate] = useState([])
-    const [customDatesStyles, setCustomDatesStyles] = useState([
+    const [listOfHiglightedDays, setCustomDatesStyles] = useState([
         {
             date: moment("09-03-2023", "DD-MM-YYYY"),
             style: {backgroundColor: "#235885"},
-            textStyle: {color: "#FFFFFF"}
+            textStyle: {color: "#FFFFFF"},
+            text: ":D"
         }
     ])
-    const [text, setText] = useState('') //proper name for the text variable
-
-    /* useEffect(() => {
-        theDate = moment(text,"DD-MM-YYYY")
-        setCustomDatesStyles([
-          {
-              date: moment(theDate),
-              style: { backgroundColor: '#D83333' },
-              textStyle: { color: '#FFFFFF' }
-          }
-        ])
-      
-      }, [text]) */
+    const [inputtedDate, setInputtedDate] = useState('') //proper name for the text variable
 
     const onDateChange = (date) => {
         setSelectedStartDate(date.format('LL'))
     }
         
     useEffect(() => {
-        highlightDay(text, customDatesStyles)
-    }, [text])
+        addDayToList(inputtedDate, listOfHiglightedDays)
+    }, [inputtedDate])
     
-    const highlightDay = (text, customDatesStyles) => {
+    const addDayToList = (inputtedDate, listOfHiglightedDays) => {
 
-        tempList = customDatesStyles
+        tempList = listOfHiglightedDays
 
         newDateObject = {
-            date: moment(text, "DD-MM-YYYY", true), //true means stricts mode
+            date: moment(inputtedDate, "DD-MM-YYYY", true), //true means stricts mode
             style: { backgroundColor: "#235885" },
             textStyle: { color: "#FFFFFF" }
         }
@@ -51,7 +40,7 @@ const Calendar = () => {
         <View style={styles.container}>
             <CalendarPicker
                 onDateChange={onDateChange}
-                customDatesStyles={customDatesStyles}
+                customDatesStyles={listOfHiglightedDays}
             />
 
             <View>
@@ -61,7 +50,7 @@ const Calendar = () => {
             <View>
                 <Text>Give a date to highlight:</Text>
                 <Text>Format: DD-MM-YYYY</Text>
-                <TextInput onChangeText={(text) => setText(text)} style={styles.textInputBox}/>
+                <TextInput onChangeText={(text) => setInputtedDate(text)} style={styles.textInputBox}/>
             </View>
         </View>
     )
