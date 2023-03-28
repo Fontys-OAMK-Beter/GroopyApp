@@ -8,14 +8,11 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import CustomHeader from './components/CustomHeader';
 import HelloWorld from './components/HelloWorld';
 import User from './components/User';
+import Login from './components/Login';
 
 //This function is just temporary, once login screen is done replace this with that
 function LaunchPage({ navigation }) {
-  useEffect(() => {
-    navigation.navigate("Hello")
-  }, [])
   
-
   return (
     <SafeAreaView style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>This loads on app startup</Text>
@@ -83,7 +80,7 @@ export default function App() {
           />
           <Tab.Screen 
             name="Hello" 
-            component={HelloWorld}
+            component={Login}
             options={({ navigation }) => useCustomHeader(navigation, "Page title")}
           />  
         </Tab.Navigator>
