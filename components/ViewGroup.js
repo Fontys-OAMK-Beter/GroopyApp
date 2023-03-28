@@ -1,5 +1,8 @@
+import { Icon } from "react-native-vector-icons/FontAwesome5";
 import React from "react";
-import { Text, StyleSheet, FlatList, Button, Alert, SafeAreaView, TouchableOpacity } from "react-native";
+import { View, Text, FlatList, Button, Image, Alert, TouchableOpacity } from "react-native";
+
+import styles from './Styles';
 
 
 //TODO: Fetch data from database and cache it
@@ -9,17 +12,17 @@ const dummyUserData = [
   {
     id: '1',
     userName: 'Heikki Matero',
-    profilePic: 'https://häläpäti'
+    profilePic: './assets/default-profile-32.png'
   },
   {
     id: '2',
     userName: 'Jussi Jokunen',
-    profilePic: 'https://häläpäti'
+    profilePic: './assets/default-profile-32.png'
   },
   {
     id: '3',
     userName: 'Maija Molla',
-    profilePic: 'https://häläpäti'
+    profilePic: 'https://imgur.com/t/simon_cowell/lR5uU'
   }
 ]
 
@@ -34,15 +37,29 @@ const dummyEventData = [
   },
   {
     id: '2',
-    eventName: 'Kävely',
-    eventDate: '2020-12-12',
+    eventName: 'Hölkkä',
+    eventDate: '2020-12-13',
     eventTime: '12:00',
     eventLocation: 'Kamppi',
   },
   {
     id: '3',
-    eventName: 'Kävely',
-    eventDate: '2020-12-12',
+    eventName: 'Juoksu',
+    eventDate: '2020-12-14',
+    eventTime: '12:00',
+    eventLocation: 'Kamppi',
+  },
+  {
+    id: '4',
+    eventName: 'Loikka',
+    eventDate: '2020-12-15',
+    eventTime: '12:00',
+    eventLocation: 'Kamppi',
+  },
+  {
+    id: '5',
+    eventName: 'Kolmiloikka',
+    eventDate: '2020-12-16',
     eventTime: '12:00',
     eventLocation: 'Kamppi',
   }
@@ -51,6 +68,7 @@ const dummyEventData = [
 //flatlist component for showing users
 const UserItem = ({ item, onPress }) => (
   <TouchableOpacity onPress={onPress} style={[styles.item]}>
+      <Image style = {styles.defaultUserIcon} source = {item.profilePic}></Image>
       <Text style={styles.title}>{item.userName}</Text>
   </TouchableOpacity>
 );
@@ -58,7 +76,9 @@ const UserItem = ({ item, onPress }) => (
 //flatlist component for showing upcoming events
 const EventItem = ({ item, onPress }) => (
   <TouchableOpacity onPress={onPress} style={[styles.item]}>
-      <Text style={styles.title}>{item.eventName}</Text>
+      <Text style={styles.listTitle}>{item.eventName}</Text>
+      <Text style={styles.listSubtitle}>{item.eventDate}</Text>
+      <Text style={styles.listSubtitle}>{item.eventTime}</Text>
   </TouchableOpacity>
 );
 
@@ -82,7 +102,7 @@ const ViewGroup = ({item}) => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={[ styles.viewGroup ]}>
       <FlatList
         data={dummyEventData}
         renderItem={renderEventItem}
@@ -100,7 +120,7 @@ const ViewGroup = ({item}) => {
         title="Add event"
         onPress={() => Alert.alert('New event added!')}
       />
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -120,35 +140,5 @@ const ViewGroup = ({route}) => {
       </SafeAreaView>
     )
   }
-*/
-
-//Copied styles
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#f4f4f4',
-    flex: 1,
-  },
-  Header: {
-    backgroundColor: '#f4f4f4'
-  },
-  text: {
-    color: '#000000'
-  },
-  button: {
-    backgroundColor: '#f194ff',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    position: 'relative'
-  },
-  item: {
-    backgroundColor: '#f9c2ff',
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
-  title: {
-    fontSize: 32,
-  }
-})
-  
+*/  
   export default ViewGroup
