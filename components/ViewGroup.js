@@ -1,7 +1,6 @@
 import React from "react";
 import { Text, StyleSheet, FlatList, Button, Alert, SafeAreaView, TouchableOpacity } from "react-native";
 
-import Styles from "./Styles";
 
 //TODO: Fetch data from database and cache it
 
@@ -51,15 +50,15 @@ const dummyEventData = [
 
 //flatlist component for showing users
 const UserItem = ({ item, onPress }) => (
-  <TouchableOpacity onPress={onPress} style={[Styles.item]}>
-      <Text style={Styles.title}>{item.userName}</Text>
+  <TouchableOpacity onPress={onPress} style={[styles.item]}>
+      <Text style={styles.title}>{item.userName}</Text>
   </TouchableOpacity>
 );
 
 //flatlist component for showing upcoming events
 const EventItem = ({ item, onPress }) => (
-  <TouchableOpacity onPress={onPress} style={[Styles.item]}>
-      <Text style={Styles.title}>{item.eventName}</Text>
+  <TouchableOpacity onPress={onPress} style={[styles.item]}>
+      <Text style={styles.title}>{item.eventName}</Text>
   </TouchableOpacity>
 );
 
@@ -97,7 +96,7 @@ const ViewGroup = ({item}) => {
       />
 
       <Button
-      style={Styles.button}
+      style={styles.button}
         title="Add event"
         onPress={() => Alert.alert('New event added!')}
       />
@@ -123,8 +122,8 @@ const ViewGroup = ({route}) => {
   }
 */
 
-//Copied Styles
-const Styles = StyleSheet.create({
+//Copied styles
+const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f4f4f4',
     flex: 1,
