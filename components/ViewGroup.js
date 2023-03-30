@@ -70,7 +70,7 @@ const dummyEventData = [
 
 //flatlist component for showing users
 const UserItem = ({ item, onPress }) => (
-  <TouchableOpacity onPress={onPress} style={[styles.item]}>
+  <TouchableOpacity onPress={onPress} style={[styles.itemWithPicture]}>
       <Image style = {styles.defaultUserIcon} source = {item.profilePic}></Image>
       <Text style={styles.title}>{item.userName}</Text>
   </TouchableOpacity>
@@ -95,7 +95,7 @@ const ViewGroup = ({item}) => {
     );
   }
 
-  const renderUserItem = ({item}) => {
+  const renderUserItem = ({ item }) => {
     return (
       <UserItem
         item={item}
@@ -105,21 +105,21 @@ const ViewGroup = ({item}) => {
   }
 
   return (
-    <View style={[ styles.viewGroup ]}>
-      <FlatList
-        data={dummyEventData}
-        renderItem={renderEventItem}
-        keyExtractor={item => item.id}
-      />
-
-      <FlatList
-        data={dummyUserData}
-        renderItem={renderUserItem}
-        keyExtractor={item => item.id}
-      />
-
+    <View style={[styles.viewGroup]}>
+      <View>
+        <FlatList
+          data={dummyEventData}
+          renderItem={renderEventItem}
+          keyExtractor={item => item.id}
+        />
+        <FlatList
+          data={dummyUserData}
+          renderItem={renderUserItem}
+          keyExtractor={item => item.id}
+        />
+      </View>
       <Button
-      style={styles.button}
+        style={styles.button}
         title="Add event"
         onPress={() => Alert.alert('New event added!')}
       />

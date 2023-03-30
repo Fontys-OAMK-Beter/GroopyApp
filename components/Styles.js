@@ -20,11 +20,19 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: '#f194ff',
+        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         position: 'relative'
     },
     item: {
+        backgroundColor: '#f9c2ff',
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16
+    },
+    itemWithPicture: {
+        flexDirection: 'row',
         backgroundColor: '#f9c2ff',
         padding: 20,
         marginVertical: 8,
@@ -36,7 +44,7 @@ const styles = StyleSheet.create({
     viewGroup: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     listUnitWithPicture: {
         flexDirection: 'row',
