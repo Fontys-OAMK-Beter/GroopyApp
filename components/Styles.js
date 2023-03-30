@@ -4,6 +4,13 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#f4f4f4',
         flex: 1,
+        justifyContent: 'space-between',
+    },
+    containerForButtons: {
+        backgroundColor: '#f4f4f4',
+        flex: 0,
+        flexDirection: 'column-reverse',
+        justifyContent: 'flex-start',
     },
     Header: {
         backgroundColor: '#f4f4f4'
@@ -31,6 +38,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+    listUnitWithPicture: {
+        flexDirection: 'row',
+        backgroundColor: '#f9c2ff',
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16
+    },
     listTitle: {
         fontSize: 24,
         fontWeight: 'bold',
@@ -41,8 +55,8 @@ const styles = StyleSheet.create({
         color: '#000000'
     },
     defaultUserIcon: {
-        height: 32,
-        width: 32,
+        height: 48,
+        width: 48,
         color: '#000000'
     },
 })

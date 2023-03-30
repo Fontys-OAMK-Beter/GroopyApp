@@ -66,28 +66,30 @@ const Groups = ({ navigation }) => {
         return (
             <Item
                 item={item}
-                onPress={() => { navigation.navigate("ViewGroup", {id: item.id}) }}
+                onPress={() => { navigation.navigate("ViewGroup", { id: item.id }) }}
             />
         );
     };
 
     return (
         <View style={styles.container}>
-
-            <FlatList
-                data={DATA}
-                renderItem={renderItem}
-                keyExtractor={item => item.id}
-            />
-
-            <Button
-                style={styles.button}
-                title="Create Group"
-                onPress={() => { Alert.alert("You want to create a new group!") }} />
-            <Button
-                style={styles.button}
-                title="Create Event"
-                onPress={() => { Alert.alert("You want to create a new event!") }} />
+            <View>
+                <FlatList
+                    data={DATA}
+                    renderItem={renderItem}
+                    keyExtractor={item => item.id}
+                />
+            </View>
+            <View style={styles.containerForButtons}>
+                <Button
+                    style={styles.button}
+                    title="Create Group"
+                    onPress={() => { Alert.alert("You want to create a new group!") }} />
+                <Button
+                    style={styles.button}
+                    title="Create Event"
+                    onPress={() => { Alert.alert("You want to create a new event!") }} />
+            </View>
         </View>
     );
 }
