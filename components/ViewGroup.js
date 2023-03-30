@@ -7,6 +7,9 @@ import styles from './Styles';
 
 //TODO: Fetch data from database and cache it
 
+//Testrun for icon implementation
+const testIcon = <Icon name="user-circle" size={30} color="#900" />;
+
 //Dummy data for users
 const dummyUserData = [
   {
@@ -17,7 +20,7 @@ const dummyUserData = [
   {
     id: '2',
     userName: 'Jussi Jokunen',
-    profilePic: './assets/default-profile-32.png'
+    profilePic: './assets/default-profile-48.png'
   },
   {
     id: '3',
