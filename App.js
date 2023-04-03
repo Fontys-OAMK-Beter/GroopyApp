@@ -11,14 +11,15 @@ import User from './components/User';
 import Login from './components/Login';
 import Register from './components/Register'
 import HelloWorld from './components/HelloWorld';
+import GroupStack from './components/Groups';
 
 const LaunchPage = ({ navigation }) => {
   //placeholder waiting for groups to merge
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button
-        title={'Back to helloworld'}
-        onPress={() => navigation.navigate('Hello')}
+        title="Go to GroupStack"
+        onPress={() => navigation.navigate("GroupStack")}
       />
     </View>
   )
@@ -43,6 +44,7 @@ const MainStack = () => {
   }
 
   const Tab = createBottomTabNavigator()
+  const Stack = createStackNavigator()
 
   return (
     <IconComponentProvider IconComponent={MaterialCommunityIcons}>
