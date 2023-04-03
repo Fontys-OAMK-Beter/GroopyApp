@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect} from 'react'
 import { StyleSheet, Text, View, TextInput} from 'react-native';
 import CalendarPicker from 'react-native-calendar-picker';
 import moment from 'moment';
+import { Button } from '@react-native-material/core';
 
 const Calendar = () => {
-    const [listOfHiglightedDays, setCustomDatesStyles] = useState([
+    const [listOfHiglightedDays, setListOfHighlightedDays] = useState([
         {
             date: moment("09-03-2023", "DD-MM-YYYY", true),
             style: {backgroundColor: "#235885"},
@@ -19,6 +20,7 @@ const Calendar = () => {
         }
     ])
     const [inputtedDate, setInputtedDate] = useState('')
+    const [inputtedContent, setInputtedContent] = useState('')
     const [displayedDateContent, setDisplayedDateContent] = useState('')
 
     const pressingDay = (date) => {
@@ -33,21 +35,22 @@ const Calendar = () => {
         }
     }
 
-    useEffect(() => {
-        addDayToList(inputtedDate, listOfHiglightedDays)
-    }, [inputtedDate])
+    const inputDateAndContent = () => {
+        addDayToList(inputtedDate, inputtedContent, listOfHiglightedDays)
+    }
     
-    const addDayToList = (inputtedDate, listOfHiglightedDays) => {
+    const addDayToList = (inputtedDate, inputtedContent, listOfHiglightedDays) => {
 
         tempList = listOfHiglightedDays
 
         newDateObject = {
             date: moment(inputtedDate, "DD-MM-YYYY", true), //true means strict mode
             style: { backgroundColor: "#235885" },
-            textStyle: { color: "#FFFFFF" }
+            textStyle: { color: "#FFFFFF" },
+            text: inputtedContent
         }
 
-        setCustomDatesStyles( tempList => [...tempList, newDateObject]) // creating a new list of date objects by spreading the old list of date objects and adding a new date object to the end of the new list
+        setListOfHighlightedDays( tempList => [...tempList, newDateObject]) // creating a new list of date objects by spreading the old list of date objects and adding a new date object to the end of the new list
     }
 
     return (
@@ -58,9 +61,19 @@ const Calendar = () => {
             />
 
             <View>
-                <Text>Give a date to highlight:</Text>
-                <Text>Format: DD-MM-YYYY</Text>
-                <TextInput onChangeText={(text) => setInputtedDate(text)} style={styles.textInputBox}/>
+                <View>
+                    <Text>Give a date to highlight:</Text>
+                    <Text>Format: DD-MM-YYYY</Text>
+                    <TextInput onChangeText={(aDate) => setInputtedDate(aDate)} style={styles.textInputBox}/>
+                </View>
+                <View>
+                    <Text>Give content for the date:</Text>
+                    <Text>e.g. String</Text>
+                    <TextInput onChangeText={(aString) => setInputtedContent(aString)} style={styles.textInputBox}/>
+                </View>
+                <View>
+                    <Button onPress={() => { inputDateAndContent() }}/>
+                </View>
             </View>
 
             <View>
@@ -75,7 +88,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#FFFFFF',
-        marginTop: 100,
+        marginTop: 50,
     },
     textInputBox: {
         borderWidth: 2,
