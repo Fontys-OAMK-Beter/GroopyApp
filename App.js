@@ -44,12 +44,11 @@ const MainStack = () => {
   }
 
   const Tab = createBottomTabNavigator()
-  const Stack = createStackNavigator()
 
   return (
     <IconComponentProvider IconComponent={MaterialCommunityIcons}>
       <Tab.Navigator
-        initialRouteName='User'
+        initialRouteName='GroupStack'
         screenOptions={({ route }) => ({
           tabBarShowLabel: false,
           tabBarIcon: ({ focused, color, size }) => {
@@ -58,7 +57,7 @@ const MainStack = () => {
               iconName = focused ? 'cards-playing' : 'cards-outline';
             } else if (route.name === 'Hello') {
               iconName = focused ? 'account' : 'account-outline';
-            } else if (route.name === 'User') {
+            } else if (route.name === 'GroupStack') {
               iconName = focused ? 'account-group' : 'account-group-outline';
             }
             return <Icon name={iconName} size={30} color={color} />;
@@ -72,12 +71,12 @@ const MainStack = () => {
         <Tab.Screen
           name="Launch"
           component={LaunchPage}
-          options={{ headerShown: false }}
+          options={({ navigation }) => useCustomHeader(navigation, "Placeholder page")}
         />
         <Tab.Screen
-          name="User"
-          component={User}
-          options={({ navigation }) => useCustomHeader(navigation, "User")}
+          name="GroupStack"
+          component={GroupStack}
+          options={({ navigation }) => useCustomHeader(navigation, "Groups")}
         />
         <Tab.Screen
           name="Hello"
@@ -92,6 +91,7 @@ const MainStack = () => {
 export default function App() {
   const Stack = createStackNavigator();
 
+  //this stack is mainly just ussed for login so users can be authenticated before getting access to the app
   return (
     <NavigationContainer>
       <Stack.Navigator
