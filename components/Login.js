@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { View, TextInput, Text, Button, TouchableOpacity } from 'react-native'
 
+import LoginContext from './LoginContext'
 
 const Login = ( { navigation } ) => {
     const [username, setUsername] = useState('')
     const [pwd, setPwd] = useState('')
 
+    const { setIsLoggedIn } = useContext(LoginContext)
     
     useEffect(() => {
         //attempt to login via saved credentials here
@@ -16,7 +18,8 @@ const Login = ( { navigation } ) => {
         //attempt to login via inputs once backend is 'finished'
         //until then you will just login by pressing the button. No input needed
 
-        navigation.navigate('Main')
+        //set loggedin state to true here to navigate to main
+        setIsLoggedIn(true)
     }
 
     const forgot = () => {
