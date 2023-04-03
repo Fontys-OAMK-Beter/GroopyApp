@@ -10,6 +10,7 @@ const MainStack = () => {
     const { isLoggedIn } = useContext(LoginContext)
     const Stack = createStackNavigator()
 
+    //Login elements are conditionally added to the stack so that the user cannot use back button to go back to them if they are logged in
     return (
         <NavigationContainer>
             <Stack.Navigator
