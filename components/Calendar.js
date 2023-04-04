@@ -11,27 +11,28 @@ const Calendar = () => {
             style: {backgroundColor: "#235885"},
             textStyle: {color: "#FFFFFF"},
             text: "Iron man at 18:00",
-            group: "1",
+            group: 1,
         },
         {
             date: moment("16-04-2023", "DD-MM-YYYY", true),
             style: {backgroundColor: "#235885"},
             textStyle: {color: "#FFFFFF"},
             text: "E.T. at 19:00",
-            group: "2",
+            group: 2,
         },
         {
             date: moment("22-04-2023", "DD-MM-YYYY", true),
             style: {backgroundColor: "#235885"},
             textStyle: {color: "#FFFFFF"},
             text: "Spirited away at 20:00",
-            group: "3",
+            group: 3,
         },
     ])
     const [listOfToggledHighlightedDays, setListOfToggledHighlightedDays] = useState([])
     const [inputtedDate, setInputtedDate] = useState('')
     const [inputtedContent, setInputtedContent] = useState('')
     const [displayedDateContent, setDisplayedDateContent] = useState('')
+    const [assignedGroup, setAssignedGroup] = useState('all')
 
     const pressingDay = (date) => {
         displayDateContent(date, listOfHiglightedDays)
@@ -46,10 +47,10 @@ const Calendar = () => {
     }
 
     const inputDateAndContent = () => {
-        addDayToList(inputtedDate, inputtedContent, listOfHiglightedDays)
+        addDayToList(inputtedDate, inputtedContent, listOfHiglightedDays, assignedGroup)
     }
     
-    const addDayToList = (inputtedDate, inputtedContent, listOfHiglightedDays) => {
+    const addDayToList = (inputtedDate, inputtedContent, listOfHiglightedDays, assignedGroup) => {
 
         tempList = listOfHiglightedDays
 
@@ -57,7 +58,8 @@ const Calendar = () => {
             date: moment(inputtedDate, "DD-MM-YYYY", true), //true means strict mode
             style: { backgroundColor: "#235885" },
             textStyle: { color: "#FFFFFF" },
-            text: inputtedContent
+            text: inputtedContent,
+            group: assignedGroup,
         }
 
         setListOfHighlightedDays( tempList => [...tempList, newDateObject]) // creating a new list of date objects by spreading the old list of date objects and adding a new date object to the end of the new list
@@ -93,25 +95,34 @@ const Calendar = () => {
                     <Text>Format: DD-MM-YYYY</Text>
                     <TextInput onChangeText={(aDate) => setInputtedDate(aDate)} style={styles.textInputBox}/>
                 </View>
-                <View>
-                    <Text>Give content for the date:</Text>
-                    <Text>e.g. String</Text>
-                    <TextInput onChangeText={(aString) => setInputtedContent(aString)} style={styles.textInputBox}/>
+
+                <View style={styles.contentInputViewStyle}>
+                    <View>
+                        <Text>Give content for the date:</Text>
+                        <Text>e.g. String</Text>
+                        <TextInput onChangeText={(aString) => setInputtedContent(aString)} style={styles.textInputBox}/>
+                    </View>
+                    <View>
+                        <Text>Assign a group</Text>
+                        <Text>1, 2 or 3</Text>
+                        <TextInput onChangeText={(aNumber) => setAssignedGroup(aNumber)} style={styles.textInputBox}/>
+                    </View>
                 </View>
+
                 <View>
-                    <Button onPress={() => inputDateAndContent() }/>
+                    <Button title={'highlight a day'} onPress={() => inputDateAndContent() }/>
                 </View>
             </View>
 
-            <View>
+            <View style={{paddingLeft: 20}}>
                 <Text>Date content: {displayedDateContent}</Text>
             </View>
 
             <View style={styles.buttonViewStyle}>
                 <Button title={'All events'} onPress={() => displayToggledDays('all')}/>
-                <Button title={'Group 1'} onPress={() => displayToggledDays('1')}/>
-                <Button title={'Group 2'} onPress={() => displayToggledDays('2')}/>
-                <Button title={'Group 3'} onPress={() => displayToggledDays('3')}/>
+                <Button title={'Group 1'} onPress={() => displayToggledDays(1)}/>
+                <Button title={'Group 2'} onPress={() => displayToggledDays(2)}/>
+                <Button title={'Group 3'} onPress={() => displayToggledDays(3)}/>
             </View>
         </View>
     )
@@ -130,9 +141,13 @@ const styles = StyleSheet.create({
     buttonViewStyle: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingHorizontal: 16,
         marginTop: 16,
     },
+    contentInputViewStyle: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginTop: 16,
+    }
 });
 
 export default Calendar
