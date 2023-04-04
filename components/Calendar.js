@@ -91,8 +91,8 @@ const Calendar = () => {
 
             <View>
                 <View>
-                    <Text>Give a date to highlight:</Text>
-                    <Text>Format: DD-MM-YYYY</Text>
+                    <Text style={{paddingLeft: 20}}>Give a date to highlight:</Text>
+                    <Text style={{paddingLeft: 20}}>Format: DD-MM-YYYY</Text>
                     <TextInput onChangeText={(aDate) => setInputtedDate(aDate)} style={styles.textInputBox}/>
                 </View>
 
@@ -137,6 +137,7 @@ const styles = StyleSheet.create({
     textInputBox: {
         borderWidth: 2,
         borderColor: "#000000",
+        marginHorizontal: 20
     },
     buttonViewStyle: {
         flexDirection: 'row',

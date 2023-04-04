@@ -7,7 +7,7 @@ import Calendar from './Calendar'
 const HelloWorld = () => {
   return (
     <SafeAreaView style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Calendar/>
+      <Calendar />
       <Text>Hello world</Text>
     </SafeAreaView>
   )
