@@ -88,7 +88,7 @@ const EventItem = ({ item, onPress }) => (
   </TouchableOpacity>
 );
 
-const ViewGroup = ({item}) => {
+const ViewGroup = ({ item }) => {
   const renderEventItem = ({ item }) => {
     return (
       <EventItem

@@ -3,6 +3,7 @@ import React from "react";
 import { View, Text, FlatList, Button, Alert, TouchableOpacity } from "react-native";
 
 import ViewGroup from './ViewGroup';
+import CreateEvent from './CreateEvent';
 import styles from './Styles';
 
 //Dummy data to show before fetching from database
@@ -88,7 +89,7 @@ const Groups = ({ navigation }) => {
                 <Button
                     style={styles.button}
                     title="Create Event"
-                    onPress={() => { Alert.alert("You want to create a new event!") }} />
+                    onPress={() => { navigation.navigate("CreateEvent") }} />
             </View>
         </View>
     );
@@ -106,13 +107,12 @@ const GroupStack = () => {
             <Stack.Screen
                 name="ViewGroup" component={ViewGroup}
             />
+            <Stack.Screen
+                name="CreateEvent" component={CreateEvent}
+            />
         </Stack.Navigator>
     )
 }
-
-
-//TODO: styles as own file
-//This is here for testing how styles work and I have no idea what I'm doing
 
 
 export default GroupStack;

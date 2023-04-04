@@ -12,6 +12,17 @@ const styles = StyleSheet.create({
         flexDirection: 'column-reverse',
         justifyContent: 'flex-start',
     },
+    containerForForms: {
+        backgroundColor: '#f4f4f4',
+        justifyContent: 'space-between',
+        alignContent: 'center',
+    },
+    subContainer: {
+        backgroundColor: '#f4f4f4',
+        alignContent: 'flex-start',
+        justifyContent: 'center',
+        flex: 1,
+    },
     Header: {
         backgroundColor: '#f4f4f4'
     },
@@ -25,6 +36,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         position: 'relative'
     },
+    switch: {
+        alignItems: 'center',
+    },
     item: {
         backgroundColor: '#f9c2ff',
         padding: 20,
@@ -32,6 +46,13 @@ const styles = StyleSheet.create({
         marginHorizontal: 16
     },
     itemWithPicture: {
+        flexDirection: 'row',
+        backgroundColor: '#f9c2ff',
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16
+    },
+    itemWithText: {
         flexDirection: 'row',
         backgroundColor: '#f9c2ff',
         padding: 20,
@@ -66,6 +87,13 @@ const styles = StyleSheet.create({
     defaultUserIcon: {
         height: 48,
         width: 48,
+    },
+    textInput: {
+        height: 40,
+        borderColor: 'dark-gray',
+        borderWidth: 1,
+        flex: 2,
+        marginVertical: 24,
     },
 })
 
