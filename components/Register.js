@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { View, TextInput, Text, Button, TouchableOpacity } from 'react-native'
-
+import { BASE_URL } from '@env'
 
 const Login = ( { navigation }) => {
     const [username, setUsername] = useState('')
@@ -8,7 +8,9 @@ const Login = ( { navigation }) => {
     const [email, setEmail] = useState('')
     
     const submit = () => {
+        //test stuff to make sure everything is working as intended
         console.log(username, pwd, email)
+        console.log(BASE_URL)
         //attempt to register here
     }
 
@@ -27,7 +29,7 @@ const Login = ( { navigation }) => {
                 placeholder='Password'
             />
             <Button
-                title={'Login'}
+                title={'Register'}
                 onPress={submit}
             />
             <TouchableOpacity onPress={() => navigation.navigate('Login')}>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { View, TextInput, Text, Button, TouchableOpacity } from 'react-native'
+import * as SS from 'expo-secure-store'
 
 import LoginContext from './LoginContext'
 
@@ -11,15 +12,28 @@ const Login = ( { navigation } ) => {
     
     useEffect(() => {
         //attempt to login via saved credentials here
+        const getUser = async () => {
+            let savedUsername = await SS.getItemAsync("username") | ''
+            let savedPwd = await SS.getItemAsync("pwd") | ''
+            if(savedUsername.length > 0 && savedPwd.length > 0){
+                setIsLoggedIn(true)
+            }
+        }
+        getUser()
     }, [])
 
 
-    const submit = () => {
+    const submit = async () => {
         //attempt to login via inputs once backend is 'finished'
         //until then you will just login by pressing the button. No input needed
 
         //set loggedin state to true here to navigate to main
-        setIsLoggedIn(true)
+
+        if(username.length > 0 && pwd.length > 0){
+            await SS.setItemAsync("username", username)
+            await SS.setItemAsync("pwd", pwd)
+            setIsLoggedIn(true)
+        }
     }
 
     const forgot = () => {
