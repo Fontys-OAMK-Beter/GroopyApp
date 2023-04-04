@@ -6,10 +6,10 @@ import styles from "./Styles";
 //TODO: change category to dropdown menu
 //TODO: decide if concurrency is a switch or a toggle button
 const CreateEvent = ({ }) => {
-    const [text, setText] = React.useState("")
-    const [category, setCategory] = React.useState("")
-    const [description, setDescription] = React.useState("")
-    const [concurrency, setConcurrency] = React.useState("")
+    const [text, setText] = React.useState("Default")
+    const [category, setCategory] = React.useState("Default")
+    const [description, setDescription] = React.useState("Default")
+    const [concurrency, setConcurrency] = React.useState("False")
 
 
     return (

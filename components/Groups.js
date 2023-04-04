@@ -4,7 +4,9 @@ import { View, Text, FlatList, Button, Alert, TouchableOpacity } from "react-nat
 
 import ViewGroup from './ViewGroup';
 import CreateEvent from './CreateEvent';
+import CreateGroup from './CreateGroup';
 import styles from './Styles';
+
 
 //Dummy data to show before fetching from database
 const DATA = [
@@ -85,7 +87,7 @@ const Groups = ({ navigation }) => {
                 <Button
                     style={styles.button}
                     title="Create Group"
-                    onPress={() => { Alert.alert("You want to create a new group!") }} />
+                    onPress={() => { navigation.navigate("CreateGroup") }} />
                 <Button
                     style={styles.button}
                     title="Create Event"
@@ -109,6 +111,9 @@ const GroupStack = () => {
             />
             <Stack.Screen
                 name="CreateEvent" component={CreateEvent}
+            />
+            <Stack.Screen
+                name="CreateGroup" component={CreateGroup}
             />
         </Stack.Navigator>
     )
