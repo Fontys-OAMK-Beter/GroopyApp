@@ -2,7 +2,8 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { IconComponentProvider, IconButton, Icon } from '@react-native-material/core';
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { Button, View } from 'react-native';
+import { Alert, Button, View } from 'react-native';
+import * as SS from 'expo-secure-store'
 
 import CustomHeader from '../CustomHeader';
 import HelloWorld from '../HelloWorld';
@@ -15,6 +16,10 @@ const LaunchPage = ({ navigation }) => {
         <Button
           title="Go to GroupStack"
           onPress={() => navigation.navigate("GroupStack")}
+        />
+        <Button
+          title="Get username"
+          onPress={async () => Alert.alert(await SS.getItemAsync("username"))}
         />
       </View>
     )

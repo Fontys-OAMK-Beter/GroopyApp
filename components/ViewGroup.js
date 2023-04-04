@@ -8,7 +8,7 @@ import styles from './Styles';
 //TODO: Fetch data from database and cache it
 
 //Testrun for icon implementation
-const testIcon = <Icon name="user-circle" size={30} color="#900" />;
+/* const testIcon = <Icon name="user-circle" size={30} color="#900" />; */
 
 //Dummy data for users
 const dummyUserData = [
