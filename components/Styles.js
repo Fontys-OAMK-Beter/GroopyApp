@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+        marginVertical: 18,
     },
     listUnitWithPicture: {
         flexDirection: 'row',
@@ -65,7 +66,6 @@ const styles = StyleSheet.create({
     defaultUserIcon: {
         height: 48,
         width: 48,
-        color: '#000000'
     },
 })
 

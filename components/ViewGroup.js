@@ -1,4 +1,3 @@
-import { Icon } from "react-native-vector-icons/FontAwesome5";
 import React from "react";
 import { View, Text, FlatList, Button, Image, Alert, TouchableOpacity } from "react-native";
 
@@ -7,26 +6,29 @@ import styles from './Styles';
 
 //TODO: Fetch data from database and cache it
 
-//Testrun for icon implementation
-/* const testIcon = <Icon name="user-circle" size={30} color="#900" />; */
 
 //Dummy data for users
 const dummyUserData = [
   {
     id: '1',
     userName: 'Heikki Matero',
-    profilePic: './assets/default-profile-32.png'
+    profilePic: '../assets/default-profile-32.png'
   },
   {
     id: '2',
     userName: 'Jussi Jokunen',
-    profilePic: './assets/default-profile-48.png'
+    profilePic: '../assets/default-profile-48.png'
   },
   {
     id: '3',
     userName: 'Maija Molla',
     profilePic: 'https://imgur.com/t/simon_cowell/lR5uU'
-  }
+  },
+  {
+    id: '4',
+    userName: 'Matti Meikäläinen',
+    profilePic: 'https://tse3.mm.bing.net/th?id=OIP.BkTRQX020TVEx-wISxvTpwHaE8'
+  },
 ]
 
 //Dummy data for events
@@ -68,10 +70,11 @@ const dummyEventData = [
   }
 ]
 
+//TODO: when backend, see what needs to be called on source/uri
 //flatlist component for showing users
 const UserItem = ({ item, onPress }) => (
   <TouchableOpacity onPress={onPress} style={[styles.itemWithPicture]}>
-      <Image style = {styles.defaultUserIcon} source = {item.profilePic}></Image>
+      <Image style = {styles.defaultUserIcon} source = {require('../assets/default-profile-48.png')}/>
       <Text style={styles.title}>{item.userName}</Text>
   </TouchableOpacity>
 );
