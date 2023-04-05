@@ -55,12 +55,10 @@ const Login = ( { navigation } ) => {
             <TextInput
                 onChangeText={(e) => setUsername(e)}
                 placeholder='Username'
-                autoComplete='username'
             />
             <TextInput
                 onChangeText={(e) => setPwd(e)}
                 placeholder='Password'
-                autoComplete='current-password'
                 secureTextEntry={true}
             />
             <Button
