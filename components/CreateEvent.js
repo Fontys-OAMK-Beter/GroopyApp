@@ -10,6 +10,7 @@ const CreateEvent = ({ }) => {
     const [category, setCategory] = React.useState("Default")
     const [description, setDescription] = React.useState("Default")
     const [concurrency, setConcurrency] = React.useState("False")
+    const [DateText, setDateText] = React.useState("DD-MM-YYYY")
 
 
     return (
@@ -44,6 +45,16 @@ const CreateEvent = ({ }) => {
             </View>
 
             <View style={styles.subContainer}>
+                <Text>Choose a Date</Text>
+                <TextInput
+                    style={styles.textInput}
+                    onChangeText={(e) => setDateText(e)}
+                    placeholder="DD-MM-YYYY"
+                    value={DateText}
+                />
+            </View>
+
+            <View style={styles.subContainer}>
                 <Text>Set Event Concurrency</Text>
                 <Switch
                     style={styles.switch}
@@ -51,10 +62,10 @@ const CreateEvent = ({ }) => {
                     onValueChange={(e) => setConcurrency(e)}
                 />
             </View>
-            <Button 
-            style={styles.button}
-            title="Create Event"
-            onPress={() => Alert.alert(`Event ${text} category ${category} description ${description} concurrency ${concurrency}`)}
+            <Button
+                style={styles.button}
+                title="Create Event"
+                onPress={() => Alert.alert(`Event ${text} category ${category} description ${description} concurrency ${concurrency}`)}
             />
         </View>
 

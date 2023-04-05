@@ -5,7 +5,7 @@ import styles from "./Styles";
 
 //TODO: button chould route to new groups page
 //TODO: check if group icon is feasible
-//TODO: check if groupname exists already
+//TODO: check if groupname exists already or maybe just have unique id per group
 const CreateGroup = ({ }) => {
     const [nameText, setNameText] = React.useState("Default")
     const [DescriptionText, setDescriptionText] = React.useState("Default")

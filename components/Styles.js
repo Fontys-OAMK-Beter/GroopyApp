@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
         alignContent: 'flex-start',
         justifyContent: 'center',
         flex: 1,
+        marginVertical: 10,
     },
     Header: {
         backgroundColor: '#f4f4f4'
