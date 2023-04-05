@@ -12,3 +12,12 @@ export const Post = (path,body,cb) => {
         cb(err)
     })
 }
+
+export function Get(path, cb) {
+    axios.get(BASE_URL + path)
+    .then((res) => {
+        cb(res)
+    }).catch(err => {
+        cb(err)
+    })
+}
