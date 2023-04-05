@@ -4,12 +4,34 @@ import { IconComponentProvider, IconButton, Icon } from '@react-native-material/
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Alert, Button, View } from 'react-native';
 import * as SS from 'expo-secure-store'
+import { Post } from '../helpers/API';
 
 import CustomHeader from '../CustomHeader';
 import HelloWorld from '../HelloWorld';
 import GroupStack from '../Groups';
 
 const LaunchPage = ({ navigation }) => {
+
+    const SendPost = () => {
+
+        const body = {
+            email:"test@test.com",
+            name:"miko",
+            password:"qweasd"
+        }
+
+        Post('/User/register', body, (res) => {
+            if(res.status === 200){
+                console.log(res)
+                Alert.alert(JSON.stringify(res))
+            }else {
+                console.log(res)
+                Alert.alert(JSON.stringify(res))
+            }
+        })
+
+    }
+
     //placeholder waiting for groups to merge
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -20,6 +42,10 @@ const LaunchPage = ({ navigation }) => {
         <Button
           title="Get username"
           onPress={async () => Alert.alert(await SS.getItemAsync("username"))}
+        />
+        <Button
+          title="Send request"
+          onPress={() => SendPost()}
         />
       </View>
     )

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { View, TextInput, Text, Button, TouchableOpacity } from 'react-native'
+import { View, TextInput, Text, Button, TouchableOpacity, Alert } from 'react-native'
 import * as SS from 'expo-secure-store'
+import { Post } from './helpers/API'
 
 import LoginContext from './LoginContext'
 
@@ -30,9 +31,26 @@ const Login = ( { navigation } ) => {
         //set loggedin state to true here to navigate to main
 
         if(username.length > 0 && pwd.length > 0){
-            await SS.setItemAsync("username", username)
-            await SS.setItemAsync("pwd", pwd)
-            setIsLoggedIn(true)
+            try {
+                await SS.setItemAsync("username", username)
+                await SS.setItemAsync("pwd", pwd)
+            }catch (e) {
+                console.log(e)
+            }
+
+            const body = {
+                username: username,
+                password: pwd
+            }
+
+            Post('/User/login', body, (res) => {
+                console.log(res)
+                if(res.status === 200){
+                    setIsLoggedIn(true)
+                }else {
+                    Alert.alert('invalid credentials')
+                }
+            })  
         }
     }
 
