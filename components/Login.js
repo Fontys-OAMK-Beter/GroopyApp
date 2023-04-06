@@ -5,13 +5,15 @@ import { Post } from './helpers/API'
 
 import LoginContext from './LoginContext'
 
-const Login = ( { navigation } ) => {
+const Login = ({ navigation }) => {
     const [username, setUsername] = useState('')
     const [pwd, setPwd] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
 
     const { setIsLoggedIn } = useContext(LoginContext)
-    
+
     useEffect(() => {
+        setIsLoading(true)
         //attempt to login via saved credentials here
         const validate = async () => {
             let savedUsername
@@ -21,26 +23,26 @@ const Login = ( { navigation } ) => {
             } catch (error) {
                 Alert.alert("token restoration failed")
             }
-            if(savedUsername != null){
+            if (savedUsername === null) {
+                setIsLoading(false)
+            } else {
                 setIsLoggedIn(true)
             }
         }
-
         validate()
-
     }, [])
-
 
     const submit = async () => {
         //attempt to login via inputs once backend is 'finished'
         //until then you will just login by pressing the button. No input needed
 
         //set loggedin state to true here to navigate to main
-        if(username.length > 0 && pwd.length > 0){
+        if (username.length > 0 && pwd.length > 0) {
             try {
                 await SS.setItemAsync("username", username)
                 await SS.setItemAsync("pwd", pwd)
-            }catch (e) {
+                setIsLoggedIn(true)
+            } catch (e) {
                 console.log(e)
             }
 
@@ -49,14 +51,14 @@ const Login = ( { navigation } ) => {
                 password: pwd
             }
 
-            Post('/User/login', body, (res) => {
+            /* Post('/User/login', body, (res) => {
                 console.log(res)
-                if(res.status === 200){
+                if (res.status === 200) {
                     setIsLoggedIn(true)
-                }else {
+                } else {
                     Alert.alert('invalid credentials')
                 }
-            })  
+            }) */
         }
     }
 
@@ -70,29 +72,36 @@ const Login = ( { navigation } ) => {
     }
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <TextInput
-                onChangeText={(e) => setUsername(e)}
-                placeholder='Username'
-                autoComplete='username'
-            />
-            <TextInput
-                onChangeText={(e) => setPwd(e)}
-                placeholder='Password'
-                autoComplete='current-password'
-                secureTextEntry={true}
-            />
-            <Button
-                title={'Login'}
-                onPress={submit}
-            />
-            <TouchableOpacity onPress={forgot}>
-                <Text>Forgot password?</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={goRegister}>
-                <Text>Dont have an account? Register here!</Text>
-            </TouchableOpacity>
-        </View>
+        <>
+            {isLoading ? (
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                    <Text>Loading please wait</Text>
+                </View>
+            ) : (
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                    <TextInput
+                        onChangeText={(e) => setUsername(e)}
+                        placeholder='Username'
+                        autoComplete='username'
+                    />
+                    <TextInput
+                        onChangeText={(e) => setPwd(e)}
+                        placeholder='Password'
+                        secureTextEntry={true}
+                    />
+                    <Button
+                        title={'Login'}
+                        onPress={submit}
+                    />
+                    <TouchableOpacity onPress={forgot}>
+                        <Text>Forgot password?</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={goRegister}>
+                        <Text>Dont have an account? Register here!</Text>
+                    </TouchableOpacity>
+                </View>
+            )}
+        </>
     )
 }
 
