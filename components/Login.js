@@ -16,14 +16,14 @@ const Login = ({ navigation }) => {
         setIsLoading(true)
         //attempt to login via saved credentials here
         const validate = async () => {
-            let savedUsername
+            let userToken
 
             try {
-                savedUsername = await SS.getItemAsync("username")
+                userToken = await SS.getItemAsync("token")
             } catch (error) {
                 Alert.alert("token restoration failed")
             }
-            if (savedUsername === null) {
+            if (userToken === null) {
                 setIsLoading(false)
             } else {
                 setIsLoggedIn(true)
@@ -39,19 +39,18 @@ const Login = ({ navigation }) => {
         //set loggedin state to true here to navigate to main
         if (username.length > 0 && pwd.length > 0) {
             try {
-                await SS.setItemAsync("username", username)
-                await SS.setItemAsync("pwd", pwd)
+                await SS.setItemAsync("token", username)
                 setIsLoggedIn(true)
             } catch (e) {
                 console.log(e)
             }
 
-            const body = {
+            /* const body = {
                 username: username,
                 password: pwd
             }
 
-            /* Post('/User/login', body, (res) => {
+            Post('/User/login', body, (res) => {
                 console.log(res)
                 if (res.status === 200) {
                     setIsLoggedIn(true)

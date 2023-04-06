@@ -4,7 +4,7 @@ import { IconComponentProvider, IconButton, Icon } from '@react-native-material/
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Alert, Button, View } from 'react-native';
 import * as SS from 'expo-secure-store'
-import { Post } from '../helpers/API';
+import { Get } from '../helpers/API';
 
 import LoginContext from '../LoginContext';
 import CustomHeader from '../CustomHeader';
@@ -13,15 +13,8 @@ import GroupStack from '../Groups';
 
 const LaunchPage = ({ navigation }) => {
 
-    const SendPost = () => {
-
-        const body = {
-            email:"test@test.com",
-            name:"miko",
-            password:"qweasd"
-        }
-
-        Post('/User/register', body, (res) => {
+    const GetUser = () => {
+        Get('/User/?', body, (res) => {
             if(res.status === 200){
                 console.log(res)
                 Alert.alert(JSON.stringify(res))
@@ -30,7 +23,6 @@ const LaunchPage = ({ navigation }) => {
                 Alert.alert(JSON.stringify(res))
             }
         })
-
     }
 
     //placeholder waiting for groups to merge
@@ -54,6 +46,10 @@ const LaunchPage = ({ navigation }) => {
         <Button
           title="Delete username (logout)"
           onPress={async () => logout()}
+        />
+        <Button
+          title="Get user data"
+          onPress={() => GetUser()}
         />
       </View>
     )
