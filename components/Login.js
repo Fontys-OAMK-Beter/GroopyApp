@@ -13,14 +13,21 @@ const Login = ( { navigation } ) => {
     
     useEffect(() => {
         //attempt to login via saved credentials here
-        const getUser = async () => {
-            let savedUsername = await SS.getItemAsync("username") | ''
-            let savedPwd = await SS.getItemAsync("pwd") | ''
-            if(savedUsername.length > 0 && savedPwd.length > 0){
+        const validate = async () => {
+            let savedUsername
+
+            try {
+                savedUsername = await SS.getItemAsync("username")
+            } catch (error) {
+                Alert.alert("token restoration failed")
+            }
+            if(savedUsername != null){
                 setIsLoggedIn(true)
             }
         }
-        getUser()
+
+        validate()
+
     }, [])
 
 
@@ -29,7 +36,6 @@ const Login = ( { navigation } ) => {
         //until then you will just login by pressing the button. No input needed
 
         //set loggedin state to true here to navigate to main
-
         if(username.length > 0 && pwd.length > 0){
             try {
                 await SS.setItemAsync("username", username)
@@ -54,8 +60,9 @@ const Login = ( { navigation } ) => {
         }
     }
 
-    const forgot = () => {
+    const forgot = async () => {
         //redirect to password reset form
+        Alert.alert(await SS.getItemAsync("username"))
     }
 
     const goRegister = () => {
@@ -67,10 +74,13 @@ const Login = ( { navigation } ) => {
             <TextInput
                 onChangeText={(e) => setUsername(e)}
                 placeholder='Username'
+                autoComplete='username'
             />
             <TextInput
                 onChangeText={(e) => setPwd(e)}
                 placeholder='Password'
+                autoComplete='current-password'
+                secureTextEntry={true}
             />
             <Button
                 title={'Login'}

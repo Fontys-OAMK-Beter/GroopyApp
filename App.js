@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import 'react-native-gesture-handler';
 
 import LoginContext from './components/LoginContext'
 import MainStack from './components/navigation/MainStack';
