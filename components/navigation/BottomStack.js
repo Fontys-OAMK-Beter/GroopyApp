@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { IconComponentProvider, IconButton, Icon } from '@react-native-material/core';
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Alert, Button, View } from 'react-native';
 import * as SS from 'expo-secure-store'
 
+import LoginContext from '../LoginContext';
 import CustomHeader from '../CustomHeader';
 import HelloWorld from '../HelloWorld';
 import GroupStack from '../Groups';
 
 const LaunchPage = ({ navigation }) => {
     //placeholder waiting for groups to merge
+    const { setIsLoggedIn } = useContext(LoginContext)
+
+    const logout = async () => {
+        await SS.deleteItemAsync("username")
+        setIsLoggedIn(false)
+    }
+
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Button
@@ -20,6 +28,10 @@ const LaunchPage = ({ navigation }) => {
         <Button
           title="Get username"
           onPress={async () => Alert.alert(await SS.getItemAsync("username"))}
+        />
+        <Button
+          title="Delete username (logout)"
+          onPress={async () => logout()}
         />
       </View>
     )
