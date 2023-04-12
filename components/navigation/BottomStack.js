@@ -9,7 +9,7 @@ import { Get } from '../helpers/API';
 import LoginContext from '../LoginContext';
 import CustomHeader from '../CustomHeader';
 import HelloWorld from '../HelloWorld';
-import GroupStack from '../Groups';
+import GroupStack from './GroupStack';
 
 const LaunchPage = ({ navigation }) => {
 

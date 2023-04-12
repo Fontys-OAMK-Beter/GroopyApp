@@ -1,9 +1,8 @@
-import { createStackNavigator } from '@react-navigation/stack';
 import React from "react";
-import { View, Text, FlatList, Button, Alert, TouchableOpacity } from "react-native";
+import { View, Text, FlatList, Button, TouchableOpacity } from "react-native";
 
-import ViewGroup from './ViewGroup';
 import styles from './Styles';
+
 
 //Dummy data to show before fetching from database
 const DATA = [
@@ -84,35 +83,14 @@ const Groups = ({ navigation }) => {
                 <Button
                     style={styles.button}
                     title="Create Group"
-                    onPress={() => { Alert.alert("You want to create a new group!") }} />
+                    onPress={() => { navigation.navigate("CreateGroup") }} />
                 <Button
                     style={styles.button}
                     title="Create Event"
-                    onPress={() => { Alert.alert("You want to create a new event!") }} />
+                    onPress={() => { navigation.navigate("CreateEvent") }} />
             </View>
         </View>
     );
 }
 
-//This is the stack navigator for the groups tab so that viewgroup can be accessed by pressing on a group in the flatlist
-const Stack = createStackNavigator()
-
-const GroupStack = () => {
-    return (
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen
-                name="Groups" component={Groups}
-            />
-            <Stack.Screen
-                name="ViewGroup" component={ViewGroup}
-            />
-        </Stack.Navigator>
-    )
-}
-
-
-//TODO: styles as own file
-//This is here for testing how styles work and I have no idea what I'm doing
-
-
-export default GroupStack;
+export default Groups;
