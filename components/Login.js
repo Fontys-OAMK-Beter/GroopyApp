@@ -16,14 +16,15 @@ const Login = ({ navigation }) => {
         setIsLoading(true)
         //attempt to login via saved credentials here
         const validate = async () => {
-            let userToken
+            let userToken = ""
 
             try {
                 userToken = await SS.getItemAsync("token")
+                console.log("usertoken: " + userToken)
             } catch (error) {
                 Alert.alert("token restoration failed")
             }
-            if (userToken === null) {
+            if (userToken === null || userToken === "") {
                 setIsLoading(false)
             } else {
                 setIsLoggedIn(true)
@@ -63,7 +64,7 @@ const Login = ({ navigation }) => {
 
     const forgot = async () => {
         //redirect to password reset form
-        Alert.alert(await SS.getItemAsync("username"))
+        Alert.alert(await SS.getItemAsync("token"))
     }
 
     const goRegister = () => {

@@ -29,7 +29,7 @@ const LaunchPage = ({ navigation }) => {
     const { setIsLoggedIn } = useContext(LoginContext)
 
     const logout = async () => {
-        await SS.deleteItemAsync("username")
+        await SS.deleteItemAsync("token")
         setIsLoggedIn(false)
     }
 
@@ -41,15 +41,11 @@ const LaunchPage = ({ navigation }) => {
         />
         <Button
           title="Get username"
-          onPress={async () => Alert.alert(await SS.getItemAsync("username"))}
+          onPress={async () => Alert.alert(await SS.getItemAsync("token"))}
         />
         <Button
           title="Delete username (logout)"
           onPress={async () => logout()}
-        />
-        <Button
-          title="Get user data"
-          onPress={() => GetUser()}
         />
       </View>
     )
