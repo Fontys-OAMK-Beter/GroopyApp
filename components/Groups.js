@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, FlatList, Button, TouchableOpacity } from "react-native";
 
+import GroupStack from "./navigation/GroupStack";
 import styles from './Styles';
 
 
