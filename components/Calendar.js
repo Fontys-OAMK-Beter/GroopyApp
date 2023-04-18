@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View, TextInput} from 'react-native';
 import CalendarPicker from 'react-native-calendar-picker';
 import moment from 'moment';
