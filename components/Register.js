@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, TextInput, Text, Button, TouchableOpacity } from 'react-native'
+import { View, TextInput, Text, Button, TouchableOpacity, Alert } from 'react-native'
 import { BASE_URL } from '@env'
 
 const Login = ( { navigation }) => {
@@ -10,7 +10,7 @@ const Login = ( { navigation }) => {
     const submit = () => {
         //test stuff to make sure everything is working as intended
         console.log(username, pwd, email)
-        console.log(BASE_URL)
+        Alert.alert(BASE_URL)
         //attempt to register here
     }
 
@@ -18,15 +18,18 @@ const Login = ( { navigation }) => {
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <TextInput
                 onChangeText={(e) => setUsername(e)}
+                style={{textAlign: 'left'}}
                 placeholder='Username'
             />
             <TextInput
                 onChangeText={(e) => setEmail(e)}
                 placeholder='email@email.com'
+                autoComplete='email'
             />
             <TextInput
                 onChangeText={(e) => setPwd(e)}
                 placeholder='Password'
+                secureTextEntry={true}
             />
             <Button
                 title={'Register'}

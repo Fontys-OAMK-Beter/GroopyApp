@@ -12,6 +12,18 @@ const styles = StyleSheet.create({
         flexDirection: 'column-reverse',
         justifyContent: 'flex-start',
     },
+    containerForForms: {
+        backgroundColor: '#f4f4f4',
+        justifyContent: 'space-between',
+        alignContent: 'center',
+    },
+    subContainer: {
+        backgroundColor: '#f4f4f4',
+        alignContent: 'flex-start',
+        justifyContent: 'center',
+        flex: 1,
+        marginVertical: 10,
+    },
     Header: {
         backgroundColor: '#f4f4f4'
     },
@@ -24,6 +36,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         position: 'relative'
+    },
+    switch: {
+        alignItems: 'center',
     },
     item: {
         backgroundColor: '#f9c2ff',
@@ -38,6 +53,13 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         marginHorizontal: 16
     },
+    itemWithText: {
+        flexDirection: 'row',
+        backgroundColor: '#f9c2ff',
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16
+    },
     title: {
         fontSize: 32
     },
@@ -45,6 +67,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+        marginVertical: 18,
     },
     listUnitWithPicture: {
         flexDirection: 'row',
@@ -65,7 +88,13 @@ const styles = StyleSheet.create({
     defaultUserIcon: {
         height: 48,
         width: 48,
-        color: '#000000'
+    },
+    textInput: {
+        height: 40,
+        borderColor: 'dark-gray',
+        borderWidth: 1,
+        flex: 2,
+        marginVertical: 24,
     },
 })
 
