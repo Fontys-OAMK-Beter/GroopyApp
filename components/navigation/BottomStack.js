@@ -7,7 +7,7 @@ import * as SS from 'expo-secure-store'
 
 import LoginContext from '../LoginContext';
 import CustomHeader from '../CustomHeader';
-import UserPage from '../UserPage';
+import UserPageStack from './UserPageStack';
 import GroupStack from './GroupStack';
 
 const LaunchPage = ({ navigation }) => {
@@ -92,8 +92,8 @@ const BottomStack = () => {
                 />
                 <Tab.Screen
                     name="Hello"
-                    component={UserPage}
-                    options={({ navigation }) => useCustomHeader(navigation, "UserPage")}
+                    component={UserPageStack}
+                    options={({ navigation }) => useCustomHeader(navigation, "UserPageStack")}
                 />
             </Tab.Navigator>
         </IconComponentProvider>

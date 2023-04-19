@@ -3,11 +3,11 @@ import { createStackNavigator } from '@react-navigation/stack'
 import UserPage from '../UserPage'
 import PersonalInfo from '../PersonalInfo'
 
-const stack = createStackNavigator()
+const Stack = createStackNavigator()
 
 const UserPageStack = () => {
     return(
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen
                 name="UserPage" component={UserPage}
             />
