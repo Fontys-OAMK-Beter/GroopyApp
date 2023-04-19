@@ -6,23 +6,24 @@ import styles from "./Styles";
 //TODO: 12-branch pull here
 //TODO: button chould route to new groups page
 //TODO: check if group icon is feasible
+
 const CreateGroup = ({ }) => {
     const [nameText, setNameText] = React.useState("Default")
     const [DescriptionText, setDescriptionText] = React.useState("Default")
     const groupID = 1 //Debug variables rock n' roll
 
-    const postNewGroup = (nameText, DescriptionText, groupID) => {
-        temp1 = toString(nameText)
-        temp2 = toString(DescriptionText)
-        temp3 = parseInt(groupID)
-
-        fetch(`https://groopyswoopyapiweb.azurewebsites.net/api/Party?title=${temp1}&pictureUrl=${temp2}&userId=${temp3}`, {
+    const postNewGroup = (nameText, DescriptionText, userID) => {
+        fetch('https://groopyswoopyapiweb.azurewebsites.net/api/' + 'party', {
             method:'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
-            //This api takes data in header only  :):):):):):)
+            body: JSON.stringify({
+                title: nameText,
+                pictureUrl: DescriptionText,
+                userId: userID,
+            })
             }
         )
         .then((response) => {

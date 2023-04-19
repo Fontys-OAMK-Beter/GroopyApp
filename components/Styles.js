@@ -6,11 +6,23 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-between',
     },
+    containerForGroups: {
+        backgroundColor: '#f4f4f4',
+        flex: 1,
+        justifyContent: 'space-between',
+
+    },
     containerForButtons: {
         backgroundColor: '#f4f4f4',
-        flex: 0,
-        flexDirection: 'column-reverse',
+        flex: 1,
+        flexDirection: 'column',
         justifyContent: 'flex-start',
+    },
+    containerForList: {
+        backgroundColor: '#f4f4f4',
+        flex: 4,
+        flexDirection: 'row',
+        
     },
     containerForForms: {
         backgroundColor: '#f4f4f4',

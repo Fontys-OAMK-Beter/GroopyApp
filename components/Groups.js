@@ -1,9 +1,10 @@
 import React from "react";
 import { View, Text, FlatList, Button, TouchableOpacity } from "react-native";
 
-import GroupStack from "./navigation/GroupStack";
 import styles from './Styles';
 
+//TODO: see how to fetch groups data to local storage on page load
+//TODO: having more than 6 groups hides buttons at the bottom
 
 //Dummy data to show before fetching from database
 const DATA = [
@@ -19,18 +20,18 @@ const DATA = [
         id: '3',
         title: 'Group 3',
     },
-    /* {
+     {
         id: '4',
-        title: 'Group 3',
+        title: 'Group 4',
     },
     {
         id: '5',
-        title: 'Group 3',
+        title: 'Group 5',
     },
     {
         id: '6',
-        title: 'Group 3',
-    },
+        title: 'Group 6',
+    }, /*
     {
         id: '7',
         title: 'Group 3',
@@ -72,8 +73,8 @@ const Groups = ({ navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
-            <View>
+        <View style={styles.containerForGroups}>
+            <View style = {styles.containerForList}>
                 <FlatList
                     data={DATA}
                     renderItem={renderItem}
