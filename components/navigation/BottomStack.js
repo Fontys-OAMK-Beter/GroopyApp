@@ -6,7 +6,7 @@ import { Alert, Button, View } from 'react-native';
 import * as SS from 'expo-secure-store'
 
 import CustomHeader from '../CustomHeader';
-import HelloWorld from '../HelloWorld';
+import UserPage from '../UserPage';
 import GroupStack from '../Groups';
 
 const LaunchPage = ({ navigation }) => {
@@ -80,8 +80,8 @@ const BottomStack = () => {
                 />
                 <Tab.Screen
                     name="Hello"
-                    component={HelloWorld}
-                    options={({ navigation }) => useCustomHeader(navigation, "Page title")}
+                    component={UserPage}
+                    options={({ navigation }) => useCustomHeader(navigation, "UserPage")}
                 />
             </Tab.Navigator>
         </IconComponentProvider>
