@@ -1,9 +1,17 @@
-import React from 'react'
-import {Text, TouchableOpacity} from 'react-native'
+import React, {useContext} from 'react'
+import {Text, TouchableOpacity, View} from 'react-native'
 import styles from './Styles'
-import { View } from 'react-native-web'
+import * as SS from 'expo-secure-store'
 
 const UserPage = () => {
+
+    const { setIsLoggedIn } = useContext(LoginContext)
+
+    const logout = async () => {
+        await SS.deleteItemAsync("username")
+        setIsLoggedIn(false)
+    }
+
     return(
         <View styles={styles.container}>
             <View>
@@ -13,7 +21,7 @@ const UserPage = () => {
                 <TouchableOpacity>
                     <Text>Personal information</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={logout}>
                     <Text>Log out</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>

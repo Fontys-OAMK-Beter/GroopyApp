@@ -7,7 +7,7 @@ import * as SS from 'expo-secure-store'
 
 import LoginContext from '../LoginContext';
 import CustomHeader from '../CustomHeader';
-import HelloWorld from '../HelloWorld';
+import UserPage from '../UserPage';
 import GroupStack from './GroupStack';
 
 const LaunchPage = ({ navigation }) => {
