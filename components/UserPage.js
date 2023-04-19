@@ -7,6 +7,8 @@ const UserPage = () => {
 
     const { setIsLoggedIn } = useContext(LoginContext)
 
+    
+
     const logout = async () => {
         await SS.deleteItemAsync("username")
         setIsLoggedIn(false)
@@ -18,7 +20,7 @@ const UserPage = () => {
 
             </View>
             <View>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={}>
                     <Text>Personal information</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={logout}>
