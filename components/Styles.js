@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#f4f4f4',
         flex: 1,
         justifyContent: 'space-between',
-
     },
     containerForButtons: {
         backgroundColor: '#f4f4f4',
@@ -22,7 +21,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#f4f4f4',
         flex: 4,
         flexDirection: 'row',
-        
     },
     containerForForms: {
         backgroundColor: '#f4f4f4',

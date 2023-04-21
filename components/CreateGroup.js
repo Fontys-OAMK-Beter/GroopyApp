@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, Button, Alert, TextInput } from "react-native";
+import * as SS from "expo-secure-store";
 
 import styles from "./Styles";
 
@@ -9,10 +10,25 @@ import styles from "./Styles";
 
 const CreateGroup = ({ }) => {
     const [nameText, setNameText] = React.useState("Default")
-    const [DescriptionText, setDescriptionText] = React.useState("Default")
-    const groupID = 1 //Debug variables rock n' roll
+    const [descriptionText, setDescriptionText] = React.useState("Default")
+    const [userId, setUserId] = React.useState()
 
-    const postNewGroup = (nameText, DescriptionText, userID) => {
+    async function getUserID() {
+        try {
+            let temp = await SS.getItemAsync("userID");
+            let tempParsed = JSON.parse(temp);
+            
+            if(tempParsed !== null) {
+                setUserID(tempParsed);
+            } 
+        } catch (error) {
+            console.log(error)     
+        }
+    }
+
+    setUserId(getUserID())
+
+    const postNewGroup = (nameText, descriptionText, userId) => {
         fetch('https://groopyswoopyapiweb.azurewebsites.net/api/' + 'party', {
             method:'POST',
             headers: {
@@ -21,8 +37,8 @@ const CreateGroup = ({ }) => {
             },
             body: JSON.stringify({
                 title: nameText,
-                pictureUrl: DescriptionText,
-                userId: userID,
+                pictureUrl: descriptionText,
+                userId: userId,
             })
             }
         )
@@ -63,7 +79,7 @@ const CreateGroup = ({ }) => {
             <Button 
             style={styles.button}
             title="Create Group"
-            onPress={() => postNewGroup(nameText, DescriptionText, groupID)}
+            onPress={() => postNewGroup(nameText, descriptionText, groupId)}
             />
         </View>
     )
