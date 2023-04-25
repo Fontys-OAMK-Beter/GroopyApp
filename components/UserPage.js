@@ -15,18 +15,24 @@ const UserPage = ({navigation}) => {
     }
 
     return(
-        <View styles={styles.container}>
-            <View>
+        <View style={{padding: 24}}>
+            <View style={{
+                width: 200,
+                height: 200,
+                borderRadius: 200 / 2,
+                backgroundColor: '#85888c',
+                marginTop: 16,
+                marginLeft: 65
 
-            </View>
-            <View>
-                <TouchableOpacity onPress={() => {navigation.navigate("PersonalInfo")}}>
+            }}/>
+            <View style={{marginTop: 40}}>
+                <TouchableOpacity onPress={() => {navigation.navigate("PersonalInfo")}} style={styles.item}>
                     <Text>Personal information</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={logout}>
+                <TouchableOpacity onPress={logout} style={styles.item}>
                     <Text>Log out</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity style={styles.item}>
                     <Text>Remove account</Text>
                 </TouchableOpacity>
             </View>
