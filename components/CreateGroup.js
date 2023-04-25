@@ -27,9 +27,9 @@ const CreateGroup = ({ }) => {
     }
 
     setUserId(getUserID())
-
+    //TODO: check url and api routing when up
     const postNewGroup = (nameText, descriptionText, userId) => {
-        fetch('https://groopyswoopyapiweb.azurewebsites.net/api/' + 'party', {
+        fetch('https://groopyswoopyapiweb3.azurewebsites.net/api/' + 'party', {
             method:'POST',
             headers: {
                 'Accept': 'application/json',
