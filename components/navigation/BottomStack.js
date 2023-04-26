@@ -4,7 +4,7 @@ import { IconComponentProvider, IconButton, Icon } from '@react-native-material/
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Alert, Button, View } from 'react-native';
 import * as SS from 'expo-secure-store'
-import { DecodeJWT, Post } from '../helpers/API';
+import { AuthGet, DecodeJWT, Post } from '../helpers/API';
 
 import LoginContext from '../LoginContext';
 import CustomHeader from '../CustomHeader';
@@ -22,7 +22,6 @@ const LaunchPage = ({ navigation }) => {
     const logout = async () => {
         Post('/User/logout', {}, async (res) => {
             if(res.status === 200){
-                console.log(res)
                 await SS.deleteItemAsync("token")
                 setIsLoggedIn(false)
             }else{
@@ -32,6 +31,14 @@ const LaunchPage = ({ navigation }) => {
 
     }
 
+    const GetUserInfo = async () => {
+        let userObj = DecodeJWT()
+
+        AuthGet("/User/4", (res) => {
+            console.log(res)
+        })
+    }
+
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Button
@@ -39,8 +46,8 @@ const LaunchPage = ({ navigation }) => {
           onPress={() => navigation.navigate("GroupStack")}
         />
         <Button
-          title="Get username"
-          onPress={async () => Alert.alert(await SS.getItemAsync("token"))}
+          title="Get user info"
+          onPress={async () => await GetUserInfo()}
         />
         <Button
           title="Delete username (logout)"
