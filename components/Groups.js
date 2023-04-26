@@ -72,6 +72,8 @@ const Groups = ({ navigation }) => {
         );
     };
 
+    
+
     return (
         <View style={styles.containerForGroups}>
             <View style = {styles.containerForList}>

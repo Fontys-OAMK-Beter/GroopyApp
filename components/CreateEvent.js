@@ -4,14 +4,16 @@ import { View, Text, Alert, TextInput, Switch, Button } from "react-native";
 import styles from "./Styles";
 
 //TODO: change category to dropdown menu
-//TODO: decide if concurrency is a switch or a toggle button
 const CreateEvent = ({ }) => {
     const [text, setText] = React.useState("Default")
     const [category, setCategory] = React.useState("Default")
     const [description, setDescription] = React.useState("Default")
     const [concurrency, setConcurrency] = React.useState("False")
-    const [DateText, setDateText] = React.useState("DD-MM-YYYY")
+    const [dateText, setDateText] = React.useState("DD-MM-YYYY")
 
+    const postNewEvent = () => {
+        
+    }
 
     return (
         <View style={styles.container}>
@@ -50,7 +52,7 @@ const CreateEvent = ({ }) => {
                     style={styles.textInput}
                     onChangeText={(e) => setDateText(e)}
                     placeholder="DD-MM-YYYY"
-                    value={DateText}
+                    value={dateText}
                 />
             </View>
 

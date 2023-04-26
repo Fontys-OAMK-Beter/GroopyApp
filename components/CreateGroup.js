@@ -26,19 +26,27 @@ const CreateGroup = ({ }) => {
         }
     }
 
-    setUserId(getUserID())
-    //TODO: check url and api routing when up
+    //setUserId(getUserID())
+
+    React.useEffect(() => {
+        async function fetchID() {
+            const tempID = await getUserID();
+            setUserId(tempID);
+        }
+        fetchID();
+    }, [])
+
     const postNewGroup = (nameText, descriptionText, userId) => {
-        fetch('https://groopyswoopyapiweb3.azurewebsites.net/api/' + 'party', {
+        fetch('https://groopyswoopyapiweb3.azurewebsites.net/api/' + 'Party', {
             method:'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                title: nameText,
+                //title: nameText,
                 pictureUrl: descriptionText,
-                userId: userId,
+                UserId: userId,
             })
             }
         )
@@ -68,7 +76,7 @@ const CreateGroup = ({ }) => {
                     style={styles.textInput}
                     onChangeText={(e) => setDescriptionText(e)}
                     placeholder="Group Description"
-                    value={DescriptionText}
+                    value={descriptionText}
                 />
             </View>
 
@@ -79,7 +87,7 @@ const CreateGroup = ({ }) => {
             <Button 
             style={styles.button}
             title="Create Group"
-            onPress={() => postNewGroup(nameText, descriptionText, groupId)}
+            onPress={() => postNewGroup(nameText, descriptionText, userId)}
             />
         </View>
     )
