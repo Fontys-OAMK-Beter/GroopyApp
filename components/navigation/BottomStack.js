@@ -4,7 +4,7 @@ import { IconComponentProvider, IconButton, Icon } from '@react-native-material/
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Alert, Button, View } from 'react-native';
 import * as SS from 'expo-secure-store'
-import { Get } from '../helpers/API';
+import { DecodeJWT } from '../helpers/API';
 
 import LoginContext from '../LoginContext';
 import CustomHeader from '../CustomHeader';
@@ -12,17 +12,8 @@ import HelloWorld from '../HelloWorld';
 import GroupStack from './GroupStack';
 
 const LaunchPage = ({ navigation }) => {
-
     const GetUser = () => {
-        Get('/User/?', body, (res) => {
-            if(res.status === 200){
-                console.log(res)
-                Alert.alert(JSON.stringify(res))
-            }else {
-                console.log(res)
-                Alert.alert(JSON.stringify(res))
-            }
-        })
+        console.log(DecodeJWT())
     }
 
     //placeholder waiting for groups to merge
@@ -46,6 +37,10 @@ const LaunchPage = ({ navigation }) => {
         <Button
           title="Delete username (logout)"
           onPress={async () => logout()}
+        />
+        <Button
+          title="Decode token "
+          onPress={async () => GetUser()}
         />
       </View>
     )

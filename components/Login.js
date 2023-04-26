@@ -12,6 +12,8 @@ const Login = ({ navigation }) => {
 
     const { setIsLoggedIn } = useContext(LoginContext)
 
+    let loadingIcon
+
     useEffect(() => {
         setIsLoading(true)
         //attempt to login via saved credentials here
@@ -52,17 +54,20 @@ const Login = ({ navigation }) => {
                     console.log(res.headers.authorization)
                     try {
                         await SS.setItemAsync("token", res.headers.authorization)
+                        setUsername('')
+                        setPwd('')
                         setIsLoggedIn(true)
                     } catch (e) {
                         console.log(e)
                         Alert.alert('An error occurred please try again')
                     }
                 } else {
-                    Alert.alert('invalid credentials')
+                    Alert.alert('Incorrect email or password')
                 }
             })
         }
     }
+
 
     const forgot = async () => {
         //redirect to password reset form
@@ -94,6 +99,7 @@ const Login = ({ navigation }) => {
                         title={'Login'}
                         onPress={submit}
                     />
+                    <Text>{loadingIcon}</Text>
                     <TouchableOpacity onPress={forgot}>
                         <Text>Forgot password?</Text>
                     </TouchableOpacity>

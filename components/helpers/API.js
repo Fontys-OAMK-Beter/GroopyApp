@@ -1,6 +1,21 @@
 import axios from "axios";
 import { BASE_URL } from '@env'
 import * as SS from 'expo-secure-store'
+import jwt_decode from 'jwt-decode'
+
+export const DecodeJWT = async () => {
+    try {
+        let decoded
+        var token = await SS.getItemAsync("token")
+        token = token.replace(/^Bearer\s+/, "")
+
+        decoded = jwt_decode(token)
+        return decoded
+    }catch (e) {
+        return e
+    }
+}
+
 
 export const Post = (path, body, cb) => {
     axios.post(BASE_URL + path, body, {
