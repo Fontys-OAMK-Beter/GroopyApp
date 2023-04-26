@@ -21,10 +21,10 @@ const LaunchPage = ({ navigation }) => {
 
     const logout = async () => {
         Post('/User/logout', {}, async (res) => {
-            if(res.status === 200){
+            if (res.status === 200) {
                 await SS.deleteItemAsync("token")
                 setIsLoggedIn(false)
-            }else{
+            } else {
                 Alert.alert("Error logging out")
             }
         })
@@ -32,34 +32,43 @@ const LaunchPage = ({ navigation }) => {
     }
 
     const GetUserInfo = async () => {
-        let userObj = DecodeJWT()
+        let userObj = await DecodeJWT()
 
-        AuthGet("/User/4", (res) => {
-            console.log(res)
+        await AuthGet("/User/" + userObj.userID, (res) => {
+            if (res.status === 200) {
+                Alert.alert("Logged in as ", res.data.name)
+                return
+            } else if (res.response.status === 401) {
+                Alert.alert("Login expired, please log back in")
+                logout()
+                return
+            }else{
+                Alert.alert("An error occurred, please try again")
+            }
         })
     }
 
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Button
-          title="Go to GroupStack"
-          onPress={() => navigation.navigate("GroupStack")}
-        />
-        <Button
-          title="Get user info"
-          onPress={async () => await GetUserInfo()}
-        />
-        <Button
-          title="Delete username (logout)"
-          onPress={async () => logout()}
-        />
-        <Button
-          title="Decode token "
-          onPress={async () => GetUser()}
-        />
-      </View>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Button
+                title="Go to GroupStack"
+                onPress={() => navigation.navigate("GroupStack")}
+            />
+            <Button
+                title="Get user info"
+                onPress={async () => await GetUserInfo()}
+            />
+            <Button
+                title="Delete username (logout)"
+                onPress={async () => logout()}
+            />
+            <Button
+                title="Decode token "
+                onPress={async () => GetUser()}
+            />
+        </View>
     )
-  }
+}
 
 //Main stack is the component where you define any navigation you want to happen from the bottom bar
 const BottomStack = () => {
