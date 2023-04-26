@@ -24,10 +24,9 @@ export const Get = (path, cb) => {
 }
 
 export const AuthGet = async (path, cb) => {
-    let token = 'Bearer '
-
+    let token = ''
     try {
-        token = token + await SS.getItemAsync("token")
+        token = await SS.getItemAsync("token")
     } catch (e) {
         console.log(e)
     }

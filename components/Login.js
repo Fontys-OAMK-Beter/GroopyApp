@@ -39,26 +39,28 @@ const Login = ({ navigation }) => {
 
         //set loggedin state to true here to navigate to main
         if (username.length > 0 && pwd.length > 0) {
-            try {
-                await SS.setItemAsync("token", username)
-                setIsLoggedIn(true)
-            } catch (e) {
-                console.log(e)
-            }
 
-            /* const body = {
-                username: username,
+            const body = {
+                email: username,
                 password: pwd
             }
 
-            Post('/User/login', body, (res) => {
+            Post('/User/login', body, async (res) => {
                 console.log(res)
                 if (res.status === 200) {
-                    setIsLoggedIn(true)
+                    //setIsLoggedIn(true)
+                    console.log(res.headers.authorization)
+                    try {
+                        await SS.setItemAsync("token", res.headers.authorization)
+                        setIsLoggedIn(true)
+                    } catch (e) {
+                        console.log(e)
+                        Alert.alert('An error occurred please try again')
+                    }
                 } else {
                     Alert.alert('invalid credentials')
                 }
-            }) */
+            })
         }
     }
 
@@ -81,8 +83,7 @@ const Login = ({ navigation }) => {
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                     <TextInput
                         onChangeText={(e) => setUsername(e)}
-                        placeholder='Username'
-                        autoComplete='username'
+                        placeholder='Email'
                     />
                     <TextInput
                         onChangeText={(e) => setPwd(e)}
