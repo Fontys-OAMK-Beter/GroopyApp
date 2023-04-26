@@ -63,3 +63,23 @@ export const AuthGet = async (path, cb) => {
             cb(err)
         })
 }
+
+export const AuthPost = async (path, body, cb) => {
+    let token = ''
+    try {
+        token = await SS.getItemAsync("token")
+    } catch (e) {
+        console.log(e)
+    }
+
+    axios.post(BASE_URL + path, body, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token
+        }
+    }).then(res => {
+        cb(res)
+    }).catch(err => {
+        cb(err)
+    })
+}
