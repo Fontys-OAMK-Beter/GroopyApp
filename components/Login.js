@@ -22,7 +22,6 @@ const Login = ({ navigation }) => {
 
             try {
                 userToken = await SS.getItemAsync("token")
-                console.log("usertoken: " + userToken)
             } catch (error) {
                 Alert.alert("token restoration failed")
             }
@@ -50,8 +49,6 @@ const Login = ({ navigation }) => {
             Post('/User/login', body, async (res) => {
                 console.log(res)
                 if (res.status === 200) {
-                    //setIsLoggedIn(true)
-                    console.log(res.headers.authorization)
                     try {
                         await SS.setItemAsync("token", res.headers.authorization)
                         setUsername('')

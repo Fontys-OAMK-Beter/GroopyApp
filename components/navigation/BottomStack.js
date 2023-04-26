@@ -4,7 +4,7 @@ import { IconComponentProvider, IconButton, Icon } from '@react-native-material/
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Alert, Button, View } from 'react-native';
 import * as SS from 'expo-secure-store'
-import { DecodeJWT } from '../helpers/API';
+import { DecodeJWT, Post } from '../helpers/API';
 
 import LoginContext from '../LoginContext';
 import CustomHeader from '../CustomHeader';
@@ -12,16 +12,24 @@ import HelloWorld from '../HelloWorld';
 import GroupStack from './GroupStack';
 
 const LaunchPage = ({ navigation }) => {
-    const GetUser = () => {
-        console.log(DecodeJWT())
+    const GetUser = async () => {
+        console.log(await DecodeJWT())
     }
 
     //placeholder waiting for groups to merge
     const { setIsLoggedIn } = useContext(LoginContext)
 
     const logout = async () => {
-        await SS.deleteItemAsync("token")
-        setIsLoggedIn(false)
+        Post('/User/logout', {}, async (res) => {
+            if(res.status === 200){
+                console.log(res)
+                await SS.deleteItemAsync("token")
+                setIsLoggedIn(false)
+            }else{
+                Alert.alert("Error logging out")
+            }
+        })
+
     }
 
     return (
