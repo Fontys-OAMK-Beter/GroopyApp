@@ -26,6 +26,9 @@ const UserPage = ({navigation}) => {
 
             }}/>
             <View style={{marginTop: 40}}>
+                <TouchableOpacity onPress={() => {navigation.navigate("Calendar")}} style={styles.item}>
+                    <Text>Calendar</Text>
+                </TouchableOpacity>
                 <TouchableOpacity onPress={() => {navigation.navigate("PersonalInfo")}} style={styles.item}>
                     <Text>Personal information</Text>
                 </TouchableOpacity>

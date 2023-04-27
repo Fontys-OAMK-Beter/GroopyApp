@@ -2,6 +2,7 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import UserPage from '../UserPage'
 import PersonalInfo from '../PersonalInfo'
+import Calendar from '../Calendar'
 
 const Stack = createStackNavigator()
 
@@ -13,6 +14,9 @@ const UserPageStack = () => {
             />
             <Stack.Screen
                 name="PersonalInfo" component={PersonalInfo}
+            />
+            <Stack.Screen
+            name="Calendar" component={Calendar}
             />
         </Stack.Navigator>
     )
