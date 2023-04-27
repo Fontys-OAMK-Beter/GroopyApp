@@ -38,6 +38,15 @@ const UserPage = ({navigation}) => {
                 <TouchableOpacity style={styles.item}>
                     <Text>Remove account</Text>
                 </TouchableOpacity>
+                <TouchableOpacity onPress={() => {
+                    
+                }} style={styles.item}>
+                    <Text>Get stuff</Text>
+                </TouchableOpacity>
+                <View>
+
+                </View>
+
             </View>
         </View>
     )
