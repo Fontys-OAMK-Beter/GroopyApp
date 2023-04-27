@@ -4,6 +4,7 @@ import { IconComponentProvider, IconButton, Icon } from '@react-native-material/
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Alert, Button, View } from 'react-native';
 import * as SS from 'expo-secure-store'
+import { AuthGet, DecodeJWT, Post } from '../helpers/API';
 
 import LoginContext from '../LoginContext';
 import CustomHeader from '../CustomHeader';
@@ -11,31 +12,63 @@ import UserPageStack from './UserPageStack';
 import GroupStack from './GroupStack';
 
 const LaunchPage = ({ navigation }) => {
+    const GetUser = async () => {
+        console.log(await DecodeJWT())
+    }
+
     //placeholder waiting for groups to merge
     const { setIsLoggedIn } = useContext(LoginContext)
 
     const logout = async () => {
-        await SS.deleteItemAsync("username")
-        setIsLoggedIn(false)
+        Post('/User/logout', {}, async (res) => {
+            if (res.status === 200) {
+                await SS.deleteItemAsync("token")
+                setIsLoggedIn(false)
+            } else {
+                Alert.alert("Error logging out")
+            }
+        })
+
+    }
+
+    const GetUserInfo = async () => {
+        let userObj = await DecodeJWT()
+
+        await AuthGet("/User/" + userObj.userID, (res) => {
+            if (res.status === 200) {
+                Alert.alert("Logged in as ", res.data.name)
+                return
+            } else if (res.response.status === 401) {
+                Alert.alert("Login expired, please log back in")
+                logout()
+                return
+            }else{
+                Alert.alert("An error occurred, please try again")
+            }
+        })
     }
 
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Button
-          title="Go to GroupStack"
-          onPress={() => navigation.navigate("GroupStack")}
-        />
-        <Button
-          title="Get username"
-          onPress={async () => Alert.alert(await SS.getItemAsync("username"))}
-        />
-        <Button
-          title="Delete username (logout)"
-          onPress={async () => logout()}
-        />
-      </View>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Button
+                title="Go to GroupStack"
+                onPress={() => navigation.navigate("GroupStack")}
+            />
+            <Button
+                title="Get user info"
+                onPress={async () => await GetUserInfo()}
+            />
+            <Button
+                title="Delete username (logout)"
+                onPress={async () => logout()}
+            />
+            <Button
+                title="Decode token "
+                onPress={async () => GetUser()}
+            />
+        </View>
     )
-  }
+}
 
 //Main stack is the component where you define any navigation you want to happen from the bottom bar
 const BottomStack = () => {

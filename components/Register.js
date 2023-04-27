@@ -1,17 +1,28 @@
 import React, { useState } from 'react'
 import { View, TextInput, Text, Button, TouchableOpacity, Alert } from 'react-native'
-import { BASE_URL } from '@env'
+import { Post } from './helpers/API'
 
-const Login = ( { navigation }) => {
+const Register = ( { navigation }) => {
     const [username, setUsername] = useState('')
     const [pwd, setPwd] = useState('')
     const [email, setEmail] = useState('')
     
     const submit = () => {
-        //test stuff to make sure everything is working as intended
-        console.log(username, pwd, email)
-        Alert.alert(BASE_URL)
         //attempt to register here
+        const body = {
+            name: username,
+            email: email,
+            password: pwd
+        }
+
+        Post('/User/register', body, (res) => {
+            if(res.status === 200){
+                Alert.alert("User created! please login")
+                navigation.navigate('Login')
+            }else{
+                Alert.alert("Something went wrong please try again")
+            }
+        })
     }
 
     return (
@@ -42,4 +53,4 @@ const Login = ( { navigation }) => {
     )
 }
 
-export default Login
+export default Register
