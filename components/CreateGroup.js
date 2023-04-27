@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button, Alert, TextInput } from "react-native";
+import { View, Text, Button, TextInput } from "react-native";
 import * as SS from "expo-secure-store";
 
 import styles from "./Styles";
