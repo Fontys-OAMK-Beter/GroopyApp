@@ -8,7 +8,7 @@ import { AuthGet, DecodeJWT, Post } from '../helpers/API';
 
 import LoginContext from '../LoginContext';
 import CustomHeader from '../CustomHeader';
-import HelloWorld from '../HelloWorld';
+import UserPageStack from './UserPageStack';
 import GroupStack from './GroupStack';
 
 const LaunchPage = ({ navigation }) => {
@@ -125,8 +125,8 @@ const BottomStack = () => {
                 />
                 <Tab.Screen
                     name="Hello"
-                    component={HelloWorld}
-                    options={({ navigation }) => useCustomHeader(navigation, "Page title")}
+                    component={UserPageStack}
+                    options={({ navigation }) => useCustomHeader(navigation, "UserPageStack")}
                 />
             </Tab.Navigator>
         </IconComponentProvider>
