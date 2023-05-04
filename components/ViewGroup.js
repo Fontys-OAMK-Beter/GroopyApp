@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, FlatList, Button, Image, Alert, TouchableOpacity } from "react-native";
+import { View, Text, FlatList, Button, Image, Alert, TouchableOpacity, TextInput } from "react-native";
 
 import styles from './Styles';
 
@@ -121,6 +121,17 @@ const ViewGroup = ({ item }) => {
           keyExtractor={item => item.id}
         />
       </View>
+      <Text style={styles.title}>Invite People</Text>
+      <TextInput
+        style={styles.textInput}
+        placeholder="Input username"
+        onChangeText={(e) => Alert.alert(e)}
+      />
+      <Button
+        style={styles.button}
+        title="Invite people"
+        onPress={() => Alert.alert('People invited!')}
+      />
       <Button
         style={styles.button}
         title="Add event"
