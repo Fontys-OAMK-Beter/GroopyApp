@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, Button, TextInput } from "react-native";
-import * as SS from "expo-secure-store";
 
 import styles from "./Styles";
 import { AuthPost, UserObj } from "./helpers/API";
@@ -12,10 +11,14 @@ const CreateGroup = ({ }) => {
     const [descriptionText, setDescriptionText] = React.useState("Default")
     const [userId, setUserId] = React.useState()
 
+    //Get user id from jwt
     React.useEffect(() => {
         setUserId(UserObj.userID)
     }, [])
 
+    //TODO: get backend changes to title and response
+    //TODO: get new group id from response and route to new group page here
+    //Handle POST request to create a new group, 
     const clickHandler = () => {
         const body = {
             title: nameText,
