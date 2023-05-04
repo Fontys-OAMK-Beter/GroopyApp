@@ -3,59 +3,31 @@ import { View, Text, Button, TextInput } from "react-native";
 import * as SS from "expo-secure-store";
 
 import styles from "./Styles";
+import { AuthPost, UserObj } from "./helpers/API";
 
-//TODO: 12-branch pull here
 //TODO: button chould route to new groups page
-//TODO: check if group icon is feasible
 
 const CreateGroup = ({ }) => {
     const [nameText, setNameText] = React.useState("Default")
     const [descriptionText, setDescriptionText] = React.useState("Default")
     const [userId, setUserId] = React.useState()
 
-    async function getUserID() {
-        try {
-            let temp = await SS.getItemAsync("userID");
-            let tempParsed = JSON.parse(temp);
-            
-            if(tempParsed !== null) {
-                setUserID(tempParsed);
-            } 
-        } catch (error) {
-            console.log(error)     
-        }
-    }
-
-    //setUserId(getUserID())
-
     React.useEffect(() => {
-        async function fetchID() {
-            const tempID = await getUserID();
-            setUserId(tempID);
-        }
-        fetchID();
+        setUserId(UserObj.userID)
     }, [])
 
-    const postNewGroup = (nameText, descriptionText, userId) => {
-        fetch('https://groopyswoopyapiweb3.azurewebsites.net/api/' + 'Party', {
-            method:'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                //title: nameText,
-                pictureUrl: descriptionText,
-                UserId: userId,
-            })
-            }
-        )
-        .then((response) => {
-            console.log(response)
-        })
-        .catch((error) => {
-            console.error(error)
-        })
+    const clickHandler = () => {
+        const body = {
+            title: nameText,
+            pictureUrl: descriptionText,
+            UserId: userId,
+        }
+        AuthPost("/Party", body, (res) => {
+            if (res.status === 200) {
+                console.log(res.data)
+            } else {
+                console.log(res)
+            }})
     }
 
     return (
@@ -87,7 +59,7 @@ const CreateGroup = ({ }) => {
             <Button 
             style={styles.button}
             title="Create Group"
-            onPress={() => postNewGroup(nameText, descriptionText, userId)}
+            onPress={() => clickHandler()}
             />
         </View>
     )

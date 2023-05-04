@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { View, TextInput, Text, Button, TouchableOpacity, Alert } from 'react-native'
 import * as SS from 'expo-secure-store'
-import { Post } from './helpers/API'
+import { Post, DecodeJWT } from './helpers/API'
 
 import LoginContext from './LoginContext'
 
@@ -28,6 +28,7 @@ const Login = ({ navigation }) => {
             if (userToken === null || userToken === "") {
                 setIsLoading(false)
             } else {
+                DecodeJWT()
                 setIsLoggedIn(true)
             }
         }
@@ -52,8 +53,10 @@ const Login = ({ navigation }) => {
                         await SS.setItemAsync("token", res.headers.authorization)
                         setUsername('')
                         setPwd('')
+                        DecodeJWT()
                         setIsLoggedIn(true)
                     } catch (e) {
+                        //TODO: handle error in a better way
                         console.log(e)
                         Alert.alert('An error occurred please try again')
                     }

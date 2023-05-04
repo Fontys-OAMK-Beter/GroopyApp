@@ -3,20 +3,22 @@ import { BASE_URL } from '@env'
 import * as SS from 'expo-secure-store'
 import jwt_decode from 'jwt-decode'
 
+export let UserObj = {}
+
 export const DecodeJWT = async () => {
     try {
         let decoded = {}
-        let parsed
+        
         var token = await SS.getItemAsync("token")
         token = token.replace(/^Bearer\s+/, "")
 
         decoded = jwt_decode(token)
-        parsed = {
+        UserObj = {
             userID: decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/userdata'],
             username: decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'],
             email: decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress']
         }
-        return parsed
+        return UserObj
     }catch (e) {
         return e
     }
