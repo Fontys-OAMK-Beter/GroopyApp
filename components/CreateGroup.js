@@ -54,10 +54,6 @@ const CreateGroup = ({ }) => {
                     value={descriptionText}
                 />
             </View>
-
-            <View style={styles.subContainer}>
-                <Text style={styles.title}>Invite people</Text>
-            </View>
             
             <Button 
             style={styles.button}
