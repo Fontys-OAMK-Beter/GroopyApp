@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, ActivityIndicator, Alert, Modal, StyleSheet } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Button } from '@react-native-material/core'
 import { OMDB } from '@env'
@@ -84,12 +84,31 @@ const res = {
   "Response": "True"
 }
 
+//more placeholder data
+const groups = [
+  {
+    "name": "group 1",
+    "id": "1"
+  },
+  {
+    "name": "group 2",
+    "id": "2"
+  },
+  {
+    "name": "group 3",
+    "id": "3"
+  }
+]
+
 
 const Search = () => {
   const [query, setQuery] = useState([])
   const [path, setPath] = useState("")
   const [err, setErr] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+
+  const [movieModalVisible, setMovieModalVisible] = useState(false)
+  const [groupModalVisible, setGroupModalVisible] = useState(false)
 
   useEffect(() => {
     setQuery(res["Search"])
@@ -115,47 +134,93 @@ const Search = () => {
     return () => clearTimeout(timer)
   }, [path])
 
-  const results = query.map((movie, i) =>
-    <View style={{ backgroundColor: "red", width: "95%", marginBottom: "2%", padding: "1%" }} key={movie.imdbID}>
-      <TouchableOpacity onPress={() => handlePress(movie.Title, movie.imdbID)}>
-        <Text style={{ fontSize: 20, overflow: "hidden", paddingRight: "20%" }}>{movie.Title}</Text>
+  const results = query.map((movie) =>
+    <View style={{ backgroundColor: "rgba(156, 32, 23, 0.9)", marginBottom: 8, width: 380, padding: 5, borderRadius: 5 }} key={movie.imdbID}>
+      <TouchableOpacity onPress={() => handlePress(movie.Title, movie.Year, movie.imdbID)}>
+        <Text style={{ fontSize: 20, overflow: "hidden", paddingRight: 20 }}>{movie.Title}</Text>
         <Text style={{ fontSize: 16, }}>{movie.Year}</Text>
       </TouchableOpacity>
     </View>
   )
-
   const handleSearch = () => {
     axios.get(OMDB + path)
       .then((res) => {
         if (res.status === 200) {
-          setQuery(res.data["Search"])
+          if (res.data['Response'] == 'False') {
+            setErr("Movie not found")
+            setQuery([])
+          } else {
+            setQuery(res.data["Search"])
+          }
           setErr('')
         } else {
+          setQuery([])
           setErr('Something went wrong')
         }
       }).catch(err => {
+        setQuery([])
         setErr('Something went wrong')
       })
     setIsLoading(false)
     console.log("sent")
   }
 
-  const handlePress = (title, imdb) => {
-    console.log(title, imdb)
+  const handlePress = (title, year, imdb) => {
+    console.log(title, year, imdb)
     //TODO: popup for adding the movie in question to pool, or adding it to favourites
+    Alert.alert(year, title, [
+      {
+        text: 'Cancel',
+        style: "cancel"
+      },
+      {
+        text: 'Add to favourites',
+        onPress: () => addToFavourites(imdb)
+      },
+      {
+        text: 'Add to group pool',
+        onPress: () => addToPool(imdb)
+      },
+    ], { cancelable: true })
+  }
+
+  const addToFavourites = (imdb) => {
+    console.log("ID to add: ", imdb)
+  }
+
+  const addToPool = (imdb) => {
+
+    //get users group info and show this
+    setGroupModalVisible(true)
   }
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', height: "100%" }}>
-      <ScrollView style={{marginBottom: "2%"}}>
-        <View style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "space-evenly",marginBottom: "2%", marginTop: "2%",height: "10%" }}>
-          <Icon name="movie-search" size={30} />
-          <TextInput style={{ flex: 1, flexWrap: "nowrap", fontSize: 20, overflow: "hidden" }}
-            textAlign='left'
-            textBreakStrategy='balanced'
-            onChangeText={(e) => setPath(e)}
-            placeholder='Search for a movie with title'
-          />
+    <View style={{ flex: 1, alignItems: 'center', backgroundColor: "rgb(40, 40, 40)" }}>
+      {/* Group modal */}
+      <Modal animationType='slide'
+        transparent={true}
+        visible={groupModalVisible}
+        onRequestClose={() => setGroupModalVisible(!groupModalVisible)}
+      >
+        <View style={styles.modalContainer}>
+          <Text>Choose a group</Text>
+          <TouchableOpacity
+            onPress={() => setGroupModalVisible(!groupModalVisible)}>
+            <Text>Hide Modal</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
+      <ScrollView style={{ marginBottom: 6, width: 380, marginTop: 4 }}>
+        <View style={{ flex: 1, flexDirection: "row", alignItems: "center", marginBottom: 10, marginTop: 2,}}>
+          <Icon name="movie-search" size={30} color="rgb(156, 32, 23)" style={{ backgroundColor: "white", marginBottom: 5, borderTopLeftRadius: 7, borderBottomLeftRadius: 7, height: 40, marginTop: 4 }} />
+          <View style={{ backgroundColor: "white", borderTopRightRadius: 7, borderBottomRightRadius: 7, height: 40, marginRight: 10, marginBottom: 5, marginTop: 4 }}>
+            <TextInput style={{ flex: 1, flexWrap: "nowrap", fontSize: 20, overflow: "hidden" }}
+              textAlign='left'
+              textBreakStrategy='balanced'
+              onChangeText={(e) => setPath(e)}
+              placeholder='Search for a movie with title '
+            />
+          </View>
           {isLoading && <ActivityIndicator size="large" color="red" />}
         </View>
         {err.length > 1 && <Text>{err}</Text>}
@@ -164,5 +229,19 @@ const Search = () => {
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  modalContainer: {
+    flex: 1,
+    alignItems: 'center',
+    alignContent: 'center',
+    justifyContent: 'center',
+    marginHorizontal: "2%",
+    marginVertical: "20%",
+    backgroundColor: 'rgba(45, 45, 45, 0.9)',
+    borderColor: "red",
+    borderRadius: 10
+  },
+})
 
 export default Search
