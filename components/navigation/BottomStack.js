@@ -10,6 +10,7 @@ import LoginContext from '../LoginContext';
 import CustomHeader from '../CustomHeader';
 import UserPageStack from './UserPageStack';
 import GroupStack from './GroupStack';
+import Search from '../Search';
 
 const LaunchPage = ({ navigation }) => {
     const GetUser = async () => {
@@ -80,11 +81,25 @@ const BottomStack = () => {
         return {
             headerLeft: () => <IconButton icon={() => <Icon name="account-circle" color="red" size={30} />} />,
             headerTitle: () => <CustomHeader navigation={navigation} title={title} />,
-            headerRight: () => <IconButton icon={() => <Icon name="text-search" color="red" size={30} />} />,
+            headerRight: () => <IconButton onPress={() => navigation.navigate('Search')} icon={() => <Icon name="text-search" color="red" size={30} />} />,
             headerTitleAlign: "center",
             headerStyle: {
                 backgroundColor: 'gray',
             },
+        }
+    }
+
+    const useHeaderNoTab = (navigation, title) => {
+        return {
+            headerLeft: () => <IconButton icon={() => <Icon name="account-circle" color="red" size={30} />} />,
+            headerTitle: () => <CustomHeader navigation={navigation} title={title} />,
+            headerRight: () => <IconButton onPress={() => navigation.navigate('Search')} icon={() => <Icon name="text-search" color="red" size={30} />}/>,
+            headerTitleAlign: "center",
+            headerStyle: {
+                backgroundColor: 'gray',
+            },
+            tabBarButton: () => null,
+            tabBarVisible: false,
         }
     }
 
@@ -127,6 +142,11 @@ const BottomStack = () => {
                     name="Hello"
                     component={UserPageStack}
                     options={({ navigation }) => useCustomHeader(navigation, "UserPageStack")}
+                />
+                <Tab.Screen
+                    name="Search"
+                    component={Search}
+                    options={({ navigation }) => useHeaderNoTab(navigation, "Search")}
                 />
             </Tab.Navigator>
         </IconComponentProvider>
