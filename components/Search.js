@@ -140,9 +140,6 @@ const Search = () => {
     console.log("sent")
   }
 
-
-
-
   const handlePress = (title, imdb) => {
     console.log(title, imdb)
     //TODO: popup for adding the movie in question to pool, or adding it to favourites
@@ -150,7 +147,7 @@ const Search = () => {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', height: "100%" }}>
-      <ScrollView>
+      <ScrollView style={{marginBottom: "2%"}}>
         <View style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "space-evenly",marginBottom: "2%", marginTop: "2%",height: "10%" }}>
           <Icon name="movie-search" size={30} />
           <TextInput style={{ flex: 1, flexWrap: "nowrap", fontSize: 20, overflow: "hidden" }}

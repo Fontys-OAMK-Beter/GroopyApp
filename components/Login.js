@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { View, TextInput, Text, Button, TouchableOpacity, Alert } from 'react-native'
+import { View, TextInput, Text, Button, TouchableOpacity, Alert, ActivityIndicator } from 'react-native'
 import * as SS from 'expo-secure-store'
 import { Post } from './helpers/API'
 
@@ -9,7 +9,7 @@ const Login = ({ navigation }) => {
     const [username, setUsername] = useState('')
     const [pwd, setPwd] = useState('')
     const [isLoading, setIsLoading] = useState(false)
-
+    const [waitingAPI, setWaitingAPI] = useState(false)
     const { setIsLoggedIn } = useContext(LoginContext)
 
     let loadingIcon
@@ -37,7 +37,7 @@ const Login = ({ navigation }) => {
     const submit = async () => {
         //attempt to login via inputs once backend is 'finished'
         //until then you will just login by pressing the button. No input needed
-
+        setWaitingAPI(true)
         //set loggedin state to true here to navigate to main
         if (username.length > 0 && pwd.length > 0) {
 
@@ -52,9 +52,11 @@ const Login = ({ navigation }) => {
                         await SS.setItemAsync("token", res.headers.authorization)
                         setUsername('')
                         setPwd('')
+                        setWaitingAPI(false)
                         setIsLoggedIn(true)
                     } catch (e) {
                         console.log(e)
+                        setWaitingAPI(false)
                         Alert.alert('An error occurred please try again')
                     }
                 } else {
@@ -79,6 +81,7 @@ const Login = ({ navigation }) => {
             {isLoading ? (
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                     <Text>Loading please wait</Text>
+                    <ActivityIndicator size="large" color="red" />
                 </View>
             ) : (
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -95,13 +98,16 @@ const Login = ({ navigation }) => {
                         title={'Login'}
                         onPress={submit}
                     />
-                    <Text>{loadingIcon}</Text>
-                    <TouchableOpacity onPress={forgot}>
-                        <Text>Forgot password?</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={goRegister}>
-                        <Text>Dont have an account? Register here!</Text>
-                    </TouchableOpacity>
+                    {waitingAPI ? (<ActivityIndicator size='large' color="red" />) : (
+                        <>
+                            <TouchableOpacity onPress={forgot}>
+                                <Text>Forgot password?</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={goRegister}>
+                                <Text>Dont have an account? Register here!</Text>
+                            </TouchableOpacity>
+                        </>
+                    )}
                 </View>
             )}
         </>
