@@ -12,8 +12,6 @@ const Login = ({ navigation }) => {
     const [waitingAPI, setWaitingAPI] = useState(false)
     const { setIsLoggedIn } = useContext(LoginContext)
 
-    let loadingIcon
-
     useEffect(() => {
         setIsLoading(true)
         //attempt to login via saved credentials here
