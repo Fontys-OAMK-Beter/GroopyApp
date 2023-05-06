@@ -1,9 +1,12 @@
-import { View, Text, TextInput, ScrollView } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Button } from '@react-native-material/core'
 import { OMDB } from '@env'
 import axios from 'axios'
+import { Icon } from '@react-native-material/core'
+import { ScrollView } from 'react-native-gesture-handler'
 
+//dummy data for styling purposes, no need to spam the api
 const res = {
   "Search": [
     {
@@ -93,44 +96,70 @@ const Search = () => {
 
   }, [])
 
-  const results = query.map((movie) =>
-    <View style={{ backgroundColor: "red", width: "95%", marginBottom: "2%", height: "8%" }} key={movie.imdbID}>
-        <Text style={{fontSize: 20, overflow: "hidden" , paddingRight: "20%"}}>{movie.Title.substring(0, 28)}</Text>
-        <Text style={{fontSize: 16,}}>{movie.Year}</Text>
-        <View></View>
+  useEffect(() => {
+
+    const timer = setTimeout(() => {
+      if (path > 2) {
+        handlePress("t", "a")
+        console.log(results)
+      }
+
+    }, 500)
+
+
+    return () => clearTimeout(timer)
+
+  }, [path])
+
+  const results = query.map((movie, i) =>
+    <View style={{ backgroundColor: "red", width: "95%", marginBottom: "2%", padding: "1%"}} key={movie.imdbID}>
+        <TouchableOpacity onPress={() => handlePress(movie.Title, movie.imdbID)}>
+          <Text style={{ fontSize: 20, overflow: "hidden", paddingRight: "20%" }}>{movie.Title}</Text>
+          <Text style={{ fontSize: 16, }}>{movie.Year}</Text>
+        </TouchableOpacity>
     </View>
   )
 
   const handleSearch = () => {
-    axios.get(OMDB + path)
+    /* axios.get(OMDB + path)
       .then((res) => {
         if (res.status === 200) {
           setQuery(res.data["Search"])
-          setPath('')
           setErr('')
         } else {
           setErr('Something went wrong')
         }
       }).catch(err => {
         setErr('Something went wrong')
-      })
+      }) */
+      console.log("res ", results)
   }
 
 
+
+
+  const handlePress = (title, imdb) => {
+    console.log(title, imdb)
+    //TODO: popup for adding the movie in question to pool, or adding it to favourites
+  }
+
   return (
     <View style={{ flex: 1, alignItems: 'center', height: "100%" }}>
-      <View style={{flex: 1, flexDirection: "row"}}>
-        <TextInput style={{ marginTop: "5%", marginBottom: "5%" }}
-          onChangeText={(e) => setPath(e)}
-          placeholder='Search for a movie with title'
-        />
-        <Button
-          title="debug Search"
-          onPress={() => handleSearch()}
-        />
-      </View>
-      {err.length > 1 && <Text>{err}</Text>}
-      {results}
+      <ScrollView>
+        <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
+          <Icon name="movie-search" size={25} />
+          <TextInput style={{ marginTop: "5%", marginBottom: "5%" }}
+            onChangeText={(e) => setPath(e)}
+            placeholder='Search for a movie with title'
+          />
+          <Button
+            title="debug Search"
+            onPress={() => handleSearch()}
+          />
+        </View>
+        {err.length > 1 && <Text>{err}</Text>}
+        {results}
+      </ScrollView>
     </View>
   )
 }
