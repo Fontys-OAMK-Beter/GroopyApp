@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Button } from '@react-native-material/core'
 import { OMDB } from '@env'
@@ -86,10 +86,10 @@ const res = {
 
 
 const Search = () => {
-
   const [query, setQuery] = useState([])
   const [path, setPath] = useState("")
   const [err, setErr] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     setQuery(res["Search"])
@@ -97,31 +97,35 @@ const Search = () => {
   }, [])
 
   useEffect(() => {
+    if (path.length > 2) {
+      setIsLoading(true)
+    } else {
+      setIsLoading(false)
+    }
 
     const timer = setTimeout(() => {
-      if (path > 2) {
-        handlePress("t", "a")
-        console.log(results)
+      setIsLoading(false)
+      if (path.length > 2) {
+        setIsLoading(true)
+        handleSearch()
       }
 
     }, 500)
 
-
     return () => clearTimeout(timer)
-
   }, [path])
 
   const results = query.map((movie, i) =>
-    <View style={{ backgroundColor: "red", width: "95%", marginBottom: "2%", padding: "1%"}} key={movie.imdbID}>
-        <TouchableOpacity onPress={() => handlePress(movie.Title, movie.imdbID)}>
-          <Text style={{ fontSize: 20, overflow: "hidden", paddingRight: "20%" }}>{movie.Title}</Text>
-          <Text style={{ fontSize: 16, }}>{movie.Year}</Text>
-        </TouchableOpacity>
+    <View style={{ backgroundColor: "red", width: "95%", marginBottom: "2%", padding: "1%" }} key={movie.imdbID}>
+      <TouchableOpacity onPress={() => handlePress(movie.Title, movie.imdbID)}>
+        <Text style={{ fontSize: 20, overflow: "hidden", paddingRight: "20%" }}>{movie.Title}</Text>
+        <Text style={{ fontSize: 16, }}>{movie.Year}</Text>
+      </TouchableOpacity>
     </View>
   )
 
   const handleSearch = () => {
-    /* axios.get(OMDB + path)
+    axios.get(OMDB + path)
       .then((res) => {
         if (res.status === 200) {
           setQuery(res.data["Search"])
@@ -131,8 +135,9 @@ const Search = () => {
         }
       }).catch(err => {
         setErr('Something went wrong')
-      }) */
-      console.log("res ", results)
+      })
+    setIsLoading(false)
+    console.log("sent")
   }
 
 
@@ -146,16 +151,15 @@ const Search = () => {
   return (
     <View style={{ flex: 1, alignItems: 'center', height: "100%" }}>
       <ScrollView>
-        <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
-          <Icon name="movie-search" size={25} />
-          <TextInput style={{ marginTop: "5%", marginBottom: "5%" }}
+        <View style={{ flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "space-evenly",marginBottom: "2%", marginTop: "2%",height: "10%" }}>
+          <Icon name="movie-search" size={30} />
+          <TextInput style={{ flex: 1, flexWrap: "nowrap", fontSize: 20, overflow: "hidden" }}
+            textAlign='left'
+            textBreakStrategy='balanced'
             onChangeText={(e) => setPath(e)}
             placeholder='Search for a movie with title'
           />
-          <Button
-            title="debug Search"
-            onPress={() => handleSearch()}
-          />
+          {isLoading && <ActivityIndicator size="large" color="red" />}
         </View>
         {err.length > 1 && <Text>{err}</Text>}
         {results}
