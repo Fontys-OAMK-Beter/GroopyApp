@@ -106,8 +106,9 @@ const Search = () => {
   const [path, setPath] = useState("")
   const [err, setErr] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [chosenMovie, setChosenMovie] = useState('')
+  const [chosenID, setChosenID] = useState('')
 
-  const [movieModalVisible, setMovieModalVisible] = useState(false)
   const [groupModalVisible, setGroupModalVisible] = useState(false)
 
   useEffect(() => {
@@ -142,6 +143,17 @@ const Search = () => {
       </TouchableOpacity>
     </View>
   )
+
+  const renderGroups = groups.map((group) =>
+    <View key={group.id}>
+      <TouchableOpacity onPress={() => addToPool(group.id)}>
+        <View style={styles.groupCont}>
+          <Text style={styles.groupText}>{group.name}</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  )
+
   const handleSearch = () => {
     axios.get(OMDB + path)
       .then((res) => {
@@ -162,7 +174,6 @@ const Search = () => {
         setErr('Something went wrong')
       })
     setIsLoading(false)
-    console.log("sent")
   }
 
   const handlePress = (title, year, imdb) => {
@@ -179,23 +190,31 @@ const Search = () => {
       },
       {
         text: 'Add to group pool',
-        onPress: () => addToPool(imdb)
+        onPress: () => chooseMovie(title, imdb)
       },
     ], { cancelable: true })
   }
 
   const addToFavourites = (imdb) => {
+    //simply call api here
     console.log("ID to add: ", imdb)
   }
 
-  const addToPool = (imdb) => {
+  const addToPool = (groupID) => {
+    //send post with groupid and chosenid
+    console.log(groupID, chosenID)
+  }
 
-    //get users group info and show this
+  const chooseMovie = (title, imdb) => {
+    setChosenID(imdb)
+    setChosenMovie(title)
     setGroupModalVisible(true)
   }
 
   return (
     <View style={{ flex: 1, alignItems: 'center', backgroundColor: "rgb(40, 40, 40)" }}>
+
+
       {/* Group modal */}
       <Modal animationType='slide'
         transparent={true}
@@ -203,15 +222,23 @@ const Search = () => {
         onRequestClose={() => setGroupModalVisible(!groupModalVisible)}
       >
         <View style={styles.modalContainer}>
-          <Text>Choose a group</Text>
-          <TouchableOpacity
+          <Text style={styles.modalText}>Choose a group to add movie to pool</Text>
+          <Text style={styles.modalTitle}>{chosenMovie}</Text>
+          <View style={{marginTop: 40, }}>
+            <ScrollView>
+              {renderGroups}
+            </ScrollView>
+          </View>
+          <TouchableOpacity 
             onPress={() => setGroupModalVisible(!groupModalVisible)}>
             <Text>Hide Modal</Text>
           </TouchableOpacity>
         </View>
       </Modal>
+
+
       <ScrollView style={{ marginBottom: 6, width: 380, marginTop: 4 }}>
-        <View style={{ flex: 1, flexDirection: "row", alignItems: "center", marginBottom: 10, marginTop: 2,}}>
+        <View style={{ flex: 1, flexDirection: "row", alignItems: "center", marginBottom: 10, marginTop: 2, }}>
           <Icon name="movie-search" size={30} color="rgb(156, 32, 23)" style={{ backgroundColor: "white", marginBottom: 5, borderTopLeftRadius: 7, borderBottomLeftRadius: 7, height: 40, marginTop: 4 }} />
           <View style={{ backgroundColor: "white", borderTopRightRadius: 7, borderBottomRightRadius: 7, height: 40, marginRight: 10, marginBottom: 5, marginTop: 4 }}>
             <TextInput style={{ flex: 1, flexWrap: "nowrap", fontSize: 20, overflow: "hidden" }}
@@ -234,14 +261,34 @@ const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
     alignItems: 'center',
-    alignContent: 'center',
-    justifyContent: 'center',
-    marginHorizontal: "2%",
-    marginVertical: "20%",
-    backgroundColor: 'rgba(45, 45, 45, 0.9)',
-    borderColor: "red",
-    borderRadius: 10
+    marginHorizontal: 7,
+    marginVertical: 30,
+    backgroundColor: 'rgba(65, 65, 65, 0.9)',
+    borderRadius: 15
   },
+  modalText: {
+    fontSize: 21,
+    color: "white",
+    textShadowRadius: 4,
+    textShadowColor: "black"
+  },
+  modalTitle: {
+    fontSize: 32,
+    color: "rgb(176, 15, 4)",
+    textShadowRadius: 3,
+    textShadowColor: "black",
+    fontWeight: "bold"
+  },
+  groupCont: {
+    padding: 20,
+    backgroundColor: "white",
+    margin: 4,
+    width: 300,
+    borderRadius: 10,
+  },
+  groupText: {
+    fontSize: 26,
+  }
 })
 
 export default Search
