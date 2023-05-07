@@ -99,23 +99,23 @@ const groups = [
     "id": "3"
   },
   {
-    "name": "group 3",
+    "name": "group 4",
     "id": "4"
   },
   {
-    "name": "group 3",
+    "name": "group 5",
     "id": "5"
   },
   {
-    "name": "group 3",
+    "name": "group 6",
     "id": "6"
   },
   {
-    "name": "group 3",
+    "name": "group 7",
     "id": "7"
   },
   {
-    "name": "group 3",
+    "name": "group 8",
     "id": "8"
   },
 ]
@@ -148,6 +148,14 @@ const Search = () => {
       if (path.length > 2) {
         setIsLoading(true)
         handleSearch()
+      }else{
+        setQuery([{
+        "Title": "Type in a title and the search will pop up automatically!",
+        "Year": "Click on a movie title to add it to favourites or to a group pool!",
+        "imdbID": "wait",
+        "Type": "",
+        "Poster":"",
+      }])
       }
 
     }, 500)
@@ -156,9 +164,9 @@ const Search = () => {
   }, [path])
 
   const results = query.map((movie) =>
-    <View style={{ backgroundColor: "rgba(156, 32, 23, 0.9)", marginBottom: 8, width: 380, padding: 5, borderRadius: 5 }} key={movie.imdbID}>
+    <View style={{ backgroundColor: "rgba(156, 32, 23, 0.9)", marginBottom: 8, width: 360, padding: 5, borderRadius: 5 }} key={movie.imdbID}>
       <TouchableOpacity onPress={() => handlePress(movie.Title, movie.Year, movie.imdbID)}>
-        <Text style={{ fontSize: 20, overflow: "hidden", paddingRight: 20 }}>{movie.Title}</Text>
+        <Text style={{ fontSize: 23, color: "white", textShadowColor: "black", textShadowRadius: 29, fontWeight: "bold",overflow: "hidden", paddingRight: 20 }}>{movie.Title}</Text>
         <Text style={{ fontSize: 16, }}>{movie.Year}</Text>
       </TouchableOpacity>
     </View>
@@ -182,39 +190,63 @@ const Search = () => {
         if (res.status === 200) {
           if (res.data['Response'] == 'False') {
             setErr("Movie not found")
-            setQuery([])
+            setQuery([{
+              "Title": "No movie found by that title :(",
+              "Year": "check your search for typos and try again!",
+              "imdbID": "404",
+              "Type": "",
+              "Poster":"",
+            }])
+            setIsLoading(false)
           } else {
             setQuery(res.data["Search"])
+            setIsLoading(false)
           }
           setErr('')
         } else {
           setQuery([])
           setErr('Something went wrong')
+          setIsLoading(false)
         }
       }).catch(err => {
         setQuery([])
         setErr('Something went wrong')
+        setIsLoading(false)
       })
-    setIsLoading(false)
+
   }
 
   const handlePress = (title, year, imdb) => {
     console.log(title, year, imdb)
     //TODO: popup for adding the movie in question to pool, or adding it to favourites
-    Alert.alert(year, title, [
-      {
-        text: 'Cancel',
-        style: "cancel"
-      },
-      {
-        text: 'Add to favourites',
-        onPress: () => addToFavourites(imdb)
-      },
-      {
-        text: 'Add to group pool',
-        onPress: () => chooseMovie(title, imdb)
-      },
-    ], { cancelable: true })
+    switch (imdb) {
+      case "404":
+          Alert.alert("Error", "Search is not case sensitive but the title needs to match letter by letter")
+        break;
+      case "wait":
+        Alert.alert("Example", "The movie options will pop up like this\n\nYou need to type atleast 3 letters of the title before the search can happen")
+        break;
+      default:
+        Alert.alert(year, title, [
+          {
+            text: 'Cancel',
+            style: "cancel"
+          },
+          {
+            text: 'Add to favourites',
+            onPress: () => addToFavourites(imdb)
+          },
+          {
+            text: 'Add to group pool',
+            onPress: () => chooseMovie(title, imdb)
+          },
+        ], { cancelable: true })
+        break;
+    }
+
+
+
+    
   }
 
   const addToFavourites = (imdb) => {
@@ -225,6 +257,8 @@ const Search = () => {
   const addToPool = (groupID) => {
     //send post with groupid and chosenid
     console.log(groupID, chosenID)
+
+    setGroupModalVisible(!groupModalVisible)
   }
 
   const chooseMovie = (title, imdb) => {
@@ -234,7 +268,7 @@ const Search = () => {
   }
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', backgroundColor: "rgb(40, 40, 40)" }}>
+    <View style={{ flex: 1, alignItems: 'center', backgroundColor: "rgb(0, 0, 0)" }}>
 
 
       {/* Group modal */}
@@ -246,7 +280,7 @@ const Search = () => {
         <View style={styles.modalContainer}>
           <Text style={styles.modalText}>Choose a group for movie: </Text>
           <Text style={styles.modalTitle}>{chosenMovie}</Text>
-            <ScrollView style={{marginBottom: 80, marginTop: 40}}>
+            <ScrollView style={{marginBottom: 40, marginTop: 20}}>
               {renderGroups}
             </ScrollView>
           <TouchableOpacity style={styles.hideBtn}
@@ -284,17 +318,17 @@ const styles = StyleSheet.create({
     marginHorizontal: 7,
     marginVertical: 30,
     marginBottom: 100,
-    backgroundColor: 'rgba(65, 65, 65, 0.9)',
+    backgroundColor: 'rgba(0, 0, 0, 0.90)',
     borderRadius: 15
   },
   modalText: {
-    fontSize: 21,
+    fontSize: 19,
     color: "white",
     textShadowRadius: 4,
     textShadowColor: "black"
   },
   modalTitle: {
-    fontSize: 32,
+    fontSize: 34,
     color: "rgb(176, 15, 4)",
     textShadowRadius: 3,
     textShadowColor: "black",
@@ -315,7 +349,7 @@ const styles = StyleSheet.create({
   },
   hideBtn: {
     bottom: 1,
-    marginBottom: 10,
+    marginBottom: 15,
     backgroundColor: "rgb(176, 15, 4)",
     borderRadius: 10,
     paddingVertical: 15,
