@@ -97,7 +97,27 @@ const groups = [
   {
     "name": "group 3",
     "id": "3"
-  }
+  },
+  {
+    "name": "group 3",
+    "id": "4"
+  },
+  {
+    "name": "group 3",
+    "id": "5"
+  },
+  {
+    "name": "group 3",
+    "id": "6"
+  },
+  {
+    "name": "group 3",
+    "id": "7"
+  },
+  {
+    "name": "group 3",
+    "id": "8"
+  },
 ]
 
 
@@ -148,7 +168,9 @@ const Search = () => {
     <View key={group.id}>
       <TouchableOpacity onPress={() => addToPool(group.id)}>
         <View style={styles.groupCont}>
+          <Icon name="account-group" size={30}  />
           <Text style={styles.groupText}>{group.name}</Text>
+          
         </View>
       </TouchableOpacity>
     </View>
@@ -222,20 +244,18 @@ const Search = () => {
         onRequestClose={() => setGroupModalVisible(!groupModalVisible)}
       >
         <View style={styles.modalContainer}>
-          <Text style={styles.modalText}>Choose a group to add movie to pool</Text>
+          <Text style={styles.modalText}>Choose a group for movie: </Text>
           <Text style={styles.modalTitle}>{chosenMovie}</Text>
-          <View style={{marginTop: 40, }}>
-            <ScrollView>
+            <ScrollView style={{marginBottom: 80, marginTop: 40}}>
               {renderGroups}
             </ScrollView>
-          </View>
-          <TouchableOpacity 
+          <TouchableOpacity style={styles.hideBtn}
             onPress={() => setGroupModalVisible(!groupModalVisible)}>
-            <Text>Hide Modal</Text>
+            <Text style={styles.modalText}>Cancel</Text>
           </TouchableOpacity>
         </View>
       </Modal>
-
+    
 
       <ScrollView style={{ marginBottom: 6, width: 380, marginTop: 4 }}>
         <View style={{ flex: 1, flexDirection: "row", alignItems: "center", marginBottom: 10, marginTop: 2, }}>
@@ -263,6 +283,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 7,
     marginVertical: 30,
+    marginBottom: 100,
     backgroundColor: 'rgba(65, 65, 65, 0.9)',
     borderRadius: 15
   },
@@ -284,10 +305,22 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     margin: 4,
     width: 300,
+    alignContent: "flex-start",
     borderRadius: 10,
+    flexDirection: "row",
   },
   groupText: {
     fontSize: 26,
+    paddingLeft: 7,
+  },
+  hideBtn: {
+    bottom: 1,
+    marginBottom: 10,
+    backgroundColor: "rgb(176, 15, 4)",
+    borderRadius: 10,
+    paddingVertical: 15,
+    paddingHorizontal: 25,
+    fontSize: 20, 
   }
 })
 
