@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { StatusBar } from 'react-native';
 import 'react-native-gesture-handler';
 
 import LoginContext from './components/LoginContext'
@@ -13,6 +14,7 @@ export default function App() {
 
   return (
     <LoginContext.Provider value={authenticated}>
+      <StatusBar barStyle="light-content"/>
       <MainStack />
     </LoginContext.Provider>
   );
