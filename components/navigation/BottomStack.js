@@ -11,6 +11,7 @@ import CustomHeader from '../CustomHeader';
 import UserPageStack from './UserPageStack';
 import GroupStack from './GroupStack';
 import Search from '../Search';
+import About from '../About'
 
 const LaunchPage = ({ navigation }) => {
     const GetUser = async () => {
@@ -79,24 +80,24 @@ const BottomStack = () => {
     //another option would be to disable the header completely and just render a component instead
     const useCustomHeader = (navigation, title) => {
         return {
-            headerLeft: () => <IconButton icon={() => <Icon name="account-circle" color="red" size={30} />} />,
+            headerLeft: () => <IconButton icon={() => <Icon onPress={() => navigation.navigate('About')} name="account-circle" color="red" size={30} />} />,
             headerTitle: () => <CustomHeader navigation={navigation} title={title} />,
-            headerRight: () => <IconButton onPress={() => navigation.navigate('Search')} icon={() => <Icon name="text-search" color="red" size={30} />} />,
+            headerRight: () => <IconButton onPress={() => navigation.navigate('Search')} icon={() => <Icon name="text-search" color="white" size={30} />} />,
             headerTitleAlign: "center",
             headerStyle: {
-                backgroundColor: 'gray',
+                backgroundColor: 'black',
             },
         }
     }
 
     const useHeaderNoTab = (navigation, title) => {
         return {
-            headerLeft: () => <IconButton icon={() => <Icon name="account-circle" color="red" size={30} />} />,
+            headerLeft: () => <IconButton icon={() => <Icon onPress={() => navigation.navigate('About')} name="account-circle" color="red" size={30} />} />,
             headerTitle: () => <CustomHeader navigation={navigation} title={title} />,
             headerRight: () => <IconButton onPress={() => navigation.navigate('Search')} icon={() => <Icon name="text-search" color="red" size={30} />}/>,
             headerTitleAlign: "center",
             headerStyle: {
-                backgroundColor: 'gray',
+                backgroundColor: 'black',
             },
             tabBarButton: () => null,
             tabBarVisible: false,
@@ -124,8 +125,8 @@ const BottomStack = () => {
                     },
                     tabBarActiveTintColor: "red",
                     tabBarInactiveTintColor: "white",
-                    tabBarActiveBackgroundColor: "gray",
-                    tabBarInactiveBackgroundColor: "gray"
+                    tabBarActiveBackgroundColor: "black",
+                    tabBarInactiveBackgroundColor: "black"
                 })}
             >
                 <Tab.Screen
@@ -141,12 +142,17 @@ const BottomStack = () => {
                 <Tab.Screen
                     name="Hello"
                     component={UserPageStack}
-                    options={({ navigation }) => useCustomHeader(navigation, "UserPageStack")}
+                    options={({ navigation }) => useCustomHeader(navigation, "Profile")}
                 />
                 <Tab.Screen
                     name="Search"
                     component={Search}
-                    options={({ navigation }) => useHeaderNoTab(navigation, "Search")}
+                    options={({ navigation, }) => useHeaderNoTab(navigation, "Search")}
+                />
+                <Tab.Screen
+                    name="About"
+                    component={About}
+                    options={({ navigation, }) => useHeaderNoTab(navigation, "About Us")}
                 />
             </Tab.Navigator>
         </IconComponentProvider>
