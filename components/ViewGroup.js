@@ -88,6 +88,7 @@ const EventItem = ({ item, onPress }) => (
   </TouchableOpacity>
 );
 
+//TODO: create a viewevent component
 const ViewGroup = ({ item }) => {
   const renderEventItem = ({ item }) => {
     return (
