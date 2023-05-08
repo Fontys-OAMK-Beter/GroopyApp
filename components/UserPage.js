@@ -38,9 +38,7 @@ const UserPage = ({navigation}) => {
                 <TouchableOpacity style={styles.item}>
                     <Text>Remove account</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => {
-                    
-                }} style={styles.item}>
+                <TouchableOpacity onPress={() => {navigation.navigate("SwipingForVoting")}} style={styles.item}>
                     <Text>Get stuff</Text>
                 </TouchableOpacity>
                 <View>
