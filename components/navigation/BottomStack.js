@@ -139,7 +139,7 @@ const BottomStack = () => {
                 <Tab.Screen
                     name="GroupStack"
                     component={GroupStack}
-                    options={({ navigation }) => useCustomHeader(navigation, "Groups")}
+                    options={({ navigation }) => useCustomHeader(navigation, "Groops")}
                 />
                 <Tab.Screen
                     name="Hello"

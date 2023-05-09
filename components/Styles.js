@@ -2,23 +2,23 @@ import { StyleSheet} from "react-native";
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#f4f4f4',
+        backgroundColor: '#212121',
         flex: 1,
         justifyContent: 'space-between',
     },
     containerForButtons: {
-        backgroundColor: '#f4f4f4',
+        backgroundColor: '#212121',
         flex: 0,
         flexDirection: 'column-reverse',
         justifyContent: 'flex-start',
     },
     containerForForms: {
-        backgroundColor: '#f4f4f4',
+        backgroundColor: '#212121',
         justifyContent: 'space-between',
         alignContent: 'center',
     },
     subContainer: {
-        backgroundColor: '#f4f4f4',
+        backgroundColor: '#212121',
         alignContent: 'flex-start',
         justifyContent: 'center',
         flex: 1,
@@ -31,37 +31,78 @@ const styles = StyleSheet.create({
         color: '#000000'
     },
     button: {
-        backgroundColor: '#f194ff',
+        backgroundColor: '#7E6C6B',
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        position: 'relative'
+        position: 'relative',
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16
     },
     switch: {
         alignItems: 'center',
     },
     item: {
-        backgroundColor: '#f9c2ff',
+        backgroundColor: '#7E6C6B',
+        color: '#ffffff',
         padding: 20,
         marginVertical: 8,
-        marginHorizontal: 16
+        marginHorizontal: 16,
+        flexDirection: "row",
+        borderRadius: 10,
     },
     itemWithPicture: {
         flexDirection: 'row',
-        backgroundColor: '#f9c2ff',
+        color: '#ffffff',
+        backgroundColor: '#7E6C6B',
         padding: 20,
         marginVertical: 8,
         marginHorizontal: 16
     },
+    bubble:{
+        borderRadius: 30,
+        backgroundColor: '#FFFFFF',
+        paddingTop: 4,
+        opacity: 0.5,
+        width: 43,
+        alignItems: "center",
+        overflow: "hidden",
+        marginRight: 18,
+    },
+    bubbleplus:{
+        borderRadius: 30,
+        backgroundColor: '#FFFFFF',
+        paddingTop: 4,
+        opacity: 0.5,
+        width: 43,
+        alignItems: "center",
+        overflow: "hidden",
+        marginRight: 18,
+        paddingTop:6,
+    },
+    subheader: {
+        backgroundColor: '#594847',
+        padding: 7,
+        marginTop: 28
+        
+    },
+    subtitle: {
+        fontSize: 20,
+        color: '#FACDA4',
+        textAlign: 'center',
+    },
     itemWithText: {
         flexDirection: 'row',
-        backgroundColor: '#f9c2ff',
+        color: '#ffffff',
+        backgroundColor: '#594847',
         padding: 20,
         marginVertical: 8,
         marginHorizontal: 16
     },
     title: {
-        fontSize: 32
+        fontSize: 32,
+        color: '#ffffff',
     },
     viewGroup: {
         flex: 1,
@@ -71,7 +112,7 @@ const styles = StyleSheet.create({
     },
     listUnitWithPicture: {
         flexDirection: 'row',
-        backgroundColor: '#f9c2ff',
+        backgroundColor: '#594847',
         padding: 20,
         marginVertical: 8,
         marginHorizontal: 16
@@ -79,11 +120,11 @@ const styles = StyleSheet.create({
     listTitle: {
         fontSize: 24,
         fontWeight: 'bold',
-        color: '#000000'
+        color: '#ffffff'
     },
     listSubtitle: {
         fontSize: 16,
-        color: '#000000'
+        color: '#ffffff'
     },
     defaultUserIcon: {
         height: 48,
