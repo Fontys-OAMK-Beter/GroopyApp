@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Text, TouchableOpacity, View, StyleSheet } from 'react-native'
 import * as SS from 'expo-secure-store'
 import { ScrollView } from 'react-native-gesture-handler'
@@ -9,7 +9,6 @@ import CalendarViewOnly from './CalendarViewOnly'
 const UserPage = ({ navigation }) => {
 
     const { setIsLoggedIn } = useContext(LoginContext)
-
 
 
     const logout = async () => {
@@ -48,15 +47,8 @@ const UserPage = ({ navigation }) => {
 
 
                     <TouchableOpacity onPress={() => logout()} style={styles.btnCont}>
-                        <Text style={styles.btnText}>Log out</Text>
+                        <Text style={styles.btnText}>Logout</Text>
                     </TouchableOpacity>
-                    {/* <TouchableOpacity style={styles.btnCont}>
-                        <Text style={styles.btnText}>Remove account</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => { }} style={styles.btnCont}>
-                        <Text style={styles.btnText}>Get stuff</Text>
-                    </TouchableOpacity> */}
-
                 </View>
             </View>
         </ScrollView>

@@ -4,7 +4,7 @@ import CalendarPicker from 'react-native-calendar-picker';
 import moment from 'moment';
 
 
-const CalendarViewOnly = () => {
+const CalendarViewOnly = ({onDatePick, ...rest}) => {
     const [listOfHiglightedDays, setListOfHighlightedDays] = useState([])
     const [displayedDateContent, setDisplayedDateContent] = useState('')
 
@@ -58,6 +58,9 @@ const CalendarViewOnly = () => {
 
     const onDateChange = (date) => {
         displayDateContent(date, listOfHiglightedDays)
+
+        if(onDatePick)
+            onDatePick(date.format('DD-MM-YYYY'))
     }
 
     const dayHeaderStyle = () => {
@@ -84,7 +87,7 @@ const CalendarViewOnly = () => {
                 previousTitle="Back"
             />
 
-            <View style={{paddingLeft: "20%", marginVertical: "5%"}}>
+            <View style={{paddingLeft: "5%", marginVertical: "5%"}}>
                 <Text style={{fontSize: 15, color: "white", fontWeight: "500"}}>Event on selection: {displayedDateContent}</Text>
             </View>
         </View>
