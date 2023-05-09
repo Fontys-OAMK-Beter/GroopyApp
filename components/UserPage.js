@@ -19,7 +19,7 @@ const UserPage = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <View style={{ padding: 24 }}>
+            <View style={{ padding: "3%" }}>
                 <View style={{
                     width: 200,
                     height: 200,
@@ -33,7 +33,7 @@ const UserPage = ({ navigation }) => {
                 }} >
                     <Icon name="account-circle" color="red" size={200} />
                 </View>
-                <View style={{ marginTop: 40 }}>
+                <View style={{ marginTop: "7%" }}>
                     {/* <TouchableOpacity onPress={() => { navigation.navigate("Calendar") }} style={styles.btnCont}>
                         <Text style={styles.btnText}>Calendar</Text>
                     </TouchableOpacity>
@@ -73,9 +73,9 @@ const styles = StyleSheet.create({
     btnCont: {
         backgroundColor: "rgba(156, 32, 23, 0.9)",
         marginBottom: 8,
-        width: 360,
+        width: "98%",
         padding: 15,
-        marginTop: 10,
+        marginTop: "5%",
         borderRadius: 5,
     },
     btnText: {
@@ -97,6 +97,6 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(156, 32, 23, 0.9)",
         borderRadius: 15,
         paddingHorizontal: 10,
-        marginBottom: 15,
+        marginBottom: "3%",
     }
 })
