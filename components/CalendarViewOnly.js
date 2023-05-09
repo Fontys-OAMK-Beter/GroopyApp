@@ -79,13 +79,12 @@ const CalendarViewOnly = () => {
                 monthTitleStyle={styles.title}
                 headerWrapperStyle={styles.headerWrapper}
                 customDayHeaderStyles={()=>dayHeaderStyle()}
-                width={380}
                 todayBackgroundColor="#a81717"
                 textStyle={styles.text}
                 previousTitle="Back"
             />
 
-            <View style={{paddingLeft: 20, marginVertical: 10}}>
+            <View style={{paddingLeft: "20%", marginVertical: "5%"}}>
                 <Text style={{fontSize: 15, color: "white", fontWeight: "500"}}>Event on selection: {displayedDateContent}</Text>
             </View>
         </View>
@@ -98,11 +97,11 @@ const styles = StyleSheet.create({
     },
     prev: {
         color: "white",
-        width: 70,
+        width: "100%",
         fontSize: 15
     },
     next: {
-        width: 70,
+        width: "100%",
         color: "white",
         textAlign: "right",
         fontSize: 15
