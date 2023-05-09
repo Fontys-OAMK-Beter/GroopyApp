@@ -162,7 +162,7 @@ const Search = () => {
   }, [path])
 
   const results = query.map((movie) =>
-    <View style={{ backgroundColor: "rgba(156, 32, 23, 0.9)", marginBottom: 8, width: 360, padding: 5, borderRadius: 5 }} key={movie.imdbID}>
+    <View style={{ backgroundColor: "rgba(156, 32, 23, 0.9)", marginBottom: 8, width: "95%", padding: 5, borderRadius: 5 }} key={movie.imdbID}>
       <TouchableOpacity onPress={() => handlePress(movie.Title, movie.Year, movie.imdbID)}>
         <Text style={{ fontSize: 23, color: "white", textShadowColor: "black", textShadowRadius: 29, fontWeight: "bold",overflow: "hidden", paddingRight: 20 }}>{movie.Title}</Text>
         <Text style={{ fontSize: 16, }}>{movie.Year}</Text>
@@ -289,7 +289,7 @@ const Search = () => {
       </Modal>
     
 
-      <ScrollView style={{ marginBottom: 6, width: 380, marginTop: 4 }}>
+      <ScrollView style={{ marginBottom: 6, width: "95%", marginTop: 4 }}>
         <View style={{ flex: 1, flexDirection: "row", alignItems: "center", marginBottom: 10, marginTop: 2, }}>
           <Icon name="movie-search" size={30} color="rgb(156, 32, 23)" style={{ backgroundColor: "white", marginBottom: 5, borderTopLeftRadius: 7, borderBottomLeftRadius: 7, height: 40, marginTop: 4 }} />
           <View style={{ backgroundColor: "white", borderTopRightRadius: 7, borderBottomRightRadius: 7, height: 40, marginRight: 10, marginBottom: 5, marginTop: 4 }}>
