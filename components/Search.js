@@ -266,7 +266,7 @@ const Search = () => {
   }
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', backgroundColor: "rgb(0, 0, 0)" }}>
+    <View style={{ flex: 1, alignItems: 'center', backgroundColor: "rgb(30, 30, 30)" }}>
 
 
       {/* Group modal */}
