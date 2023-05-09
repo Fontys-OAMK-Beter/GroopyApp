@@ -11,6 +11,7 @@ const SwipingForVoting = () => {
   //states
   const [query, setQuery] = useState([])
   const [arrayOfDataForVoting, setArrayOfDataForVoting] = useState([])
+  const [namesOfMovies, setNamesOfMovies] = useState([])
 
   //placeholder data that comes from our own database
   const [movieDataFromOwnDatabase, setMovieDataFromOwnDatabase] = useState([
@@ -95,6 +96,15 @@ const SwipingForVoting = () => {
         })
     }
 
+
+    var tempListForMovieNames = []
+
+    for(i = 0; i < arrayOfDataForVoting.length; i++){
+      tempListForMovieNames.push(arrayOfDataForVoting[i].namesOfMovies)
+    }
+
+    setNamesOfMovies(tempListForMovieNames)
+    
   }, [])
   
 
@@ -128,11 +138,11 @@ const SwipingForVoting = () => {
     <View styles={{ flex: 1 }}>
       <View styles={{ flex: 3 }}>
         <Swiper
-          cards={[listOfVotableMovies[0].name, listOfVotableMovies[1].name, listOfVotableMovies[2].name]}
+          cards={[namesOfMovies]}
           renderCard={(card) => {
             return (
               <View style={styles.card}>
-                <Image style={{ width: 300, height: 300 }} source={{ uri: listOfVotableMovies[0].coverImage }} />
+                <Image style={{ width: 300, height: 300 }} source={{ uri: listOfVotableMovies.coverImage }} />
                 <Text style={styles.text}>{card}</Text>
               </View>
             )
