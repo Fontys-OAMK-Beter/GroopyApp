@@ -2,23 +2,24 @@ import { StyleSheet} from "react-native";
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#f4f4f4',
+        backgroundColor: '#212121',
+        backgroundStyle: `linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(360deg, #300000 0%, #212121 74.48%, #212121 100%)`,
         flex: 1,
         justifyContent: 'space-between',
     },
     containerForButtons: {
-        backgroundColor: '#f4f4f4',
+        backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(360deg, #300000 0%, #212121 74.48%, #212121 100%)`,
         flex: 0,
         flexDirection: 'column-reverse',
         justifyContent: 'flex-start',
     },
     containerForForms: {
-        backgroundColor: '#f4f4f4',
+        backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(360deg, #300000 0%, #212121 74.48%, #212121 100%)`,
         justifyContent: 'space-between',
         alignContent: 'center',
     },
     subContainer: {
-        backgroundColor: '#f4f4f4',
+        backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(360deg, #300000 0%, #212121 74.48%, #212121 100%)`,
         alignContent: 'flex-start',
         justifyContent: 'center',
         flex: 1,
@@ -44,7 +45,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#f9c2ff',
         padding: 20,
         marginVertical: 8,
-        marginHorizontal: 16
+        marginHorizontal: 16,
+        flexDirection: "row",
     },
     itemWithPicture: {
         flexDirection: 'row',

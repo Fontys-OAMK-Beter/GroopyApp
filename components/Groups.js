@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, FlatList, Button, TouchableOpacity } from "react-native";
-
+import { Icon } from '@react-native-material/core'
 import styles from './Styles';
 
 
@@ -54,9 +54,12 @@ const DATA = [
 
 //This is and the component rendered in the flatlist. The onpress routes to the viewgroup page of the selected group
 const Item = ({ item, onPress }) => (
-    <TouchableOpacity onPress={onPress} style={[styles.item]}>
-        <Text style={styles.title}>{item.title}</Text>
-    </TouchableOpacity>
+    <>
+        <TouchableOpacity onPress={onPress} style={[styles.item]}>
+                <Icon name="account-group" size={30}/>
+            <Text style={styles.title}>{item.title}</Text>
+        </TouchableOpacity>
+    </>
 );
 
 //This is the main page of the groups tab. It renders the flatlist and the buttons to create a group or event

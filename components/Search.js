@@ -142,7 +142,6 @@ const Search = () => {
     } else {
       setIsLoading(false)
     }
-
     const timer = setTimeout(() => {
       setIsLoading(false)
       if (path.length > 2) {
@@ -159,7 +158,6 @@ const Search = () => {
       }
 
     }, 500)
-
     return () => clearTimeout(timer)
   }, [path])
 
