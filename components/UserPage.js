@@ -37,9 +37,11 @@ const UserPage = () => {
     }, [])
 
     const loadData = () => {
+        setFavourites([])
         AuthGet('/movie/userMovies', (res) => {
             if (res.status === 200) {
-                setQuery(prevQuery => [...prevQuery, ...res.data])
+                //setQuery(prevQuery => [...prevQuery, ...res.data])
+                setQuery(res.data)
                 console.log("q", res.data)
             } else {
                 console.log(res)
@@ -130,9 +132,9 @@ const UserPage = () => {
                 }} >
                     <Icon name="account-circle" color="#ffffff99" size={200} />
                 </View>
-                <View>
+                {/* <View>
                     <Text name='profileUsername'>{(userData.email)}</Text>
-                </View>
+                </View> */}
                 <View style={{ marginTop: "7%" }}>
                     <View style={styles.calendarContainerOuter}>
                         <View style={styles.calendarContainer}>

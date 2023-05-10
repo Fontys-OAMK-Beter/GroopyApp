@@ -99,7 +99,7 @@ const BottomStack = () => {
             headerRight: () => <IconButton onPress={() => navigation.navigate('Search')} icon={() => <Icon name="text-search" color="#ffffffcc" size={30} />} />,
             headerTitleAlign: "center",
             headerStyle: {
-                backgroundColor: '300000',
+                backgroundColor: '#000000ee',
             },
             tabBarButton: () => null,
             tabBarVisible: false,
@@ -140,11 +140,11 @@ const BottomStack = () => {
                     tabBarInactiveBackgroundColor: "black"
                 })}
             >
-                <Tab.Screen
+                {/* <Tab.Screen
                     name="Launch"
                     component={LaunchPage}
                     options={({ navigation }) => useCustomHeader(navigation, "Placeholder page")}
-                />
+                /> */}
                 <Tab.Screen
                     name="GroupStack"
                     component={GroupStack}
