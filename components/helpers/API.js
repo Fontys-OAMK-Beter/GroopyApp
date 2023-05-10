@@ -13,6 +13,7 @@ export const DecodeJWT = async () => {
         token = token.replace(/^Bearer\s+/, "")
 
         decoded = jwt_decode(token)
+        console.log(token)
         UserObj = {
             userID: decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/userdata'],
             username: decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'],

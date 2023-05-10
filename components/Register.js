@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
-import { View, TextInput, Text, Button, TouchableOpacity, Alert } from 'react-native'
+import { View, TextInput, Text, Button, TouchableOpacity, Alert, ActivityIndicator } from 'react-native'
 import { Post } from './helpers/API'
 
 const Register = ( { navigation }) => {
     const [username, setUsername] = useState('')
     const [pwd, setPwd] = useState('')
     const [email, setEmail] = useState('')
-    
+    const [waitingAPI, setWaitingAPI] = useState(false)
+
     const submit = () => {
         //attempt to register here
+        setWaitingAPI(true)
         const body = {
             name: username,
             email: email,
@@ -17,9 +19,11 @@ const Register = ( { navigation }) => {
 
         Post('/User/register', body, (res) => {
             if(res.status === 200){
+                setWaitingAPI(false)
                 Alert.alert("User created! please login")
                 navigation.navigate('Login')
             }else{
+                setWaitingAPI(false)
                 Alert.alert("Something went wrong please try again")
             }
         })
@@ -46,9 +50,13 @@ const Register = ( { navigation }) => {
                 title={'Register'}
                 onPress={submit}
             />
+            {waitingAPI ?  (<ActivityIndicator size="large" color="red" />) :
+            (<>
             <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                 <Text>Already have an account? Login here!</Text>
             </TouchableOpacity>
+            </>)
+            }
         </View>
     )
 }
