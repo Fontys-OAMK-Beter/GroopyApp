@@ -21,6 +21,7 @@ const UserPage = () => {
 
         const unsubscribe = navigation.addListener('focus', () => {
             loadData();
+            
         });
 
         return unsubscribe
