@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { View, TextInput, Text, Button, TouchableOpacity, Alert, ActivityIndicator, Image } from 'react-native'
 import * as SS from 'expo-secure-store'
-import { Post } from './helpers/API'
+import { Post, DecodeJWT } from './helpers/API'
 import { Audio, Video } from 'expo-av';
 import styles from './Styles'
 import logo from '../assets/Logo_v2.png'
@@ -31,6 +31,7 @@ const Login = ({ navigation }) => {
             if (userToken === null || userToken === "") {
                 setIsLoading(false)
             } else {
+                DecodeJWT()
                 setIsLoggedIn(true)
             }
         }

@@ -84,6 +84,11 @@ const styles = StyleSheet.create({
         flexDirection: 'column-reverse',
         justifyContent: 'flex-start',
     },
+    containerForList: {
+        backgroundColor: '#f4f4f4',
+        flex: 4,
+        flexDirection: 'row',
+    },
     containerForForms: {
         backgroundColor: '#000000ee',// '#212121',
         justifyContent: 'space-between',

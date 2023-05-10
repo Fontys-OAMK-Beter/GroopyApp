@@ -3,10 +3,12 @@ import { BASE_URL } from '@env'
 import * as SS from 'expo-secure-store'
 import jwt_decode from 'jwt-decode'
 
+export let UserObj = {}
+
 export const DecodeJWT = async () => {
     try {
         let decoded = {}
-        let parsed
+        
         var token = await SS.getItemAsync("token")
         token = token.replace(/^Bearer\s+/, "")
 

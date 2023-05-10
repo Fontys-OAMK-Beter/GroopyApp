@@ -3,6 +3,7 @@ import { useState } from "react";
 import { View, Text, FlatList, Button, TouchableOpacity } from "react-native";
 import { Icon } from '@react-native-material/core'
 import styles from './Styles';
+import { AuthGet } from "./helpers/API";
 import { DecodeJWT } from "./helpers/API";
 
 
@@ -25,18 +26,18 @@ const DATA = [
         id: '3',
         title: 'Yaas queen',
     },
-    /* {
+     {
         id: '4',
-        title: 'Group 3',
+        title: 'Group 4',
     },
     {
         id: '5',
-        title: 'Group 3',
+        title: 'Group 5',
     },
     {
         id: '6',
-        title: 'Group 3',
-    },
+        title: 'Group 6',
+    }, /*
     {
         id: '7',
         title: 'Group 3',
@@ -78,6 +79,25 @@ const Item = ({ item, onPress }) => (
 
 //This is the main page of the groups tab. It renders the flatlist and the buttons to create a group or event
 const Groups = ({ navigation }) => {
+    const [groups, setGroups] = React.useState(DATA);
+
+    console.log(groups)
+
+    React.useEffect(() => {
+        async function getGroups() {
+            const body = {
+                user_id: userID
+            }
+            AuthGet("/party/getparties", body, (res) => {
+                if (res.status === 200) {
+                    console.log(res.data)
+                    setGroups(res.data)
+                }
+            })
+        }
+        getGroups()
+    }, [])
+
     const renderItem = ({ item }) => {
         return (
             <Item
@@ -94,8 +114,8 @@ const Groups = ({ navigation }) => {
     }
     getUsers()
     return (
-        <View style={styles.container}>
-            <View>
+        <View style={styles.containerForGroups}>
+            <View style = {styles.containerForList}>
                 <FlatList
                     data={DATA}
                     renderItem={renderItem}

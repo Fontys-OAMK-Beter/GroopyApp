@@ -4,7 +4,7 @@ import { IconComponentProvider, IconButton, Icon } from '@react-native-material/
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Alert, Button, View } from 'react-native';
 import * as SS from 'expo-secure-store'
-import { AuthGet, DecodeJWT, Post } from '../helpers/API';
+import { AuthGet, DecodeJWT, Post, UserObj } from '../helpers/API';
 
 import LoginContext from '../LoginContext';
 import CustomHeader from '../CustomHeader';
@@ -69,6 +69,10 @@ const LaunchPage = ({ navigation }) => {
             <Button
                 title="Decode token"
                 onPress={async () => GetUser()}
+            />
+            <Button
+                title="Parse"
+                onPress={() => console.log(UserObj)}
             />
         </View>
     )
