@@ -58,6 +58,7 @@ const Login = ({ navigation }) => {
                         Alert.alert('An error occurred please try again')
                     }
                 } else {
+                    setWaitingAPI(false)
                     Alert.alert('Incorrect email or password')
                 }
             })

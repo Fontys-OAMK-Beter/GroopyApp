@@ -1,8 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Text, TouchableOpacity, View, StyleSheet, Modal } from 'react-native'
 import * as SS from 'expo-secure-store'
 import { ScrollView } from 'react-native-gesture-handler'
 import { Icon } from '@react-native-material/core'
+import { AuthGet } from './helpers/API'
+import axios from 'axios'
+
 
 import CalendarViewOnly from './CalendarViewOnly'
 
@@ -10,6 +13,38 @@ const UserPage = ({ navigation }) => {
 
     const { setIsLoggedIn } = useContext(LoginContext)
     const [modalIsOpen, setModalIsOpen] = useState(false)
+    const [query, setQuery] = useState([])
+
+    const movieData = []
+
+    useEffect(() => {
+        AuthGet('/movie/userMovies', (res) => {
+            if (res.status === 200) {
+                setQuery([res.data])
+            } else {
+                console.log(res)
+            }
+        })
+    }, [])
+
+    useEffect(() => {
+
+        query[0].forEach(movie =>
+
+            axios.get(`http://www.omdbapi.com/?apikey=dd81e50e&i=${movie.movie_id}`)
+                .then((res) => {
+                    const tempDetails = {
+                        title: res.data.Title,
+                        year: res.data.Year,
+                        poster: res.data.Poster
+                    }
+                    movieData.push(tempDetails)
+                    console.log(movieData)
+                }).catch((err) => {
+                    console.log(err)
+                })
+        );
+    }, [query])
 
 
     const logout = async () => {
@@ -17,9 +52,13 @@ const UserPage = ({ navigation }) => {
         setIsLoggedIn(false)
     }
 
-    const favouriteMovies = () => {
-        setModalIsOpen(!modalIsOpen)
-    }
+
+    const favourites = movieData.map((movie, i) =>
+        <View style={{ backgroundColor: "rgba(156, 32, 23, 0.9)", marginBottom: 8, width: "95%", padding: 5, borderRadius: 5 }} key={i}>
+            <Text style={{ fontSize: 23, color: "white", textShadowColor: "black", textShadowRadius: 29, fontWeight: "bold", overflow: "hidden", paddingRight: 20 }}>{movie.title}</Text>
+            <Text style={{ fontSize: 16, }}>{movie.year}</Text>
+        </View>
+    )
 
     return (
         <ScrollView style={styles.container}>
@@ -31,10 +70,10 @@ const UserPage = ({ navigation }) => {
             >
                 <View style={styles.modalContainer}>
                     <ScrollView style={{ marginBottom: 40, marginTop: 20 }}>
-                        <Text>xdddddddd</Text>
+                        {favourites}
                     </ScrollView>
                     <TouchableOpacity style={styles.hideBtn}
-                        onPress={() => setGroupModalVisible(!groupModalVisible)}>
+                        onPress={() => setModalIsOpen(!modalIsOpen)}>
                         <Text style={styles.modalText}>Cancel</Text>
                     </TouchableOpacity>
                 </View>
@@ -61,7 +100,7 @@ const UserPage = ({ navigation }) => {
                             <CalendarViewOnly />
                         </View>
                     </View>
-                    <TouchableOpacity onPress={() => favouriteMovies} style={styles.btnCont}>
+                    <TouchableOpacity onPress={() => setModalIsOpen(!modalIsOpen)} style={styles.btnCont}>
                         <Text style={styles.btnText}>View favourite movies</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => logout()} style={styles.btnCont}>
@@ -117,27 +156,27 @@ const styles = StyleSheet.create({
         marginBottom: 100,
         backgroundColor: 'rgba(0, 0, 0, 0.90)',
         borderRadius: 15
-      },
-      modalText: {
+    },
+    modalText: {
         fontSize: 19,
         color: "white",
         textShadowRadius: 4,
         textShadowColor: "black"
-      },
-      modalTitle: {
+    },
+    modalTitle: {
         fontSize: 34,
         color: "rgb(176, 15, 4)",
         textShadowRadius: 3,
         textShadowColor: "black",
         fontWeight: "bold"
-      },
-      hideBtn: {
+    },
+    hideBtn: {
         bottom: 1,
         marginBottom: 15,
         backgroundColor: "rgb(176, 15, 4)",
         borderRadius: 10,
         paddingVertical: 15,
         paddingHorizontal: 25,
-        fontSize: 20, 
-      }
+        fontSize: 20,
+    }
 })
