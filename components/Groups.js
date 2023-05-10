@@ -7,18 +7,18 @@ import styles from './Styles';
 //Dummy data to show before fetching from database
 const DATA = [
     {
-        id: '1',
-        title: 'Group 1',
+        id: '25',
+        title: 'Midsummer Madness',
         users: [], // user ids
         members: [] // user names
     },
     {
         id: '2',
-        title: 'Group 2',
+        title: 'Daisy Dukes',
     },
     {
         id: '3',
-        title: 'Group 3',
+        title: 'Yaas queen',
     },
     /* {
         id: '4',
@@ -62,7 +62,7 @@ const Item = ({ item, onPress }) => (
     <>
         <TouchableOpacity onPress={onPress} style={[styles.item]}>
         <View style={styles.bubble}> 
-            <Icon name="account-group" size={30}/>
+            <Icon name="account-group" size={20}/>
         </View>
             <Text style={styles.title}>{item.title}</Text>
             <Text style={styles.users}></Text>
@@ -94,7 +94,7 @@ const Groups = ({ navigation }) => {
             <View style={styles.containerForButtons}> */}
                <TouchableOpacity style={styles.item} onPress={() => { navigation.navigate("CreateGroup") }}>
                     <View style={styles.bubbleplus}> 
-                        <Icon name="plus" size={30}/>
+                        <Icon name="plus" size={20}/>
                     </View>
                         <Text style={styles.title}>Create Group</Text>
                     
@@ -106,7 +106,7 @@ const Groups = ({ navigation }) => {
                     </View>
                     <TouchableOpacity style={styles.item} onPress={() => { navigation.navigate("CreateEvent") }}>
                     <View style={styles.bubbleplus}> 
-                        <Icon name="plus" size={30}/>
+                        <Icon name="plus" size={20}/>
                     </View>
                         <Text style={styles.title}>Create Event</Text>
                     </TouchableOpacity>

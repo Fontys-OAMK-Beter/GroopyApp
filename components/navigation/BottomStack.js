@@ -80,12 +80,12 @@ const BottomStack = () => {
     //another option would be to disable the header completely and just render a component instead
     const useCustomHeader = (navigation, title) => {
         return {
-            headerLeft: () => <IconButton icon={() => <Icon onPress={() => navigation.navigate('About')} name="account-circle" color="red" size={30} />} />,
+            headerLeft: () => <IconButton icon={() => <Icon onPress={() => navigation.navigate('About')} name="account-circle" color="#f0000099" size={35} />} />,
             headerTitle: () => <CustomHeader navigation={navigation} title={title} />,
-            headerRight: () => <IconButton onPress={() => navigation.navigate('Search')} icon={() => <Icon name="text-search" color="white" size={30} />} />,
+            headerRight: () => <IconButton onPress={() => navigation.navigate('Search')} icon={() => <Icon name="text-search" color="#f0000099" size={30} />} />,
             headerTitleAlign: "center",
             headerStyle: {
-                backgroundColor: 'black',
+                backgroundColor: '#212121',
             },
         }
     }

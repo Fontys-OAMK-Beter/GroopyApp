@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     },
     item: {
         backgroundColor: '#7E6C6B',
-        color: '#ffffff',
+        color: 'red',//'#ffffff',
         padding: 20,
         marginVertical: 8,
         marginHorizontal: 16,
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     },
     itemWithPicture: {
         flexDirection: 'row',
-        color: '#ffffff',
+        color: 'red',//'#ffffff',
         backgroundColor: '#7E6C6B',
         padding: 20,
         marginVertical: 8,
@@ -62,24 +62,25 @@ const styles = StyleSheet.create({
     },
     bubble:{
         borderRadius: 30,
-        backgroundColor: '#FFFFFF',
-        paddingTop: 4,
+        backgroundColor: 'red',//'#FFFFFF',
+        paddingTop: 8,
         opacity: 0.5,
         width: 43,
         alignItems: "center",
         overflow: "hidden",
         marginRight: 18,
+        paddingBottom: 13
     },
     bubbleplus:{
         borderRadius: 30,
         backgroundColor: '#FFFFFF',
-        paddingTop: 4,
+        paddingTop: 10,
         opacity: 0.5,
         width: 43,
         alignItems: "center",
         overflow: "hidden",
         marginRight: 18,
-        paddingTop:6,
+        paddingBottom: 11
     },
     subheader: {
         backgroundColor: '#594847',
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 16
     },
     title: {
-        fontSize: 32,
+        fontSize: 20,
         color: '#ffffff',
     },
     viewGroup: {

@@ -84,8 +84,8 @@ const CalendarViewOnly = () => {
                 previousTitle="Back"
             />
 
-            <View style={{paddingLeft: "20%", marginVertical: "5%"}}>
-                <Text style={{fontSize: 15, color: "white", fontWeight: "500"}}>Event on selection: {displayedDateContent}</Text>
+            <View style={{paddingLeft: "20%",paddingRight: "20%", marginVertical: "5%"}}>
+                <Text style={{fontSize: 15, color: "white", fontWeight: "500", textAlign: 'center'}}>{displayedDateContent}</Text>
             </View>
         </View>
   )

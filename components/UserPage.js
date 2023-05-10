@@ -31,7 +31,7 @@ const UserPage = ({ navigation }) => {
                     marginLeft: "auto",
                     marginRight: "auto"
                 }} >
-                    <Icon name="account-circle" color="red" size={200} />
+                    <Icon name="account-circle" color="#ffffff99" size={200} />
                 </View>
                 <View style={{ marginTop: "7%" }}>
                     {/* <TouchableOpacity onPress={() => { navigation.navigate("Calendar") }} style={styles.btnCont}>
