@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Alert, TextInput, Switch, Button } from "react-native";
 
 import styles from "./Styles";
-
+// :)
 //TODO: change category to dropdown menu
 const CreateEvent = ({ }) => {
     const [text, setText] = React.useState("Default")
