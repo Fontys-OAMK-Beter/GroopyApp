@@ -22,14 +22,16 @@ const LaunchPage = ({ navigation }) => {
     const { setIsLoggedIn } = useContext(LoginContext)
 
     const logout = async () => {
-        Post('/User/logout', {}, async (res) => {
+        await SS.deleteItemAsync("token")
+        setIsLoggedIn(false)
+        /* Post('/User/logout', {}, async (res) => {
             if (res.status === 200) {
                 await SS.deleteItemAsync("token")
                 setIsLoggedIn(false)
             } else {
                 Alert.alert("Error logging out")
-            }
-        })
+            } 
+        }) */
 
     }
 
