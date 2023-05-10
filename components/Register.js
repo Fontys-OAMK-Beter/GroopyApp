@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
-import { View, TextInput, Text, Button, TouchableOpacity, Alert, ActivityIndicator } from 'react-native'
+import { View, Image, TextInput, Text, Button, TouchableOpacity, Alert, ActivityIndicator } from 'react-native'
 import { Post } from './helpers/API'
+import { Video } from 'expo-av'
+import styles from './Styles'
+import videoBackground from '../assets/Promo_cc_light_blur.mp4'
+import logo from '../assets/Logo_v2.png'
 
 const Register = ( { navigation }) => {
     const [username, setUsername] = useState('')
@@ -30,34 +34,61 @@ const Register = ( { navigation }) => {
     }
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <TextInput
-                onChangeText={(e) => setUsername(e)}
-                style={{textAlign: 'left'}}
-                placeholder='Username'
-            />
-            <TextInput
-                onChangeText={(e) => setEmail(e)}
-                placeholder='email@email.com'
-                autoComplete='email'
-            />
-            <TextInput
-                onChangeText={(e) => setPwd(e)}
-                placeholder='Password'
-                secureTextEntry={true}
-            />
-            <Button
-                title={'Register'}
-                onPress={submit}
-            />
-            {waitingAPI ?  (<ActivityIndicator size="large" color="red" />) :
-            (<>
-            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                <Text>Already have an account? Login here!</Text>
-            </TouchableOpacity>
-            </>)
-            }
-        </View>
+        <>
+            <View style={styles.videoContainer}>
+                <Video source={videoBackground} 
+                    rate={1.0}
+                    isMuted={true}
+                    resizeMode="cover"
+                    shouldPlay
+                    isLooping
+                    style={styles.videoBackground}
+                />
+            </View>
+            <View style={styles.loginContainer}>
+                <View style={styles.authPageLogo}>
+                    <Image source={logo} style={styles.authPageLogoImage}/>
+                    <Text style={{
+                        fontSize: 20,
+                        fontWeight: '500',
+                        color: "#9e13e8"
+                    }}>Groopy Swoopy</Text>
+                </View>
+                <View style={styles.authInputsContainer}>
+                    <TextInput
+                        onChangeText={(e) => setUsername(e)}
+                        placeholder='Username'
+                        style={styles.authInputs}
+                    />
+                    <TextInput
+                        onChangeText={(e) => setEmail(e)}
+                        placeholder='email@email.com'
+                        autoComplete='email'
+                        style={styles.authInputs}
+                    />
+                    <TextInput
+                        onChangeText={(e) => setPwd(e)}
+                        placeholder='Password'
+                        secureTextEntry={true}
+                        style={styles.authInputs}
+                    />
+                </View>
+                <View style={styles.authButtons}>
+                    <Button
+                        title={'Register'}
+                        onPress={submit}
+                        color={styles.authButtons.color}
+                    />
+                </View>
+                {waitingAPI ?  (<ActivityIndicator size="large" color="red" />) :
+                (<View style={styles.authOptions}>
+                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                    <Text style = {styles.authOptionsText}>Already have an account? Login here!</Text>
+                </TouchableOpacity>
+                </View>)
+                }
+            </View>
+    </>
     )
 }
 
