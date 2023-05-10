@@ -2,9 +2,7 @@ import React from "react";
 import { View, Text, FlatList, Button, TouchableOpacity } from "react-native";
 
 import styles from './Styles';
-
-//TODO: see how to fetch groups data to local storage on page load
-//TODO: having more than 6 groups hides buttons at the bottom
+import { AuthGet } from "./helpers/API";
 
 //Dummy data to show before fetching from database
 const DATA = [
@@ -63,6 +61,25 @@ const Item = ({ item, onPress }) => (
 
 //This is the main page of the groups tab. It renders the flatlist and the buttons to create a group or event
 const Groups = ({ navigation }) => {
+    const [groups, setGroups] = React.useState(DATA);
+
+    console.log(groups)
+
+    React.useEffect(() => {
+        async function getGroups() {
+            const body = {
+                user_id: userID
+            }
+            AuthGet("/party/getparties", body, (res) => {
+                if (res.status === 200) {
+                    console.log(res.data)
+                    setGroups(res.data)
+                }
+            })
+        }
+        getGroups()
+    }, [])
+
     const renderItem = ({ item }) => {
         return (
             <Item
@@ -71,8 +88,6 @@ const Groups = ({ navigation }) => {
             />
         );
     };
-
-    
 
     return (
         <View style={styles.containerForGroups}>
