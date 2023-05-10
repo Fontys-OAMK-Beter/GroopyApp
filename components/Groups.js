@@ -1,7 +1,11 @@
 import React from "react";
+import { useState } from "react";
 import { View, Text, FlatList, Button, TouchableOpacity } from "react-native";
 import { Icon } from '@react-native-material/core'
 import styles from './Styles';
+import { DecodeJWT } from "./helpers/API";
+
+
 
 
 //Dummy data to show before fetching from database
@@ -11,6 +15,7 @@ const DATA = [
         title: 'Midsummer Madness',
         users: [], // user ids
         members: [] // user names
+        
     },
     {
         id: '2',
@@ -56,6 +61,7 @@ const DATA = [
 function getUsers(){
     //implement functionality
 }
+
 getUsers()
 //This is and the component rendered in the flatlist. The onpress routes to the viewgroup page of the selected group
 const Item = ({ item, onPress }) => (
@@ -80,7 +86,13 @@ const Groups = ({ navigation }) => {
             />
         );
     };
+    const [userData, setUserData] = useState('')
 
+
+    const getUsers = async () => {
+        setUserData(await DecodeJWT())
+    }
+    getUsers()
     return (
         <View style={styles.container}>
             <View>

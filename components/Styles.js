@@ -93,6 +93,10 @@ const styles = StyleSheet.create({
         color: '#FACDA4',
         textAlign: 'center',
     },
+    profileUsername:{
+        textAlign: 'center',
+        color: 'white',
+    },
     itemWithText: {
         flexDirection: 'row',
         color: '#ffffff',

@@ -111,19 +111,17 @@ const BottomStack = () => {
     return (
         <IconComponentProvider IconComponent={MaterialCommunityIcons}>
             <Tab.Navigator
-                tabBarOptions={{
-                    style: {
-                        elevation: 0,   // for Android
-                        shadowOffset: {
-                            width: 0, height: 0 // for iOS
-                        },
-                    }
-                }}
                 initialRouteName='GroupStack'
                 screenOptions={({ route }) => ({
                         tabBarStyle: {
                                  borderTopWidth: 0
                            },
+                           style: {
+                            elevation: 0,   // for Android
+                            shadowOffset: {
+                                width: 0, height: 0 // for iOS
+                            },
+                        },
                     tabBarShowLabel: false,
                     tabBarIcon: ({ focused, color, size }) => {
                         let iconName;

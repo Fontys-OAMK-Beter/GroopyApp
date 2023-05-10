@@ -131,7 +131,7 @@ const UserPage = () => {
                     <Icon name="account-circle" color="#ffffff99" size={200} />
                 </View>
                 <View>
-                    <Text>{(userData.email)}</Text>
+                    <Text name='profileUsername'>{(userData.email)}</Text>
                 </View>
                 <View style={{ marginTop: "7%" }}>
                     <View style={styles.calendarContainerOuter}>
