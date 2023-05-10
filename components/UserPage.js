@@ -5,6 +5,7 @@ import { Icon } from '@react-native-material/core'
 import { AuthGet } from './helpers/API'
 import axios from 'axios'
 import { useNavigation } from '@react-navigation/native'
+import { DecodeJWT } from './helpers/API'
 
 import CalendarViewOnly from './CalendarViewOnly'
 
@@ -15,13 +16,20 @@ const UserPage = () => {
     const [query, setQuery] = useState([])
     const [movieData, setMovieData] = useState([])
     const [favourites, setFavourites] = useState([])
+    const [userData, setUserData] = useState('')
     const navigation = useNavigation()
+
+    const getUser = async () => {
+        setUserData(await DecodeJWT())
+    }
+
     useEffect(() => {
         loadData()
+        getUser()
 
         const unsubscribe = navigation.addListener('focus', () => {
             loadData();
-            
+            getUser()
         });
 
         return unsubscribe
@@ -121,6 +129,9 @@ const UserPage = () => {
                     marginRight: "auto"
                 }} >
                     <Icon name="account-circle" color="#ffffff99" size={200} />
+                </View>
+                <View>
+                    <Text>{(userData.email)}</Text>
                 </View>
                 <View style={{ marginTop: "7%" }}>
                     <View style={styles.calendarContainerOuter}>

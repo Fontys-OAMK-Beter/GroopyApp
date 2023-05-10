@@ -47,7 +47,7 @@ const Login = ({ navigation }) => {
             Post('/User/login', body, async (res) => {
                 if (res.status === 200) {
                     try {
-                        await SS.setItemAsync("token", res.data.token)
+                        await SS.setItemAsync("token", res.headers.authorization)
                         setUsername('')
                         setPwd('')
                         setWaitingAPI(false)
