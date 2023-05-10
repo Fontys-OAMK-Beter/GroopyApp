@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import UserPage from '../UserPage'
 import PersonalInfo from '../PersonalInfo'
 import Calendar from '../Calendar'
+import SwipingForVoting from '../SwipingForVoting'
 
 const Stack = createStackNavigator()
 
@@ -17,6 +18,9 @@ const UserPageStack = () => {
             />
             <Stack.Screen
             name="Calendar" component={Calendar}
+            />
+            <Stack.Screen
+            name="SwipingForVoting" component={SwipingForVoting}
             />
         </Stack.Navigator>
     )
