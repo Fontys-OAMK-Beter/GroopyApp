@@ -14,7 +14,7 @@ const GroupStack = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen
-                name="Groups" component={Groups}
+                name="Groops" component={Groups}
             />
             <Stack.Screen
                 name="ViewGroup" component={ViewGroup}

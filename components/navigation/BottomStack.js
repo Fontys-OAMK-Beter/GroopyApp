@@ -22,14 +22,16 @@ const LaunchPage = ({ navigation }) => {
     const { setIsLoggedIn } = useContext(LoginContext)
 
     const logout = async () => {
-        Post('/User/logout', {}, async (res) => {
+        await SS.deleteItemAsync("token")
+        setIsLoggedIn(false)
+        /* Post('/User/logout', {}, async (res) => {
             if (res.status === 200) {
                 await SS.deleteItemAsync("token")
                 setIsLoggedIn(false)
             } else {
                 Alert.alert("Error logging out")
-            }
-        })
+            } 
+        }) */
 
     }
 
@@ -65,7 +67,7 @@ const LaunchPage = ({ navigation }) => {
                 onPress={async () => logout()}
             />
             <Button
-                title="Decode token "
+                title="Decode token"
                 onPress={async () => GetUser()}
             />
         </View>
@@ -80,30 +82,30 @@ const BottomStack = () => {
     //another option would be to disable the header completely and just render a component instead
     const useCustomHeader = (navigation, title) => {
         return {
-            headerLeft: () => <IconButton icon={() => <Icon onPress={() => navigation.navigate('About')} name="account-circle" color="red" size={30} />} />,
+            headerLeft: () => <IconButton icon={() => <Icon onPress={() => navigation.navigate('About')} name="account-circle" color="#ffffffcc" size={35} />} />,
             headerTitle: () => <CustomHeader navigation={navigation} title={title} />,
-            headerRight: () => <IconButton onPress={() => navigation.navigate('Search')} icon={() => <Icon name="text-search" color="white" size={30} />} />,
+            headerRight: () => <IconButton onPress={() => navigation.navigate('Search')} icon={() => <Icon name="text-search" color="#ffffffcc" size={30} />} />,
             headerTitleAlign: "center",
             headerStyle: {
-                backgroundColor: 'black',
+                backgroundColor: '#000000ee',
             },
         }
     }
 
     const useHeaderNoTab = (navigation, title) => {
         return {
-            headerLeft: () => <IconButton icon={() => <Icon onPress={() => navigation.navigate('About')} name="account-circle" color="red" size={30} />} />,
+            headerLeft: () => <IconButton icon={() => <Icon onPress={() => navigation.navigate('About')} name="account-circle" color='#ffffffcc' size={35} />} />,
             headerTitle: () => <CustomHeader navigation={navigation} title={title} />,
-            headerRight: () => <IconButton onPress={() => navigation.navigate('Search')} icon={() => <Icon name="text-search" color="red" size={30} />}/>,
+            headerRight: () => <IconButton onPress={() => navigation.navigate('Search')} icon={() => <Icon name="text-search" color="#ffffffcc" size={30} />} />,
             headerTitleAlign: "center",
             headerStyle: {
-                backgroundColor: 'black',
+                backgroundColor: '300000',
             },
             tabBarButton: () => null,
             tabBarVisible: false,
         }
     }
-
+//,// '#212121',"#f0000099"
     const Tab = createBottomTabNavigator()
 
     return (
@@ -111,6 +113,15 @@ const BottomStack = () => {
             <Tab.Navigator
                 initialRouteName='GroupStack'
                 screenOptions={({ route }) => ({
+                        tabBarStyle: {
+                                 borderTopWidth: 0
+                           },
+                           style: {
+                            elevation: 0,   // for Android
+                            shadowOffset: {
+                                width: 0, height: 0 // for iOS
+                            },
+                        },
                     tabBarShowLabel: false,
                     tabBarIcon: ({ focused, color, size }) => {
                         let iconName;
@@ -123,9 +134,9 @@ const BottomStack = () => {
                         }
                         return <Icon name={iconName} size={30} color={color} />;
                     },
-                    tabBarActiveTintColor: "red",
-                    tabBarInactiveTintColor: "white",
-                    tabBarActiveBackgroundColor: "black",
+                    tabBarActiveTintColor: "#ffffff88",
+                    tabBarInactiveTintColor: "#ffffff55",
+                    tabBarActiveBackgroundColor: "#000000ee",
                     tabBarInactiveBackgroundColor: "black"
                 })}
             >
@@ -137,7 +148,7 @@ const BottomStack = () => {
                 <Tab.Screen
                     name="GroupStack"
                     component={GroupStack}
-                    options={({ navigation }) => useCustomHeader(navigation, "Groups")}
+                    options={({ navigation }) => useCustomHeader(navigation, "Groops")}
                 />
                 <Tab.Screen
                     name="Hello"
