@@ -22,6 +22,7 @@ const Register = ( { navigation }) => {
         }
 
         Post('/User/register', body, (res) => {
+            console.log(res)
             if(res.status === 200){
                 setWaitingAPI(false)
                 Alert.alert("User created! please login")

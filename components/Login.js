@@ -58,8 +58,8 @@ const Login = ({ navigation }) => {
                         setWaitingAPI(false)
                         setIsLoggedIn(true)
                     } catch (e) {
-                        console.log(e)  
                         setWaitingAPI(false)
+                        console.log(e)
                         Alert.alert('An error occurred please try again')
                     }
                 } else {

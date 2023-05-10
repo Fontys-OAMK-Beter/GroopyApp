@@ -2,7 +2,7 @@ import { StyleSheet} from "react-native";
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#212121',
+        backgroundColor: '#000000ee',// '#212121',
         flex: 1,
         justifyContent: 'space-between',
     },
@@ -79,25 +79,25 @@ const styles = StyleSheet.create({
         textShadowRadius: 4,
     },
     containerForButtons: {
-        backgroundColor: '#212121',
+        backgroundColor:'#000000ee',// '#212121',
         flex: 0,
         flexDirection: 'column-reverse',
         justifyContent: 'flex-start',
     },
     containerForForms: {
-        backgroundColor: '#212121',
+        backgroundColor: '#000000ee',// '#212121',
         justifyContent: 'space-between',
         alignContent: 'center',
     },
     subContainer: {
-        backgroundColor: '#212121',
+        backgroundColor: '#000000ee',// '#212121',
         alignContent: 'flex-start',
         justifyContent: 'center',
         flex: 1,
         marginVertical: 10,
     },
     Header: {
-        backgroundColor: '#f4f4f4'
+        backgroundColor: '#000000ee',// '#212121','#f4f4f4'
     },
     text: {
         color: '#000000'
@@ -116,17 +116,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     item: {
-        backgroundColor: '#7E6C6B',
+        backgroundColor: '#59484799',
         color: '#ffffff',
         padding: 20,
-        marginVertical: 8,
         marginHorizontal: 16,
         flexDirection: "row",
         borderRadius: 10,
+        marginTop: 16,
     },
     itemWithPicture: {
         flexDirection: 'row',
-        color: '#ffffff',
+        color: 'red',//'#ffffff',
         backgroundColor: '#7E6C6B',
         padding: 20,
         marginVertical: 8,
@@ -134,24 +134,25 @@ const styles = StyleSheet.create({
     },
     bubble:{
         borderRadius: 30,
-        backgroundColor: '#FFFFFF',
-        paddingTop: 4,
-        opacity: 0.5,
+        backgroundColor: '#FFFFFFaa',
+        paddingTop: 8,
+        opacity: 0.7,
         width: 43,
         alignItems: "center",
         overflow: "hidden",
         marginRight: 18,
+        paddingBottom: 13
     },
     bubbleplus:{
         borderRadius: 30,
         backgroundColor: '#FFFFFF',
-        paddingTop: 4,
+        paddingTop: 10,
         opacity: 0.5,
         width: 43,
         alignItems: "center",
         overflow: "hidden",
         marginRight: 18,
-        paddingTop:6,
+        paddingBottom: 11
     },
     subheader: {
         backgroundColor: '#594847',
@@ -164,6 +165,10 @@ const styles = StyleSheet.create({
         color: '#FACDA4',
         textAlign: 'center',
     },
+    profileUsername:{
+        textAlign: 'center',
+        color: 'white',
+    },
     itemWithText: {
         flexDirection: 'row',
         color: '#ffffff',
@@ -173,7 +178,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 16
     },
     title: {
-        fontSize: 32,
+        fontSize: 20,
         color: '#ffffff',
     },
     viewGroup: {
