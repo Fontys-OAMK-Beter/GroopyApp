@@ -1,9 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { View, TextInput, Text, Button, TouchableOpacity, Alert, ActivityIndicator } from 'react-native'
+import { View, TextInput, Text, Button, TouchableOpacity, Alert, ActivityIndicator, Image } from 'react-native'
 import * as SS from 'expo-secure-store'
 import { Post } from './helpers/API'
+import { Audio, Video } from 'expo-av';
+import styles from './Styles'
+import logo from '../assets/Logo_v2.png'
 
 import LoginContext from './LoginContext'
+import LoadingSpinner from './helpers/LoadingSpinner'
+import videoBackground from '../assets/Promo_cc_light_blur.mp4'
 
 const Login = ({ navigation }) => {
     const [username, setUsername] = useState('')
@@ -83,33 +88,66 @@ const Login = ({ navigation }) => {
                     <ActivityIndicator size="large" color="red" />
                 </View>
             ) : (
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <TextInput
-                        onChangeText={(e) => setUsername(e)}
-                        placeholder='Email'
-                    />
-                    <TextInput
-                        onChangeText={(e) => setPwd(e)}
-                        placeholder='Password'
-                        secureTextEntry={true}
-                    />
-                    <Button
-                        title={'Login'}
-                        onPress={submit}
-                    />
-                    {waitingAPI ? (<ActivityIndicator size='large' color="red" />) : (
-                        <>
-                            <TouchableOpacity onPress={forgot}>
-                                <Text>Forgot password?</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={goRegister}>
-                                <Text>Dont have an account? Register here!</Text>
-                            </TouchableOpacity>
-                        </>
-                    )}
-                </View>
+                <>
+                    <View style={styles.videoContainer}>
+                        <Video source={videoBackground} 
+                            rate={1.0}
+                            isMuted={true}
+                            resizeMode="cover"
+                            shouldPlay
+                            isLooping
+                            style={styles.videoBackground}
+                        />
+                    </View>
+                    <View style={styles.loginContainer}>
+                        <View style={styles.authPageLogo}>
+                            <Image source={logo} style={styles.authPageLogoImage}/>
+                            <Text style={{
+                                fontSize: 20,
+                                fontWeight: '500',
+                                color: "#9e13e8"
+                            }}>Groopy Swoopy</Text>
+                        </View>
+                        <View style={styles.authInputsContainer}>
+                            <TextInput
+                                onChangeText={(e) => setUsername(e)}
+                                placeholder='Email'
+                                style={styles.authInputs}
+                            />
+                            <TextInput
+                                onChangeText={(e) => setPwd(e)}
+                                placeholder='Password'
+                                secureTextEntry={true}
+                                style={styles.authInputs}
+                            />
+                        </View>
+                        <View style={styles.authButtons}>
+                            <Button
+                                title={'Login'}
+                                onPress={submit}
+                                color={styles.authButtons.color}
+                                
+                            />
+                        </View>
+                        {waitingAPI ? (
+                                // <ActivityIndicator size='large' color="red" />
+                                LoadingSpinner({title: 'Logging in...', onlySpinner: false})
+                            ) : (
+                            <View style={styles.authOptions}>
+                                <TouchableOpacity onPress={forgot}>
+                                    <Text style = {styles.authOptionsText}>Forgot password?</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={goRegister}>
+                                    <Text style = {styles.authOptionsText}>Dont have an account? Register here!</Text>
+                                </TouchableOpacity>
+                            </View>
+                        )}
+                    </View>
+                </>
             )}
+            
         </>
+
     )
 }
 
