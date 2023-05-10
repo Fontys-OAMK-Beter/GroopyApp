@@ -2,30 +2,30 @@ import { StyleSheet} from "react-native";
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#212121',
+        backgroundColor: '#000000ee',// '#212121',
         flex: 1,
         justifyContent: 'space-between',
     },
     containerForButtons: {
-        backgroundColor: '#212121',
+        backgroundColor:'#000000ee',// '#212121',
         flex: 0,
         flexDirection: 'column-reverse',
         justifyContent: 'flex-start',
     },
     containerForForms: {
-        backgroundColor: '#212121',
+        backgroundColor: '#000000ee',// '#212121',
         justifyContent: 'space-between',
         alignContent: 'center',
     },
     subContainer: {
-        backgroundColor: '#212121',
+        backgroundColor: '#000000ee',// '#212121',
         alignContent: 'flex-start',
         justifyContent: 'center',
         flex: 1,
         marginVertical: 10,
     },
     Header: {
-        backgroundColor: '#f4f4f4'
+        backgroundColor: '#000000ee',// '#212121','#f4f4f4'
     },
     text: {
         color: '#000000'
@@ -44,13 +44,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     item: {
-        backgroundColor: '#7E6C6B',
-        color: 'red',//'#ffffff',
+        backgroundColor: '#59484799',
+        color: '#ffffff',
         padding: 20,
-        marginVertical: 8,
         marginHorizontal: 16,
         flexDirection: "row",
         borderRadius: 10,
+        marginTop: 16,
     },
     itemWithPicture: {
         flexDirection: 'row',
@@ -62,9 +62,9 @@ const styles = StyleSheet.create({
     },
     bubble:{
         borderRadius: 30,
-        backgroundColor: 'red',//'#FFFFFF',
+        backgroundColor: '#FFFFFFaa',
         paddingTop: 8,
-        opacity: 0.5,
+        opacity: 0.7,
         width: 43,
         alignItems: "center",
         overflow: "hidden",

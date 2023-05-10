@@ -89,12 +89,12 @@ const styles = StyleSheet.create({
     },
     calendarContainer: {
         flex: 1,
-        backgroundColor: "rgba(156, 32, 23, 0)",
+        backgroundColor: "#30000000",
         borderRadius: 15,
     },
     calendarContainerOuter: {
         flex: 1,
-        backgroundColor: "rgba(156, 32, 23, 0.9)",
+        backgroundColor: "black",
         borderRadius: 15,
         paddingHorizontal: 10,
         marginBottom: "3%",

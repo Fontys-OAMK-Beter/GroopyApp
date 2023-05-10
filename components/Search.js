@@ -266,7 +266,7 @@ const Search = () => {
   }
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', backgroundColor: "rgb(30, 30, 30)" }}>
+    <View style={{ flex: 1, alignItems: 'center', backgroundColor: "rgb(30, 30, 30)", display: 'flex' }}>
 
 
       {/* Group modal */}
@@ -291,9 +291,9 @@ const Search = () => {
 
       <ScrollView style={{ marginBottom: 6, width: "95%", marginTop: 4 }}>
         <View style={{ flex: 1, flexDirection: "row", alignItems: "center", marginBottom: 10, marginTop: 2, }}>
-          <Icon name="movie-search" size={30} color="rgb(156, 32, 23)" style={{ backgroundColor: "white", marginBottom: 5, borderTopLeftRadius: 7, borderBottomLeftRadius: 7, height: 40, marginTop: 4 }} />
+          <Icon name="movie-search" size={30} color="rgb(156, 32, 23)" style={{ backgroundColor: "white", marginBottom: 5, borderTopLeftRadius: 7, borderBottomLeftRadius: 7, height: 40, marginTop: 4, paddingLeft: 5, paddingRight: 4 }} />
           <View style={{ backgroundColor: "white", borderTopRightRadius: 7, borderBottomRightRadius: 7, height: 40, marginRight: 10, marginBottom: 5, marginTop: 4 }}>
-            <TextInput style={{ flex: 1, flexWrap: "nowrap", fontSize: 20, overflow: "hidden" }}
+            <TextInput style={{ flex: 1, flexWrap: "nowrap", fontSize: 20, overflow: "hidden", width: 400 }}
               textAlign='left'
               textBreakStrategy='balanced'
               onChangeText={(e) => setPath(e)}

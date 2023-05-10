@@ -85,7 +85,7 @@ const CalendarViewOnly = () => {
             />
 
             <View style={{paddingLeft: "20%",paddingRight: "20%", marginVertical: "5%"}}>
-                <Text style={{fontSize: 15, color: "white", fontWeight: "500", textAlign: 'center'}}>{displayedDateContent}</Text>
+                <Text style={{fontSize: 15, color: "#000000c", fontWeight: "500", textAlign: 'center'}}>{displayedDateContent}</Text>
             </View>
         </View>
   )
@@ -94,17 +94,20 @@ const CalendarViewOnly = () => {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'rgba(255,255,255, 0)',
+        padding:0
     },
     prev: {
         color: "white",
         width: "100%",
-        fontSize: 15
+        fontSize: 15,
+        opacity: 0.7
     },
     next: {
         width: "100%",
         color: "white",
         textAlign: "right",
-        fontSize: 15
+        fontSize: 15,
+        opacity: 0.7
     },
     title: {
         fontSize: 21,
@@ -112,6 +115,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         shadowColor: "black",
         shadowRadius: 15,
+        opacity: 0.8
 
     },
     dayWrapper: {
@@ -127,7 +131,8 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 18,
-        fontWeight: "700"
+        fontWeight: "700",
+        color: '#ffffff99'
     },
     myWrapper: {
         justifyContent: "center",
